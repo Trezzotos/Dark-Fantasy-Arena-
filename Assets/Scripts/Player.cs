@@ -7,7 +7,6 @@ using UnityEngine;
 public class Player : Entity
 {
     public float sprintSpeedMultiplier = 1.5f;
-    bool facingRight = true;
 
     [Header("Commands")]
     public KeyCode up = KeyCode.W;
@@ -43,11 +42,9 @@ public class Player : Entity
         if (Input.GetKey(right))
         {
             mov.x = 1;
-            facingRight = true;
         }
         else if (Input.GetKey(left)){
             mov.x = -1;
-            facingRight = false;
         }
 
         // Apply movement

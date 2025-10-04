@@ -6,12 +6,16 @@ public class Gun : MonoBehaviour
 {
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 10;
+    public float bulletSpeed = 10f;
 
-    // Update is called once per frame
     void Update()
     {
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = bulletSpawnPoint.up * bulletSpeed;    
+        if (Input.GetButtonDown("Fire1"))
+        {
+            var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            rb.velocity = bulletSpawnPoint.right * bulletSpeed;
+        }
     }
 }
