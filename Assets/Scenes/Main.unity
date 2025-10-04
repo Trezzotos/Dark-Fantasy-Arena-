@@ -178,6 +178,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1803334}
     m_Modifications:
+    - target: {fileID: -8877847855794158154, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8877847855794158154, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1305484904}
+    - target: {fileID: -8877847855794158154, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
+      propertyPath: distanceBetween
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 458919475696192853, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
       propertyPath: m_Name
       value: Box (1)
@@ -489,6 +501,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1803334}
     m_Modifications:
+    - target: {fileID: -8877847855794158154, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8877847855794158154, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1305484904}
     - target: {fileID: 458919475696192853, guid: a2c18955b100bd348b817ad22bd42e29, type: 3}
       propertyPath: m_Name
       value: Box
