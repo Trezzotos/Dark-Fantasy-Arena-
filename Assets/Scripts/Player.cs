@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Player : Entity
 {
     public float sprintSpeedMultiplier = 1.5f;
+    bool facingRight = true;
 
     [Header("Commands")]
     public KeyCode up = KeyCode.W;
@@ -13,6 +15,9 @@ public class Player : Entity
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
+   // public Gun gun;
+    private SpriteRenderer sp;
+
 
     Vector2 mov;
 
@@ -29,14 +34,21 @@ public class Player : Entity
     {
         // Movement handling
         mov = Vector2.zero;
-        
+
         // y-axis input
         if (Input.GetKey(up)) mov.y = 1;
         else if (Input.GetKey(down)) mov.y = -1;
 
         // x-axis input
-        if (Input.GetKey(right)) mov.x = 1;
-        else if (Input.GetKey(left)) mov.x = -1;
+        if (Input.GetKey(right))
+        {
+            mov.x = 1;
+            facingRight = true;
+        }
+        else if (Input.GetKey(left)){
+            mov.x = -1;
+            facingRight = false;
+        }
 
         // Apply movement
         // characterController.Move(mov * movementSpeed * Time.deltaTime);
