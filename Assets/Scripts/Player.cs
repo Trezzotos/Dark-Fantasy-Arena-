@@ -33,7 +33,7 @@ public class Player : Entity
     {
         // Movement handling
         mov = Vector2.zero;
-
+    
         // y-axis input
         if (Input.GetKey(up)) mov.y = 1;
         else if (Input.GetKey(down)) mov.y = -1;
@@ -43,7 +43,8 @@ public class Player : Entity
         {
             mov.x = 1;
         }
-        else if (Input.GetKey(left)){
+        else if (Input.GetKey(left))
+        {
             mov.x = -1;
         }
 
