@@ -19,13 +19,15 @@ public class Entity : MonoBehaviour
 
     protected Rigidbody2D rb;
 
-    public void Heal(float amount)
+    // Declared virtual so it can be overridden.
+    public virtual void Heal(float amount)
     {
         health += amount;
         if (health >= maxHealth) health = maxHealth;
     }
 
-    public void FullyHeal()
+    // Declared virtual so it can be overridden.
+    public virtual void FullyHeal()
     {
         health = maxHealth;
     }
@@ -35,7 +37,8 @@ public class Entity : MonoBehaviour
         return damage;
     }
 
-    public void Hit(float damage)
+    // Declared virtual so it can be overridden.
+    public virtual void Hit(float damage)
     {
         health -= damage;
         if (health <= 0) Die();

@@ -26,7 +26,7 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         desiredPosition = target.position + offset;
 
-        // Smooth thing up
+        // Smooth things up
         smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
 
         transform.position = smoothedPosition;

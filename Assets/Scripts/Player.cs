@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Entity
 {
@@ -14,9 +16,12 @@ public class Player : Entity
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
-   // public Gun gun;
-    private SpriteRenderer sp;
+    public KeyCode shoot = KeyCode.E;
+    public KeyCode reload = KeyCode.R;
 
+    [Space]
+    public Gun gun;
+    public Image healthBarValue;
 
     Vector2 mov;
 
@@ -24,6 +29,7 @@ public class Player : Entity
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (TryGetComponent(out Gun g)) gun = g;
         FullyHeal();
         mov = Vector2.zero;
     }
@@ -33,7 +39,7 @@ public class Player : Entity
     {
         // Movement handling
         mov = Vector2.zero;
-    
+
         // y-axis input
         if (Input.GetKey(up)) mov.y = 1;
         else if (Input.GetKey(down)) mov.y = -1;
@@ -48,9 +54,8 @@ public class Player : Entity
             mov.x = -1;
         }
 
-        // Apply movement
-        // characterController.Move(mov * movementSpeed * Time.deltaTime);
-        rb.velocity = movementSpeed * Time.deltaTime * mov.normalized;
+        // shooting
+        if (Input.GetKey(shoot)) gun.TryShoot();
     }
 
     void FixedUpdate()
@@ -80,5 +85,23 @@ public class Player : Entity
                 sprint = KeyCode.RightShift;
                 break;
         }
+    }
+
+    public override void Heal(float amount)
+    {
+        base.Heal(amount);
+        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
+    }
+
+    public override void FullyHeal()
+    {
+        base.FullyHeal();
+        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
+    }
+
+    public override void Hit(float damage)
+    {
+        base.Hit(damage);
+        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
     }
 }
