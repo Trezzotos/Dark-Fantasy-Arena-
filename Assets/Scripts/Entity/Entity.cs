@@ -9,11 +9,11 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    [Header("Stats")]
     public float maxHealth = 50;
     public float damage = 10;
 
     [Space]
-    public float movementSpeed = 1;
 
     protected float health;
 
@@ -44,7 +44,8 @@ public class Entity : MonoBehaviour
         if (health <= 0) Die();
     }
 
-    protected void Die()
+    // Declared virtual so it can be overridden.
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Stats")]
-    public float speed = 3;
+    public float movementSpeed = 3;
     public float sprintSpeedMultiplier = 1.5f;
 
     [Header("Commands")]
@@ -16,8 +16,8 @@ public class PlayerMove : MonoBehaviour
     public KeyCode sprint = KeyCode.LeftShift;
 
     bool facingRight = true;
-    internal Vector2 mov = Vector2.zero;    // lo metto global perchè lo utilizzo in FixedUpdate
     Rigidbody2D rb;
+    internal Vector2 mov = Vector2.zero;
 
     void Start()
     {
@@ -61,7 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float vel = speed;
+        float vel = movementSpeed;
         if (Input.GetKey(sprint)) vel *= sprintSpeedMultiplier;
         rb.velocity = vel * mov.normalized;
     }
