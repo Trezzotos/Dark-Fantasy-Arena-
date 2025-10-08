@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 // Ensure we have the components we need
@@ -9,6 +10,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public Transform healthBar;
     [Header("Stats")]
     public float maxHealth = 50;
     public float damage = 10;
@@ -18,18 +20,20 @@ public class Entity : MonoBehaviour
     protected float health;
 
     protected Rigidbody2D rb;
+    protected Vector3 initialHbScale;
 
     // Declared virtual so it can be overridden.
     public virtual void Heal(float amount)
     {
         health += amount;
         if (health >= maxHealth) health = maxHealth;
+        UpdateHealthBar();
     }
 
     // Declared virtual so it can be overridden.
     public virtual void FullyHeal()
     {
-        health = maxHealth;
+        Heal(maxHealth);
     }
 
     public float GetDamage()
@@ -41,6 +45,7 @@ public class Entity : MonoBehaviour
     public virtual void Hit(float damage)
     {
         health -= damage;
+        UpdateHealthBar();
         if (health <= 0) Die();
     }
 
@@ -48,5 +53,12 @@ public class Entity : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    protected virtual void UpdateHealthBar()
+    {
+        // this is a sprite, not an image
+        healthBar.localScale = new Vector3(math.remap(0, maxHealth, 0, initialHbScale.x, health), initialHbScale.y, initialHbScale.z);
+        Debug.Log(health);
     }
 }
