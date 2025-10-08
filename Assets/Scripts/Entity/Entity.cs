@@ -2,12 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-<<<<<<< HEAD:Assets/Scripts/Entity.cs
-using Unity.VisualScripting;
-=======
->>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
 using UnityEngine;
-using UnityEngine.UI;
 
 // Ensure we have the components we need
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,26 +10,15 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
-<<<<<<< HEAD:Assets/Scripts/Entity.cs
-<<<<<<< Updated upstream:Assets/Scripts/Entity.cs
-=======
-    public Transform healthBar;
     [Header("Stats")]
->>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
     public float maxHealth = 50;
     public float damage = 10;
 
     [Space]
 
-=======
     [Header("References")]
-    public Transform healthbar;
+    public Transform healthBar;
 
-    [Header("Stats")]
-    public float maxHealth = 50;
-    public float damage = 10;
-
->>>>>>> Stashed changes:Assets/Scripts/Entity/Entity.cs
     protected float health;
 
     protected Rigidbody2D rb;
@@ -77,12 +61,8 @@ public class Entity : MonoBehaviour
 
     protected virtual void UpdateHealthBar()
     {
-<<<<<<< HEAD:Assets/Scripts/Entity.cs
-        healthbar.localScale.Set(math.remap(0, maxHealth, 0, hbInitialScale.x, health), hbInitialScale.y, hbInitialScale.z);  // mappa la vita in valori [0, 1]
-=======
+        healthBar.localScale.Set(math.remap(0, maxHealth, 0, hbInitialScale.x, health), hbInitialScale.y, hbInitialScale.z);  // mappa la vita in valori [0, 1]
         // this is a sprite, not an image
-        healthBar.localScale = new Vector3(math.remap(0, maxHealth, 0, initialHbScale.x, health), initialHbScale.y, initialHbScale.z);
         Debug.Log(health);
->>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
     }
 }

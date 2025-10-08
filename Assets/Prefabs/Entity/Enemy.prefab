@@ -33,11 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
-  - {fileID: 7815522150472560740}
-=======
-  - {fileID: 8885629263012290151}
->>>>>>> RefactoringCode:Assets/Prefabs/Entity/Enemy.prefab
+  - {fileID: 5198031728471161583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2665345712397869026
@@ -82,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5849056, g: 0.3049814, b: 0.15726236, a: 1}
+  m_Color: {r: 0.58431375, g: 0.5240666, b: 0.15686274, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,23 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c7675c23fedf6458f02b3ff36536a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
-<<<<<<<< Updated upstream:Assets/Prefabs/Enemy.prefab
-========
-  healthbar: {fileID: 7909711185784339181}
-=======
-  healthBar: {fileID: 5236844024373671438}
->>>>>>> RefactoringCode:Assets/Prefabs/Entity/Enemy.prefab
-  maxHealth: 50
-  damage: 10
-  movementSpeed: 1
+  healthBar: {fileID: 8925579248508932742}
+  maxHealth: 70
+  damage: 20
+  movementSpeed: 0.5
   hitRange: 1.2
-  hitRate: 1.5
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
---- !u!1001 &7193553338612814054
-=======
---- !u!1001 &3372817720093924893
->>>>>>> RefactoringCode:Assets/Prefabs/Entity/Enemy.prefab
+  hitRate: 2.5
+--- !u!1001 &2143046247563737749
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -200,76 +186,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6304122560004026339}
     m_Modifications:
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
-    - target: {fileID: 1013400967255452171, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1013400967255452171, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1293347725674152891, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_Size.x
-      value: 0.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 1293347725674152891, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1293347725674152891, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4a9b5458074c346418e2bde8cc5709ea, type: 3}
-    - target: {fileID: 1293347725674152891, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7504438408665108129, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-      propertyPath: m_Name
-      value: EntityHealthbar
-      objectReference: {fileID: 0}
-=======
     - target: {fileID: 4632942368886561274, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
       propertyPath: m_Name
       value: Healthbar
@@ -314,34 +230,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
->>>>>>> RefactoringCode:Assets/Prefabs/Entity/Enemy.prefab
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-<<<<<<< HEAD:Assets/Prefabs/Enemy.prefab
-  m_SourcePrefab: {fileID: 100100000, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
---- !u!4 &7815522150472560740 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1126723824206389378, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-  m_PrefabInstance: {fileID: 7193553338612814054}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7909711185784339181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1013400967255452171, guid: 901eb4f302d94e84481926ca8a50043a, type: 3}
-  m_PrefabInstance: {fileID: 7193553338612814054}
-  m_PrefabAsset: {fileID: 0}
->>>>>>>> Stashed changes:Assets/Prefabs/Entities/Enemy.prefab
-=======
   m_SourcePrefab: {fileID: 100100000, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
---- !u!4 &5236844024373671438 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7377923392713533459, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
-  m_PrefabInstance: {fileID: 3372817720093924893}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8885629263012290151 stripped
+--- !u!4 &5198031728471161583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6169578976332120186, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
-  m_PrefabInstance: {fileID: 3372817720093924893}
+  m_PrefabInstance: {fileID: 2143046247563737749}
   m_PrefabAsset: {fileID: 0}
->>>>>>> RefactoringCode:Assets/Prefabs/Entity/Enemy.prefab
+--- !u!4 &8925579248508932742 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7377923392713533459, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+  m_PrefabInstance: {fileID: 2143046247563737749}
+  m_PrefabAsset: {fileID: 0}

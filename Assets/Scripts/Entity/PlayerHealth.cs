@@ -12,19 +12,15 @@ public class PlayerHealth : Entity
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< HEAD
-        if (!healthbar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthbar.localScale;
-=======
         if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
->>>>>>> RefactoringCode
+        hbInitialScale = healthBar.localScale;
         FullyHeal();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health < maxHealth)
+        if (health < maxHealth && regenFactor != 0)
         {
             Heal(regenFactor * Time.deltaTime);
         }
@@ -38,12 +34,7 @@ public class PlayerHealth : Entity
 
     protected override void UpdateHealthBar()
     {
-<<<<<<< HEAD
         // this is an Image, not a sprite
-        healthbar.GetComponent<Image>().fillAmount = math.remap(0, maxHealth, 0, hbInitialScale.x, health);
-=======
-        // this is an image, not a sprite
-        healthBar.GetComponent<Image>().fillAmount = math.remap(0, maxHealth, 0, 1, health);
->>>>>>> RefactoringCode
+        healthBar.GetComponent<Image>().fillAmount = math.remap(0, maxHealth, 0, hbInitialScale.x, health);
     }
 }

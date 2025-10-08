@@ -18,14 +18,8 @@ public class Enemy : Entity
     {
         player = FindAnyObjectByType<PlayerHealth>();  // also great for 2+ players
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
-<<<<<<< HEAD
-        if (!healthbar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthbar.localScale;
-=======
-        
         if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
-        initialHbScale = healthBar.localScale;
->>>>>>> RefactoringCode
+        hbInitialScale = healthBar.localScale;
     }
 
     void Update()

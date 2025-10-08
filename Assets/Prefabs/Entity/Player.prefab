@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 240239210782261618}
   - component: {fileID: 3917106898349109668}
   - component: {fileID: 4731685023732007296}
-  - component: {fileID: 2773309572302310552}
-  - component: {fileID: 8174112592471466554}
-  - component: {fileID: 6424274510280780703}
+  - component: {fileID: 5796316183370546753}
+  - component: {fileID: 5702371791018275961}
+  - component: {fileID: 2398450782059328537}
   m_Layer: 0
-  m_Name: Player Copy
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,22 +151,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2773309572302310552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106352687358400602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cc139c79e9a1dd4f9430fb597f18373, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shoot: 101
-  reload: 114
-  crossbow: {fileID: 0}
---- !u!114 &8174112592471466554
+--- !u!114 &5796316183370546753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,7 +170,22 @@ MonoBehaviour:
   left: 97
   right: 100
   sprint: 304
---- !u!114 &6424274510280780703
+--- !u!114 &5702371791018275961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc139c79e9a1dd4f9430fb597f18373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoot: 101
+  reload: 114
+  crossbow: {fileID: 0}
+--- !u!114 &2398450782059328537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,7 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c859148a4ca9ff5449ebbe7d0dcbdaf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHealth: 50
   damage: 10
+  healthbar: {fileID: 0}
   regenFactor: 0
-  healthBarValue: {fileID: 0}
