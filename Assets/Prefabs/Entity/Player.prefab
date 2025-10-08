@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2398450782059328537}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,8 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c859148a4ca9ff5449ebbe7d0dcbdaf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
   maxHealth: 50
   damage: 10
-  healthbar: {fileID: 0}
+  healthBar: {fileID: 0}
   regenFactor: 0
