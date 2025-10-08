@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+<<<<<<< HEAD:Assets/Scripts/Entity.cs
 using Unity.VisualScripting;
+=======
+>>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +15,16 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
+<<<<<<< HEAD:Assets/Scripts/Entity.cs
 <<<<<<< Updated upstream:Assets/Scripts/Entity.cs
+=======
+    public Transform healthBar;
+    [Header("Stats")]
+>>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
     public float maxHealth = 50;
     public float damage = 10;
 
     [Space]
-    public float movementSpeed = 1;
 
 =======
     [Header("References")]
@@ -31,6 +38,7 @@ public class Entity : MonoBehaviour
     protected float health;
 
     protected Rigidbody2D rb;
+    protected Vector3 initialHbScale;
 
     protected Vector3 hbInitialScale;
 
@@ -61,13 +69,20 @@ public class Entity : MonoBehaviour
         if (health <= 0) Die();
     }
 
-    protected void Die()
+    // Declared virtual so it can be overridden.
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }
 
     protected virtual void UpdateHealthBar()
     {
+<<<<<<< HEAD:Assets/Scripts/Entity.cs
         healthbar.localScale.Set(math.remap(0, maxHealth, 0, hbInitialScale.x, health), hbInitialScale.y, hbInitialScale.z);  // mappa la vita in valori [0, 1]
+=======
+        // this is a sprite, not an image
+        healthBar.localScale = new Vector3(math.remap(0, maxHealth, 0, initialHbScale.x, health), initialHbScale.y, initialHbScale.z);
+        Debug.Log(health);
+>>>>>>> RefactoringCode:Assets/Scripts/Entity/Entity.cs
     }
 }

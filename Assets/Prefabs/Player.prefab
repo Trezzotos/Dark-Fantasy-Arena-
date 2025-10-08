@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2773309572302310552}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,9 +174,7 @@ MonoBehaviour:
   maxHealth: 50
   damage: 10
   movementSpeed: 3
-  sprintSpeedMultiplier: 1.5
-  up: 119
-  down: 115
-  left: 97
-  right: 100
-  sprint: 304
+  shoot: 101
+  reload: 114
+  crossbow: {fileID: 0}
+  healthBarValue: {fileID: 0}

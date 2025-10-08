@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Mathematics;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Player : Entity
+public class PlayerMove : MonoBehaviour
 {
+    [Header("Stats")]
+    public float movementSpeed = 3;
     public float sprintSpeedMultiplier = 1.5f;
 
     [Header("Commands")]
@@ -16,26 +14,22 @@ public class Player : Entity
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
-    public KeyCode shoot = KeyCode.E;
-    public KeyCode reload = KeyCode.R;
 
-    [Space]
-    public Gun gun;
-    public Image healthBarValue;
+    bool facingRight = true;
+    Rigidbody2D rb;
+    internal Vector2 mov = Vector2.zero;
 
-    Vector2 mov;
-
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        if (TryGetComponent(out Gun g)) gun = g;
-        FullyHeal();
-        mov = Vector2.zero;
+        rb = GetComponent<Rigidbody2D>();   // granted by Entity
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        UpdateMovement();
+    }
+
+    private void UpdateMovement()
     {
         // Movement handling
         mov = Vector2.zero;
@@ -48,14 +42,21 @@ public class Player : Entity
         if (Input.GetKey(right))
         {
             mov.x = 1;
+            if (facingRight)    // look forwards
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                facingRight = false;
+            }
         }
         else if (Input.GetKey(left))
         {
             mov.x = -1;
+            if (!facingRight)   // look forwards
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingRight = true;
+            }
         }
-
-        // shooting
-        if (Input.GetKey(shoot)) gun.TryShoot();
     }
 
     void FixedUpdate()
@@ -85,23 +86,5 @@ public class Player : Entity
                 sprint = KeyCode.RightShift;
                 break;
         }
-    }
-
-    public override void Heal(float amount)
-    {
-        base.Heal(amount);
-        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
-    }
-
-    public override void FullyHeal()
-    {
-        base.FullyHeal();
-        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
-    }
-
-    public override void Hit(float damage)
-    {
-        base.Hit(damage);
-        healthBarValue.fillAmount = math.remap(0, maxHealth, 0, 1, health); // mappa la vita in valori [0, 1]
     }
 }
