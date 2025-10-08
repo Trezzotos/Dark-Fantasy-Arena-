@@ -9,17 +9,19 @@ public class Crossbow : MonoBehaviour
     public float range = 5;
 
     float timeToShoot = 0;
+    RaycastHit2D hit;
+    int layerMask;
 
     void Update()
     {
         timeToShoot -= Time.deltaTime;
+        layerMask = LayerMask.GetMask("ArrowHittable");
     }
 
     public void TryShoot(Vector3 direction)
     {
         if (timeToShoot > 0) return;    // not ready to shoot again
-        // if (mag <= 0) return;   // no more bullets
-        if (direction != Vector3.zero) return;  // player has to be moving
+        if (direction == Vector3.zero) return;  // player has to be moving
 
         Shoot(direction);
     }
@@ -27,14 +29,16 @@ public class Crossbow : MonoBehaviour
     void Shoot(Vector3 direction)
     {
         timeToShoot = reloadTime;   // we only have 1 arrow at a time
-        // mag--;
 
-        // non riesco a disegnare il ray :(
         Debug.DrawRay(transform.position, direction * range, Color.red, 0.5f);
         // raycast
-        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range, LayerMask.NameToLayer("ArrowHittable")))
+        hit = Physics2D.Raycast(transform.position, direction, range, layerMask);
+        if (hit)
         {
-            Debug.DrawRay(transform.position, direction * range, Color.yellow, 0.5f);
+            if (hit.transform.TryGetComponent(out Entity e))
+            {
+                e.Hit(5);
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Inizio");
+        // debug only
         StartCoroutine("Spawn");
     }
 
@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < spawnCount; i++)
         {
             Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], transform.position, transform.rotation);
-            Debug.Log(i);
             yield return new WaitForSeconds(2);
         }
     }

@@ -15,21 +15,21 @@ public class PlayerMove : MonoBehaviour
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
 
-    bool facingRight = true;
-    Rigidbody2D rb;
     internal Vector2 mov = Vector2.zero;
+    
+    SpriteRenderer sp;
+    Rigidbody2D rb;
 
     void Start()
     {
+        sp = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
+
+        sp.flipX = false;   // sx
     }
+
 
     void Update()
-    {
-        UpdateMovement();
-    }
-
-    private void UpdateMovement()
     {
         // Movement handling
         mov = Vector2.zero;
@@ -42,20 +42,12 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(right))
         {
             mov.x = 1;
-            if (facingRight)    // look forwards
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                facingRight = false;
-            }
+            if (!sp.flipX) sp.flipX = true;    // dx
         }
         else if (Input.GetKey(left))
         {
             mov.x = -1;
-            if (!facingRight)   // look forwards
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                facingRight = true;
-            }
+            if (sp.flipX) sp.flipX = false;   // sx
         }
     }
 

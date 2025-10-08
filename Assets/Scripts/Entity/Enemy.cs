@@ -20,6 +20,7 @@ public class Enemy : Entity
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
         if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
         hbInitialScale = healthBar.localScale;
+        FullyHeal();
     }
 
     void Update()

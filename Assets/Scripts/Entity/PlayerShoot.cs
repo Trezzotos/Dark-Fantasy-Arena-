@@ -26,6 +26,6 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         // handle shooting
-        if (Input.GetKey(shoot)) crossbow.TryShoot(pm.mov);
+        if (Input.GetKey(shoot)) crossbow.TryShoot(pm.mov.normalized);
     }
 }

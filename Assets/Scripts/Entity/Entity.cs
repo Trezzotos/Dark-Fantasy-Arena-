@@ -20,11 +20,15 @@ public class Entity : MonoBehaviour
     public Transform healthBar;
 
     protected float health;
-
     protected Rigidbody2D rb;
-    protected Vector3 initialHbScale;
-
     protected Vector3 hbInitialScale;
+
+    void Start()
+    {
+        if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
+        hbInitialScale = healthBar.localScale;
+        FullyHeal();
+    }
 
     // Declared virtual so it can be overridden.
     public virtual void Heal(float amount)
@@ -61,8 +65,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void UpdateHealthBar()
     {
-        healthBar.localScale.Set(math.remap(0, maxHealth, 0, hbInitialScale.x, health), hbInitialScale.y, hbInitialScale.z);  // mappa la vita in valori [0, 1]
         // this is a sprite, not an image
-        Debug.Log(health);
+        healthBar.localScale = new Vector3(math.remap(0, maxHealth, 0, hbInitialScale.x, health), hbInitialScale.y, hbInitialScale.z);  // mappa la vita in valori [0, 1]
     }
 }
