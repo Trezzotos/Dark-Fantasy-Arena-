@@ -15,8 +15,8 @@ public class PlayerMove : MonoBehaviour
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
 
-    internal Vector2 mov = Vector2.zero;
-    
+    internal Vector2 lastDirection = Vector2.left;
+    Vector2 mov = Vector2.zero;
     SpriteRenderer sp;
     Rigidbody2D rb;
 
@@ -49,13 +49,16 @@ public class PlayerMove : MonoBehaviour
             mov.x = -1;
             if (sp.flipX) sp.flipX = false;   // sx
         }
+        mov.Normalize();
+
+        if (mov != Vector2.zero) lastDirection = mov;
     }
 
     void FixedUpdate()
     {
         float vel = movementSpeed;
         if (Input.GetKey(sprint)) vel *= sprintSpeedMultiplier;
-        rb.velocity = vel * mov.normalized;
+        rb.velocity = vel * mov;
     }
 
     // Options -> Controls: 2pt

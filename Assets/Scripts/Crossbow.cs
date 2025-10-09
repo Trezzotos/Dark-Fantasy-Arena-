@@ -18,10 +18,9 @@ public class Crossbow : MonoBehaviour
         layerMask = LayerMask.GetMask("ArrowHittable");
     }
 
-    public void TryShoot(Vector3 direction)
+    public void TryShoot(Vector2 direction)
     {
         if (timeToShoot > 0) return;    // not ready to shoot again
-        if (direction == Vector3.zero) return;  // player has to be moving
 
         Shoot(direction);
     }
