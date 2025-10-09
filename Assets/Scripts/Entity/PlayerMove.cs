@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
 
-        sp.flipX = false;   // sx
+        sp.flipX = true;   // sx
     }
 
 
@@ -42,12 +42,12 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(right))
         {
             mov.x = 1;
-            if (!sp.flipX) sp.flipX = true;    // dx
+            if (sp.flipX) sp.flipX = false;    // dx
         }
         else if (Input.GetKey(left))
         {
             mov.x = -1;
-            if (sp.flipX) sp.flipX = false;   // sx
+            if (!sp.flipX) sp.flipX = true;   // sx
         }
         mov.Normalize();
 
