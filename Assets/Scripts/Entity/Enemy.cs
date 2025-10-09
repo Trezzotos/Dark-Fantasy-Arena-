@@ -25,6 +25,8 @@ public class Enemy : Entity
 
     void Update()
     {
+        if (GameManager.Instance.gameState == GameManager.GameState.GAMEOVER) Die();
+        
         // go towards the selected player
         direction = player.transform.position - transform.position;
 

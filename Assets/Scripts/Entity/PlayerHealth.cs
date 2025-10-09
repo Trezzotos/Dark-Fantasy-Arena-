@@ -28,8 +28,8 @@ public class PlayerHealth : Entity
 
     protected override void Die()
     {
-        Debug.Log("Sei morto!");
-        base.Die();
+        GameManager.Instance.Gameover();
+        // eventuali animazioni
     }
 
     protected override void UpdateHealthBar()
