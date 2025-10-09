@@ -23,13 +23,6 @@ public class Entity : MonoBehaviour
     protected Rigidbody2D rb;
     protected Vector3 hbInitialScale;
 
-    void Start()
-    {
-        if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthBar.localScale;
-        FullyHeal();
-    }
-
     // Declared virtual so it can be overridden.
     public virtual void Heal(float amount)
     {
