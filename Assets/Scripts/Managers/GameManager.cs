@@ -8,17 +8,27 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("References")]
+    public GameObject startUI;
     public GameObject gameOverUI;
     public GameObject gamePausedUI;
 
     public enum GameState
     {
+        STARTING,
         PLAYING,
         SHOPPING,
         PAUSED,
         GAMEOVER
     }
-    public GameState gameState;
+    public GameState gameState = GameState.STARTING;
+
+    public void StartGame()
+    {
+        gameState = GameState.PLAYING;
+        EntityManager.Instance.SetDifficoulty(EntityManager.Difficoulty.EASY);  // Da settare dal Main Menu
+        EntityManager.Instance.PrepareLevel();   // spawn everything
+        startUI.SetActive(false);
+    }
 
     public void PauseGame()
     {
@@ -40,9 +50,18 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
-    void Start()
+    public void Restart()
     {
-        gameState = GameState.PLAYING;
+        gameState = GameState.STARTING;
+        gameOverUI.SetActive(false);
+        startUI.SetActive(true);
+        EntityManager.Instance.ClearLevel();
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerHealth>().FullyHeal();
+        }
     }
 
     void Awake()

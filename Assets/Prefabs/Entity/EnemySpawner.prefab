@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5100632990644340326}
   m_Layer: 6
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,10 +181,10 @@ MonoBehaviour:
   - {fileID: -8877847855794158154, guid: 5a2e4fa7deaa7664886510218afea091, type: 3}
   - {fileID: -8877847855794158154, guid: 7853acd8dec89ce4cae3b2733338b861, type: 3}
   spawnFreq: 10
-  minZHealth: 1
-  maxZHealth: 10
-  minZDamage: 1
-  maxZDamage: 5
+  minZHealth: 11
+  maxZHealth: 31
+  minZDamage: 3
+  maxZDamage: 6
 --- !u!1001 &2866971188546781398
 PrefabInstance:
   m_ObjectHideFlags: 0

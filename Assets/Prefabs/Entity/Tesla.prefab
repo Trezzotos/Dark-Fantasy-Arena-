@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 224337630629696142}
   m_Layer: 6
   m_Name: Tesla
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067d5b1d238f5694e91a2f14ad894327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  damage: 10
+  maxHealth: 51
+  damage: 21
   healthBar: {fileID: 6541307829235646229}
   hitParticleSystem: {fileID: 4450504700856875483, guid: 9e2e97e631f9f86428eb2f3d41a65608, type: 3}
   shootFreq: 1.5

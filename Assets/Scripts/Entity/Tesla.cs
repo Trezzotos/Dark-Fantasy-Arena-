@@ -9,7 +9,6 @@ public class Tesla : Entity
     [Tooltip("How much time it has to wait to be able to shoot again")]
     public float shootFreq = 1.5f;
 
-    Collider2D range;
     Transform target;
     float timeToShoot;
     LineController lineController;
