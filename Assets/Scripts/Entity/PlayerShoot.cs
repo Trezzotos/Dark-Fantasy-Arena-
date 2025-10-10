@@ -25,6 +25,8 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        
         // handle shooting
         if (Input.GetKey(shoot)) crossbow.TryShoot(pm.lastDirection);
     }

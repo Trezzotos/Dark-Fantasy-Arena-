@@ -13,6 +13,11 @@ public class LineController : MonoBehaviour
         lineRenderer.positionCount = 2;
     }
 
+    public void DrawLine(Vector3 endPoint, float duration = 0.1f)
+    {
+        DrawLine(transform.position, endPoint, duration);
+    }
+
     public void DrawLine(Vector3 startPoint, Vector3 endPoint, float duration = 0.1f)
     {
         lineRenderer.SetPosition(0, startPoint);

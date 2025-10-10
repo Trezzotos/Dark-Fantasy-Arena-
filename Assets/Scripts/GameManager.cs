@@ -9,14 +9,30 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public GameObject gameOverUI;
+    public GameObject gamePausedUI;
 
     public enum GameState
     {
         PLAYING,
         SHOPPING,
+        PAUSED,
         GAMEOVER
     }
     public GameState gameState;
+
+    public void PauseGame()
+    {
+        gameState = GameState.PAUSED;
+        Time.timeScale = 0;
+        gamePausedUI.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        gameState = GameState.PLAYING;
+        Time.timeScale = 1;
+        gamePausedUI.SetActive(false);
+    }
 
     public void Gameover()
     {

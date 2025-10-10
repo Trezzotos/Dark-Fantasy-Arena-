@@ -20,6 +20,7 @@ public class PlayerHealth : Entity
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
         if (health < maxHealth && regenFactor != 0)
         {
             Heal(regenFactor * Time.deltaTime);

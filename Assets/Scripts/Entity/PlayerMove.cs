@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public KeyCode right = KeyCode.D;
     public KeyCode sprint = KeyCode.LeftShift;
 
+    [Space]
+    public KeyCode pause = KeyCode.Escape;
+
     internal Vector2 lastDirection = Vector2.left;
     Vector2 mov = Vector2.zero;
     SpriteRenderer sp;
@@ -31,6 +35,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(pause)) GameManager.Instance.PauseGame();
+        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+
         // Movement handling
         mov = Vector2.zero;
 
