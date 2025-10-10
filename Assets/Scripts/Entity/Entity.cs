@@ -18,6 +18,7 @@ public class Entity : MonoBehaviour
 
     [Header("References")]
     public Transform healthBar;
+    public ParticleSystem hitParticleSystem;
 
     protected float health;
     protected Rigidbody2D rb;
@@ -47,6 +48,7 @@ public class Entity : MonoBehaviour
     {
         health -= damage;
         UpdateHealthBar();
+        if (hitParticleSystem) hitParticleSystem.Play();
         if (health <= 0) Die();
     }
 
