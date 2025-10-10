@@ -5,8 +5,6 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public float movementSpeed = 1;
-    [Tooltip("How close the enemy must be to hit")]
-    public float hitRange = .25f;
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
     public float hitRate = 1;
 
@@ -32,20 +30,21 @@ public class Enemy : Entity
         direction = player.transform.position - transform.position;
 
         timeToHit -= Time.deltaTime;
-        if (timeToHit > 0) return;
-
-        // if the enemy is close enough, attack
-        if (direction.magnitude <= hitRange)
-        {
-            player.Hit(damage);
-            // animazione?
-            timeToHit = hitRate;
-        }
     }
 
     void FixedUpdate()
     {
         // apply movement
         rb.velocity = direction.normalized * movementSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (timeToHit > 0) return;
+        if (collision.transform.tag != "Player") return;
+
+        player.Hit(damage);
+        // animazione?
+        timeToHit = hitRate;
     }
 }
