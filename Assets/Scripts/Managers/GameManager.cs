@@ -21,7 +21,17 @@ public class GameManager : MonoBehaviour
         GAMEOVER
     }
     public GameState gameState = GameState.STARTING;
-
+ 
+    void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(gameObject);
+            return;   
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     public void StartGame()
     {
         gameState = GameState.PLAYING;
@@ -64,19 +74,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        // Se non esiste ancora un'istanza, questa è l'istanza.
-        if (Instance == null)
-        {
-            Instance = this;
-            // impedisce che l'oggetto venga distrutto al cambio di scena.
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            // Se esiste già un'istanza, distruggi questo oggetto (perché è un duplicato).
-            Destroy(gameObject);
-        }
-    }
 }
