@@ -58,9 +58,10 @@ public class PlayerMove : MonoBehaviour
     }
 
     private void DisplayPause()
-    {   
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) 
+    {
+        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING)
             return;
+            
         if (m_pauseActionPlayer.WasPressedThisFrame())
             GameManager.Instance.PauseGame();
         

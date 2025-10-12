@@ -13,6 +13,7 @@ public class SettingsHandlerEvents : MonoBehaviour
     private AudioManager musicManager;
     private Slider volumeSlider;
     private TMP_Dropdown resolutionDropdown;
+    private Button switchCmdset;
 
 
     private void Awake()
@@ -28,14 +29,17 @@ public class SettingsHandlerEvents : MonoBehaviour
         volumeSlider.value = settingsManager.GetVolume();
         resolutionDropdown.value = settingsManager.GetResolutionIndex();
         fullScreenToggle.isOn = Screen.fullScreen;
+
+        switchCmdset = GetComponentInChildren<Button>();
+    }   
+
+    public void OnControlsChange()
+    {
+        //
     }
 
     public void OnVolumeChange()
-    {   
-        if (settingsManager == null) Debug.LogError("SettingsManager is NULL");
-        if (musicManager == null) Debug.LogError("AudioManager is NULL");
-        if (volumeSlider == null) Debug.LogError("VolumeSlider is NULL");
-    
+    {     
         settingsManager.SetVolume(volumeSlider.value);
         musicManager.ChangeVolume(volumeSlider.value);
     }

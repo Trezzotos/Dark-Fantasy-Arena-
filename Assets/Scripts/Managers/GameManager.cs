@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -72,6 +73,12 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<PlayerHealth>().FullyHeal();
         }
+    }
+
+    public void BackToMenu()
+    {   
+        //gameState = GameState.PLAYING;
+        SceneManager.LoadScene(sceneNames.MainMenu);
     }
 
 }

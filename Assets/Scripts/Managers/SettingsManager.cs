@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class SettingsManager : MonoBehaviour
     {
         return instance;
     }
-    
+
     public void InitPlayerPrefs()
     {
         if (!PlayerPrefs.HasKey("volume"))
@@ -49,6 +50,10 @@ public class SettingsManager : MonoBehaviour
             PlayerPrefs.SetString("resolution", playerDefaultResolution);
         }
         PlayerPrefs.Save();
+    }
+    public void SetCmdset()
+    {
+        //foreach(var map in InputAction.actionMaps)
     }
     public float GetVolume()
     {
