@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2665345712397869026}
   - component: {fileID: 8442979535629216662}
   - component: {fileID: 1481417460889883138}
-  - component: {fileID: -8877847855794158154}
+  - component: {fileID: -4430547529555085017}
+  - component: {fileID: -1059805288666188369}
   m_Layer: 6
   m_Name: SlowGoblin
   m_TagString: Enemy
@@ -149,7 +150,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -161,7 +162,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-8877847855794158154
+--- !u!114 &-4430547529555085017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,16 +171,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 458919475696192853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0c7675c23fedf6458f02b3ff36536a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 93db9de4304eee74391a20bedf71ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
-  damage: 20
+  _startingHealth: 100
+  _maxHealth: 100
+--- !u!114 &-1059805288666188369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458919475696192853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3247ec588750b8b46a461b86b9c4de88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   healthBar: {fileID: 8925579248508932742}
-  hitParticleSystem: {fileID: 3955093890254766703}
-  movementSpeed: 0.5
-  hitRange: 1.2
-  hitRate: 2.5
 --- !u!1001 &801656686123400116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237,11 +246,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2e97e631f9f86428eb2f3d41a65608, type: 3}
---- !u!198 &3955093890254766703 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4450504700856875483, guid: 9e2e97e631f9f86428eb2f3d41a65608, type: 3}
-  m_PrefabInstance: {fileID: 801656686123400116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6960657793114956841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7762296867988725661, guid: 9e2e97e631f9f86428eb2f3d41a65608, type: 3}

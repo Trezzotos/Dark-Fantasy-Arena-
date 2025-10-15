@@ -26,6 +26,7 @@ public class EntityManager : MonoBehaviour
     // Questo tipo di advancement non è definitivo (forse)
     public void PrepareLevel()
     {
+        return;
         for (int i = 0; i < (int)(level * (int)difficoulty / 2) + 3; i++)
         {
             Entity sorted = structures[Random.Range(0, structures.Length)];
@@ -41,7 +42,7 @@ public class EntityManager : MonoBehaviour
             if (sorted.TryGetComponent(out Tesla sortedTesla))
             {
                 sortedTesla.damage = 20 + level * (int)difficoulty;
-                sortedTesla.maxHealth = 50 + level * (int)difficoulty;
+                // sortedTesla.maxHealth = 50 + level * (int)difficoulty;
             }
 
             Instantiate(sorted, new Vector2(Random.Range(minPos.x, maxPos.x), Random.Range(minPos.y, maxPos.y)), Quaternion.identity);

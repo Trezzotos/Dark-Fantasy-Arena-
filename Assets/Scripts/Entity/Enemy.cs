@@ -1,31 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Examples.Observer;
 using UnityEngine;
 
-public class Enemy : Entity
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+
+public class Enemy : MonoBehaviour
 {
     public float movementSpeed = 1;
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
     public float hitRate = 1;
+    public int damage = 5;
 
     PlayerHealth player;
     Vector2 direction = Vector2.zero;
     float timeToHit = 0;
+    Rigidbody2D rb;
 
     void Start()
     {
         player = FindAnyObjectByType<PlayerHealth>();  // also great for 2+ players
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
-        if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthBar.localScale;
-        FullyHeal();
     }
 
     void Update()
     {
-        if (GameManager.Instance.gameState == GameManager.GameState.GAMEOVER) Die();
+        // if (GameManager.Instance.gameState == GameManager.GameState.GAMEOVER) Die(); // IVAN??
         if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
-        
+
         // go towards the selected player
         direction = player.transform.position - transform.position;
 
@@ -41,10 +45,14 @@ public class Enemy : Entity
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (timeToHit > 0) return;
-        if (collision.transform.tag != "Player") return;
 
-        player.Hit(damage);
-        // animazione?
-        timeToHit = hitRate;
+        Health health = collision.transform.GetComponent<Health>();
+        if (health)
+        {
+            health.TakeDamage(damage);
+            
+            // animazione?
+            timeToHit = hitRate;
+        }
     }
 }

@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 2091619139511526310}
   - component: {fileID: 1321872882392708411}
   - component: {fileID: 3378294278464303341}
-  - component: {fileID: 224337630629696142}
+  - component: {fileID: 966633224702047394}
+  - component: {fileID: -3053186552240006850}
+  - component: {fileID: -7884141479242758794}
   m_Layer: 6
   m_Name: Tesla
   m_TagString: Enemy
@@ -197,7 +199,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &224337630629696142
+--- !u!114 &966633224702047394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,11 +211,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067d5b1d238f5694e91a2f14ad894327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 51
-  damage: 21
-  healthBar: {fileID: 6541307829235646229}
-  hitParticleSystem: {fileID: 4450504700856875483, guid: 9e2e97e631f9f86428eb2f3d41a65608, type: 3}
+  maxHealth: 50
+  damage: 10
+  healthBar: {fileID: 0}
+  hitParticleSystem: {fileID: 0}
   shootFreq: 1.5
+--- !u!114 &-3053186552240006850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302112885294128088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93db9de4304eee74391a20bedf71ab26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingHealth: 100
+  _maxHealth: 100
+--- !u!114 &-7884141479242758794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302112885294128088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3247ec588750b8b46a461b86b9c4de88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 6541307829235646229}
 --- !u!1001 &2996589433273129940
 PrefabInstance:
   m_ObjectHideFlags: 0

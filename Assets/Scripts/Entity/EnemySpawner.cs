@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : Entity
+public class EnemySpawner : MonoBehaviour
 {
     public Enemy[] enemyPool;
     [Tooltip("Enemies / sec")]
@@ -17,10 +17,6 @@ public class EnemySpawner : Entity
 
     void Start()
     {
-        if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthBar.localScale;
-        FullyHeal();
-
         // will be invoked by GameManager
         StartSpawn();
     }
@@ -35,11 +31,5 @@ public class EnemySpawner : Entity
         Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], transform.position, transform.rotation);
         yield return new WaitForSeconds(spawnFreq);
         StartCoroutine(nameof(Spawn));
-    }
-
-    protected override void Die()
-    {
-        StopAllCoroutines();
-        base.Die();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Examples.Observer;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class PlayerShoot : MonoBehaviour
     public KeyCode reload = KeyCode.R;  // remove?
 
     [Space]
-    public Crossbow crossbow;
+    public RaycastShoot weapon;
 
     private PlayerMove pm;
 
@@ -19,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         pm = GetComponent<PlayerMove>();
-        if (TryGetComponent(out Crossbow c)) crossbow = c;
+        if (TryGetComponent(out RaycastShoot w)) weapon = w;
     }
 
     // Update is called once per frame
@@ -28,6 +29,6 @@ public class PlayerShoot : MonoBehaviour
         if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
         
         // handle shooting
-        if (Input.GetKey(shoot)) crossbow.TryShoot(pm.lastDirection);
+        if (Input.GetKey(shoot)) weapon.TryShoot(pm.lastDirection);
     }
 }

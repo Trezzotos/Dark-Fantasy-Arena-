@@ -15,7 +15,7 @@ public class Crossbow : MonoBehaviour
     LineController lineController;
     Vector3[] positions;
 
-    void Update()
+    void Start()
     {
         lineController = transform.GetComponentInChildren<LineController>();
         timeToShoot -= Time.deltaTime;
