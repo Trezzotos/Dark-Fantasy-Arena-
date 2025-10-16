@@ -27,7 +27,7 @@ public class EntityManager : MonoBehaviour
     public void PrepareLevel()
     {
         return;
-        for (int i = 0; i < (int)(level * (int)difficoulty / 2) + 3; i++)
+      /*  for (int i = 0; i < (int)(level * (int)difficoulty / 2) + 3; i++)
         {
             Entity sorted = structures[Random.Range(0, structures.Length)];
 
@@ -46,7 +46,7 @@ public class EntityManager : MonoBehaviour
             }
 
             Instantiate(sorted, new Vector2(Random.Range(minPos.x, maxPos.x), Random.Range(minPos.y, maxPos.y)), Quaternion.identity);
-        }
+        }*/
     }
 
     public void ClearLevel()

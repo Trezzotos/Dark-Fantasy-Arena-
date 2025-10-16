@@ -9,10 +9,10 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Commands")]
     public KeyCode shoot = KeyCode.E;
-    public KeyCode reload = KeyCode.R;  // remove?
+   // public KeyCode reload = KeyCode.R;  
 
     [Space]
-    public RaycastShoot weapon;
+    [SerializeField] private RaycastShoot weapon;
 
     private PlayerMove pm;
 
@@ -20,7 +20,10 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         pm = GetComponent<PlayerMove>();
-        if (TryGetComponent(out RaycastShoot w)) weapon = w;
+        weapon = GetComponentInChildren<RaycastShoot>();
+
+        if (pm == null) Debug.LogError("PlayerMove non trovato!");
+        if (weapon == null) Debug.LogError("RaycastShoot non trovato nei figli!");
     }
 
     // Update is called once per frame

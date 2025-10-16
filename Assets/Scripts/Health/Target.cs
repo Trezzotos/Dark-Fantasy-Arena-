@@ -38,12 +38,11 @@ namespace Examples.Observer
 
         void OnTakeDamage(int damage)
         {
-            // on damaged, display the new health
+            float ratio = (float)Health.CurrentHealth / Health.MaxHealth;
+            
+            healthBar.localScale = new Vector3(hbInitialScale.x * ratio, hbInitialScale.y, hbInitialScale.z);
 
-            // CODICE PLAYER
-            // healthBar.GetComponent<Image>().fillAmount = math.remap(0, Health.MaxHealth, 0, hbInitialScale.x, Health.CurrentHealth);
-
-            print(name + "(" + Health.MaxHealth + "/" + Health.CurrentHealth + ")");
+            print($"{name} ({Health.CurrentHealth}/{Health.MaxHealth})");
         }
     }
 }
