@@ -28,21 +28,21 @@ namespace Examples.Observer
         private void OnEnable()
         {
             // subscribe to get notified when this health takes damage!
-            Health.Damaged += OnTakeDamage;
+            Health.Damaged += OnHealthChanged;
+            Health.Healed += OnHealthChanged;
         }
 
         private void OnDisable()
         {
-            Health.Damaged -= OnTakeDamage;
+            Health.Damaged -= OnHealthChanged;
+            Health.Healed -= OnHealthChanged;
         }
 
-        void OnTakeDamage(int damage)
+        void OnHealthChanged(float amount)
         {
             float ratio = (float)Health.CurrentHealth / Health.MaxHealth;
             
             healthBar.localScale = new Vector3(hbInitialScale.x * ratio, hbInitialScale.y, hbInitialScale.z);
-
-            print($"{name} ({Health.CurrentHealth}/{Health.MaxHealth})");
         }
     }
 }

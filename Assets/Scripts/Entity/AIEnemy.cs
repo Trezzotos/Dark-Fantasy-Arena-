@@ -50,6 +50,7 @@ public class AIEnemy: MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (timeToHit > 0) return;
+        if (!collision.transform.CompareTag("Player")) return;
 
         Health health = collision.transform.GetComponent<Health>();
         if (health)
@@ -60,7 +61,7 @@ public class AIEnemy: MonoBehaviour
             timeToHit = hitRate;
         }
     }
-    GameObject TrovaIlPiùVicino(GameObject[] players)
+    GameObject FindClosest(GameObject[] players)
     {
         float minDistance = Mathf.Infinity;
         GameObject closest = null;
@@ -81,6 +82,6 @@ public class AIEnemy: MonoBehaviour
     void AILogic()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        player = TrovaIlPiùVicino(players);
+        player = FindClosest(players);
     }
 }
