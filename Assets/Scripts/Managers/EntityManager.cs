@@ -10,8 +10,8 @@ public class EntityManager : MonoBehaviour
     public Vector2 minPos;
     public Vector2 maxPos;
 
-    [Header("References")]
-    public Entity[] structures;
+    //[Header("References")]
+    //public Entity[] structures; Era legato ad Entity, Da sistemare
 
     public enum Difficoulty
     {

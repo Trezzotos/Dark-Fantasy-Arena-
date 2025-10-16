@@ -56,12 +56,6 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(false);
         startUI.SetActive(true);
         EntityManager.Instance.ClearLevel();
-
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            player.GetComponent<PlayerHealth>().FullyHeal();
-        }
     }
 
     void Awake()

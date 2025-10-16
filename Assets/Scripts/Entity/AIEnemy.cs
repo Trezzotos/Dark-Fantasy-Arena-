@@ -7,21 +7,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
-public class Enemy : MonoBehaviour
+public class AIEnemy : MonoBehaviour
 {
     public float movementSpeed = 1;
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
     public float hitRate = 1;
     public int damage = 5;
 
-    PlayerHealth player;
+    private GameObject player;
     Vector2 direction = Vector2.zero;
     float timeToHit = 0;
     Rigidbody2D rb;
 
     void Start()
     {
-        player = FindAnyObjectByType<PlayerHealth>();  // also great for 2+ players
+        player = GameObject.FindGameObjectWithTag("Player");  // also great for 2+ players
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
     }
 
@@ -56,3 +56,36 @@ public class Enemy : MonoBehaviour
         }
     }
 }
+
+/*
+Se hai più player
+Se stai gestendo più giocatori, usa:
+
+
+void Start()
+{
+    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+    player = TrovaIlPiùVicino(players);
+}
+
+
+
+Health TrovaIlPiùVicino(GameObject[] players)
+{
+    float minDistance = Mathf.Infinity;
+    Health closest = null;
+
+    foreach (GameObject p in players)
+    {
+        float dist = Vector2.Distance(transform.position, p.transform.position);
+        if (dist < minDistance)
+        {
+            minDistance = dist;
+            closest = p.GetComponent<Health>();
+        }
+    }
+
+    return closest;
+}
+
+*/

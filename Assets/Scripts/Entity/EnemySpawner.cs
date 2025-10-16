@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
-{
+{/*
     public Enemy[] enemyPool;
     [Tooltip("Enemies / sec")]
     public int spawnFreq = 10;
@@ -31,5 +31,5 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], transform.position, transform.rotation);
         yield return new WaitForSeconds(spawnFreq);
         StartCoroutine(nameof(Spawn));
-    }
+    }*/
 }
