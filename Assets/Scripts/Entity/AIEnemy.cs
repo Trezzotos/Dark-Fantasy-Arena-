@@ -32,7 +32,6 @@ public class AIEnemy: MonoBehaviour
 
     void Update()
     {
-        // if (GameManager.Instance.gameState == GameManager.GameState.GAMEOVER) Die(); // IVAN??
         if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
 
         // go towards the selected player

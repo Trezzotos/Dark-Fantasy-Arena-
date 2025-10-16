@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton
     public static GameManager Instance { get; private set; }
 
     [Header("References")]
@@ -23,7 +21,8 @@ public class GameManager : MonoBehaviour
     public GameState gameState = GameState.STARTING;
 
     public void StartGame()
-    {
+    {   
+        startUI.SetActive(true);
         gameState = GameState.PLAYING;
         EntityManager.Instance.SetDifficoulty(EntityManager.Difficoulty.EASY);  // Da settare dal Main Menu
         EntityManager.Instance.PrepareLevel();   // spawn everything
@@ -33,23 +32,23 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         gameState = GameState.PAUSED;
-        Time.timeScale = 0;
+   //     Time.timeScale = 0;
         gamePausedUI.SetActive(true);
     }
-
+/*
     public void ResumeGame()
     {
         gameState = GameState.PLAYING;
         Time.timeScale = 1;
         gamePausedUI.SetActive(false);
     }
-
+*/
     public void Gameover()
     {
         gameState = GameState.GAMEOVER;
         gameOverUI.SetActive(true);
     }
-
+/*
     public void Restart()
     {
         gameState = GameState.STARTING;
@@ -57,7 +56,7 @@ public class GameManager : MonoBehaviour
         startUI.SetActive(true);
         EntityManager.Instance.ClearLevel();
     }
-
+*/
     void Awake()
     {
         // Se non esiste ancora un'istanza, questa è l'istanza.
