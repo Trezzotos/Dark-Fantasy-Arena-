@@ -21,7 +21,8 @@ public class AIEnemy : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");  // also great for 2+ players
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        player = TrovaIlPiùVicino(players);
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
     }
 
@@ -50,30 +51,15 @@ public class AIEnemy : MonoBehaviour
         if (health)
         {
             health.TakeDamage(damage);
-            
+
             // animazione?
             timeToHit = hitRate;
         }
     }
-}
-
-/*
-Se hai più player
-Se stai gestendo più giocatori, usa:
-
-
-void Start()
-{
-    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-    player = TrovaIlPiùVicino(players);
-}
-
-
-
-Health TrovaIlPiùVicino(GameObject[] players)
+    GameObject TrovaIlPiùVicino(GameObject[] players)
 {
     float minDistance = Mathf.Infinity;
-    Health closest = null;
+    GameObject closest = null;
 
     foreach (GameObject p in players)
     {
@@ -81,11 +67,10 @@ Health TrovaIlPiùVicino(GameObject[] players)
         if (dist < minDistance)
         {
             minDistance = dist;
-            closest = p.GetComponent<Health>();
+            closest = p;
         }
     }
 
     return closest;
 }
-
-*/
+}
