@@ -175,7 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82febfa9e1f61a34ead4a0d34aa2188c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPool: []
+  enemyPool:
+  - {fileID: -6848840948617651846, guid: 7853acd8dec89ce4cae3b2733338b861, type: 3}
+  - {fileID: -3084661160951104718, guid: 5a2e4fa7deaa7664886510218afea091, type: 3}
   spawnFreq: 10
   minZHealth: 11
   maxZHealth: 31

@@ -13,8 +13,9 @@ public class EnemyData : ScriptableObject
     [Header("Statistiche base")]
     public float health = 50f;
     public float movementSpeed = 1f;
-    public float damage = 10f;
+    public float damage = 5f;
     public float hitRate = 1;
+    float timeToHit = 0;
 
     [Header("Spawn")]
     public int spawnWeight = 1;         // Per calcolo probabilità di spawn
