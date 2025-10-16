@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Examples.Observer;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
-public class AIEnemy : MonoBehaviour
+public class AIEnemy: MonoBehaviour
 {
     public float movementSpeed = 1;
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
@@ -19,10 +20,13 @@ public class AIEnemy : MonoBehaviour
     float timeToHit = 0;
     Rigidbody2D rb;
 
+    [Header("For the Sprite/EnemyTipe")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    public EnemyData Data { get; private set; }
+
     void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        player = TrovaIlPiùVicino(players);
+        AILogic();
         rb = GetComponent<Rigidbody2D>();   // granted by Entity
     }
 
@@ -57,20 +61,26 @@ public class AIEnemy : MonoBehaviour
         }
     }
     GameObject TrovaIlPiùVicino(GameObject[] players)
-{
-    float minDistance = Mathf.Infinity;
-    GameObject closest = null;
-
-    foreach (GameObject p in players)
     {
-        float dist = Vector2.Distance(transform.position, p.transform.position);
-        if (dist < minDistance)
+        float minDistance = Mathf.Infinity;
+        GameObject closest = null;
+
+        foreach (GameObject p in players)
         {
-            minDistance = dist;
-            closest = p;
+            float dist = Vector2.Distance(transform.position, p.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closest = p;
+            }
         }
+
+        return closest;
     }
 
-    return closest;
-}
+    void AILogic()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        player = TrovaIlPiùVicino(players);
+    }
 }
