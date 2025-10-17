@@ -4,6 +4,66 @@ using UnityEngine;
 
 public class EntityManager : MonoBehaviour
 {
+
+    public static EntityManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStateChanged += HandleGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= HandleGameStateChanged;
+    }
+
+    private void HandleGameStateChanged(GameState state)
+    {
+        if (state == GameState.PAUSED)
+            StopAllSpawns();
+        else if (state == GameState.GAMEOVER)
+            ReturnAllToPool();
+    }
+
+    public void SpawnWave(WaveData wave)
+    {
+        StartCoroutine(SpawnRoutine(wave));
+    }
+
+    private IEnumerator SpawnRoutine(WaveData wave)
+    {
+        foreach (var entry in wave.entries)
+        {
+            yield return new WaitForSeconds(entry.spawnDelay);
+            var enemy = PoolManager.Instance.Get(entry.enemyType);
+            enemy.Initialize(entry.config);
+            enemy.OnDeath += () => PoolManager.Instance.Release(entry.enemyType, enemy);
+        }
+    }
+
+    private void StopAllSpawns()
+    {
+        StopAllCoroutines();
+    }
+
+    private void ReturnAllToPool()
+    {
+        PoolManager.Instance.ReleaseAll();
+    }
+}
+
+
+
+
+
+
+
+/*
     public static EntityManager Instance { get; private set; }
 
     [Header("Spawn rectangle")]
@@ -17,7 +77,7 @@ public class EntityManager : MonoBehaviour
     {
         UNSET,
         EASY,
-        MEDIUM,
+        MEDIUM,                                 //the difficolty will be set previously
         HARD
     }
     public Difficoulty difficoulty = Difficoulty.UNSET;
@@ -46,7 +106,7 @@ public class EntityManager : MonoBehaviour
             }
 
             Instantiate(sorted, new Vector2(Random.Range(minPos.x, maxPos.x), Random.Range(minPos.y, maxPos.y)), Quaternion.identity);
-        }*/
+        }
     }
 
     public void ClearLevel()
@@ -79,5 +139,4 @@ public class EntityManager : MonoBehaviour
     public void SetDifficoulty(Difficoulty d)
     {
         difficoulty = d;
-    }
-}
+    }*/

@@ -65,31 +65,4 @@ public class GameManager : MonoBehaviour
         startUI.SetActive(false);
     }
 
-    public void PauseGame()
-    {
-        gameState = GameState.PAUSED;
-   //     Time.timeScale = 0;
-        gamePausedUI.SetActive(true);
-    }
-/*
-    public void ResumeGame()
-    {
-        gameState = GameState.PLAYING;
-        Time.timeScale = 1;
-        gamePausedUI.SetActive(false);
-    }
-
-    public void Gameover()
-    {
-        gameState = GameState.GAMEOVER;
-        gameOverUI.SetActive(true);
-    }
-
-    public void Restart()
-    {
-        gameState = GameState.STARTING;
-        gameOverUI.SetActive(false);
-        startUI.SetActive(true);
-        EntityManager.Instance.ClearLevel();
-    }
 */
