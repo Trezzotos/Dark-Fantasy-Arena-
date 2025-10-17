@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     STARTING,
     PLAYING,
-    SHOPPING,    // rimane definito ma gestito altrove
+    SHOPPING,    // gestito altrove
     PAUSED,
     GAMEOVER
 }
@@ -14,37 +13,30 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public static event Action<GameState> onGameStateChanged;
-
-    [Header("UI References")]
-    [Tooltip("Pannello iniziale con bottone Start")]
-    public GameObject startUI;
-    [Tooltip("Pannello di pausa con bottone Resume")]
-    public GameObject gamePausedUI;
-    [Tooltip("Pannello Game Over con bottone Restart")]
-    public GameObject gameOverUI;
+    public static event Action<GameState> OnGameStateChanged;
 
     public GameState gameState { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
-        if (Instance)
-            Destroy(gameObject);
-        else
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
         UpdateGameState(GameState.STARTING);
     }
 
-    void Update()
+    private void Update()
     {
-        // Gestione rapido della pausa con il tasto Escape
+        // Gestione rapida della pausa con Escape
         if (gameState == GameState.PLAYING && Input.GetKeyDown(KeyCode.Escape))
             UpdateGameState(GameState.PAUSED);
         else if (gameState == GameState.PAUSED && Input.GetKeyDown(KeyCode.Escape))
@@ -54,89 +46,14 @@ public class GameManager : MonoBehaviour
     public void UpdateGameState(GameState newState)
     {
         gameState = newState;
-        Time.timeScale = 1f;  // resetto il timeScale di default
 
-        switch (newState)
-        {
-            case GameState.STARTING:
-                EnterStarting();
-                break;
+        // timeScale: 1 solo se PLAYING, altrimenti 0
+        Time.timeScale = (newState == GameState.PLAYING) ? 1f : 0f;
 
-            case GameState.PLAYING:
-                EnterPlaying();
-                break;
-
-            case GameState.PAUSED:
-                EnterPaused();
-                break;
-
-            case GameState.GAMEOVER:
-                EnterGameOver();
-                break;
-
-            case GameState.SHOPPING:
-                // TODO: implementazione shop
-                break;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
-        }
-
-        onGameStateChanged?.Invoke(newState);
-    }
-    private void EnterStarting()
-    {
-        startUI.SetActive(true);
-        gamePausedUI.SetActive(false);
-        gameOverUI.SetActive(false);
-        Time.timeScale = 0f;
-    }
-
-    private void EnterPlaying()
-    {
-        startUI.SetActive(false);
-        gamePausedUI.SetActive(false);
-        gameOverUI.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    private void EnterPaused()
-    {
-        gamePausedUI.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    private void EnterGameOver()
-    {
-        gameOverUI.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    // Metodi da collegare ai bottoni via Inspector
-    public void OnStartButton()
-    {
-        UpdateGameState(GameState.PLAYING);
-    }
-
-    public void OnResumeButton()
-    {
-        UpdateGameState(GameState.PLAYING);
-    }
-
-    public void OnRestartButton()
-    {
-        // Ricarica la scena corrente
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        UpdateGameState(GameState.STARTING);
-    }
-
-    public void OnQuitButton()
-    {
-        // Torna al menù
-        SceneManager.LoadScene("MainMenu");
-        UpdateGameState(GameState.GAMEOVER);
+        OnGameStateChanged?.Invoke(newState);
     }
 }
+
 
     /*
     public void StartGame()
