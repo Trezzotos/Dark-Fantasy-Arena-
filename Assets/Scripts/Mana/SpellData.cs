@@ -7,6 +7,7 @@ public class SpellData : ScriptableObject
     public string spellName;
     public Sprite sprite;
     public Color spriteTint = Color.white;
+    public bool areaDamage = false;
 
     public enum EffectType
     {
@@ -17,16 +18,16 @@ public class SpellData : ScriptableObject
 
     public EffectType effect;
 
-    // --- Proprietà specifiche per gli effetti ---
-
-    // Condivise tra tutti i tipi
+    // Shared between all types
     public float baseDamage;
 
-    // Condivise (usate da MULTIPLE e INCREMENTAL)
+    // MULTIPLE and INCREMENTAL shared properties
     public int totalHits;
     public float timeBetweenHits;
 
-
-    // INCREMENTAL usa proprietà specifiche
+    // INCREMENTAL specific properties
     public float damageIncrement;
+
+    // AREA specific properties
+    public float radius;
 }

@@ -15,9 +15,8 @@ MonoBehaviour:
   spellName: 
   sprite: {fileID: 0}
   spriteTint: {r: 1, g: 1, b: 1, a: 1}
-  effect: 0
-  numberOfHits: 0
-  totalHits: 0
-  damage: 0
+  effect: 2
   baseDamage: 0
-  increment: 0
+  totalHits: 0
+  timeBetweenHits: 0
+  damageIncrement: 0
