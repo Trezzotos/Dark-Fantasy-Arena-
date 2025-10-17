@@ -29,7 +29,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
         
         // handle shooting
         if (Input.GetKey(shoot)) weapon.TryShoot(pm.lastDirection);
