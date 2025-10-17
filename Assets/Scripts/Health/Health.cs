@@ -116,8 +116,8 @@ namespace Examples.Observer
         {
             Killed.Invoke();
             StopAllCoroutines();
-            // gameObject.SetActive(false);
-            Destroy(gameObject);    // DA SISTEMARE PER IL PLAYER IVAN
+            GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
+            Destroy(gameObject);   
         }
 
         private IEnumerator Regen()

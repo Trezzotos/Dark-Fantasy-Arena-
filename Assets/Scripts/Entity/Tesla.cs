@@ -25,7 +25,7 @@ public class Tesla : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
         timeToShoot -= Time.deltaTime;
 

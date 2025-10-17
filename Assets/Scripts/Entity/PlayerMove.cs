@@ -35,10 +35,10 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        mov = Vector2.zero;
+
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
         
-        if (Input.GetKeyDown(pause)) GameManager.Instance.PauseGame();
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        mov = Vector2.zero;
 
         // y-axis input
         if (Input.GetKey(up)) mov.y = 1;
