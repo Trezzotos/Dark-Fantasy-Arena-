@@ -9,12 +9,18 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Commands")]
     public KeyCode shoot = KeyCode.E;
-   // public KeyCode reload = KeyCode.R;  
+    public KeyCode shootSpell = KeyCode.T;
 
     [Space]
     [SerializeField] private RaycastShoot weapon;
 
     private PlayerMove pm;
+
+
+    // DA RILOCARE
+    public GameObject spellPrefab;
+    public SpellData[] availableSpells;
+    private int selectedSpell = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +36,17 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
-        
+
         // handle shooting
         if (Input.GetKey(shoot)) weapon.TryShoot(pm.lastDirection);
+        if (Input.GetKey(shootSpell))
+        {
+            GameObject spell = Instantiate(spellPrefab, transform.position, Quaternion.identity);
+            Spell spellComponent = spell.GetComponent<Spell>();
+            if (spellComponent)
+            {
+                spellComponent.Initialize(availableSpells[selectedSpell], pm.lastDirection);
+            }
+        }
     }
 }

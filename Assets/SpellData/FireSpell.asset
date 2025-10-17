@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb97e3976c2e5924d80b940621c1a8ed, type: 3}
-  m_Name: Ivan 1
+  m_Script: {fileID: 11500000, guid: d6c1776baf25bca409ea0954be593c88, type: 3}
+  m_Name: FireSpell
   m_EditorClassIdentifier: 
-  itemName: 
-  itemIcon: {fileID: 0}
-  isUsable: 0
-  description: 
+  spellName: 
+  sprite: {fileID: 0}
+  spriteTint: {r: 1, g: 1, b: 1, a: 1}
+  effect: 0
+  numberOfHits: 0
+  totalHits: 0
+  damage: 0
+  baseDamage: 0
+  increment: 0
