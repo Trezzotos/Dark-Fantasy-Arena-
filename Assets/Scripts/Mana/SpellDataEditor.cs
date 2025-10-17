@@ -15,6 +15,8 @@ public class SpellDataEditor : Editor
     private SerializedProperty totalHitsProp;
     private SerializedProperty timeBetweenHitsProp;
     private SerializedProperty damageIncrementProp;
+    private SerializedProperty areaDamageProp;
+    private SerializedProperty areaRadiusProp;
 
     private void OnEnable()
     {
@@ -23,12 +25,14 @@ public class SpellDataEditor : Editor
         spriteProp = serializedObject.FindProperty("sprite");
         spriteTintProp = serializedObject.FindProperty("spriteTint");
         effectProp = serializedObject.FindProperty("effect");
+        areaDamageProp = serializedObject.FindProperty("areaDamage");
 
         // Proprietà Condizionali (devono corrispondere ESATTAMENTE ai nomi in SpellData)
         baseDamageProp = serializedObject.FindProperty("baseDamage");
         totalHitsProp = serializedObject.FindProperty("totalHits");
         timeBetweenHitsProp = serializedObject.FindProperty("timeBetweenHits");
         damageIncrementProp = serializedObject.FindProperty("damageIncrement");
+        areaRadiusProp = serializedObject.FindProperty("radius");
     }
 
     public override void OnInspectorGUI()
@@ -71,24 +75,37 @@ public class SpellDataEditor : Editor
 
             case SpellData.EffectType.MULTIPLE:
                 // Proprietà: baseDamage, totalHits, timeBetweenHits
-                
+
                 EditorGUILayout.Space(5);
-                
+
                 EditorGUILayout.PropertyField(totalHitsProp, new GUIContent("Total Hits"));
                 EditorGUILayout.PropertyField(timeBetweenHitsProp, new GUIContent("Time Between Hits (s)"));
-                
+
                 break;
-            
+
             case SpellData.EffectType.INCREMENTAL:
                 // Proprietà: baseDamage, totalHits, timeBetweenHits, damageIncrement
-                
+
                 EditorGUILayout.Space(5);
 
                 EditorGUILayout.PropertyField(totalHitsProp, new GUIContent("Total Hits"));
                 EditorGUILayout.PropertyField(timeBetweenHitsProp, new GUIContent("Time Between Hits (s)"));
                 EditorGUILayout.PropertyField(damageIncrementProp, new GUIContent("Damage Increment"));
-                
+
                 break;
+        }
+
+        // -----------------------------------------------------
+        // --- SEZIONE 4: Area Damage ---
+        // -----------------------------------------------------
+
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Area Damage", EditorStyles.boldLabel);
+
+        EditorGUILayout.PropertyField(areaDamageProp, new GUIContent("AreaDamage"));
+        if (areaDamageProp.boolValue)
+        {
+            EditorGUILayout.PropertyField(areaRadiusProp, new GUIContent("Radius"));
         }
 
         // Applica le modifiche all'oggetto ScriptableObject
