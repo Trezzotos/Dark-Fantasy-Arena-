@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 5702371791018275961}
   - component: {fileID: 1454664401343665048}
   - component: {fileID: 6389216421484916085}
+  - component: {fileID: 3084304852573225397}
+  - component: {fileID: 372741606706334627}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -186,7 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot: 101
-  reload: 114
   weapon: {fileID: 0}
 --- !u!114 &1454664401343665048
 MonoBehaviour:
@@ -202,6 +203,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingHealth: 50
   _maxHealth: 50
+  _canHeal: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
 --- !u!114 &6389216421484916085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +219,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+--- !u!114 &3084304852573225397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b6d263c276e3646a41598639e4c06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingMana: 100
+  _maxMana: 100
+  _canBeRestored: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
+--- !u!114 &372741606706334627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0682810738ab6d46b1d684fd866abc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaBar: {fileID: 0}
 --- !u!1001 &5832107048770643142
 PrefabInstance:
   m_ObjectHideFlags: 0

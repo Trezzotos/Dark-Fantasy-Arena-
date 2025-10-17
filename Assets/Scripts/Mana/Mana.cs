@@ -83,7 +83,7 @@ namespace Examples.Observer
             _canBeRestored = false;
         }
 
-        public void Heal(float amount)
+        public void GainMana(float amount)
         {
             CurrentMana += amount;
             if (CurrentMana > MaxMana)
@@ -95,7 +95,7 @@ namespace Examples.Observer
             ManaGained.Invoke(amount);
         }
 
-        public void TakeDamage(float amount)
+        public void SpendMana(float amount)
         {
             CurrentMana -= amount;
             ManaSpent.Invoke(amount);
@@ -108,7 +108,7 @@ namespace Examples.Observer
 
         private IEnumerator Regen()
         {
-            Heal(RegenAmountPerTime);
+            GainMana(RegenAmountPerTime);
             yield return new WaitForSeconds(RegenWaitTime);
             if (_canBeRestored) StartCoroutine(Regen());
         }

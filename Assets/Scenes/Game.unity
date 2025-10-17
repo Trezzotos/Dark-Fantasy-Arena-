@@ -195,9 +195,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1242768231697060215, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
   m_PrefabInstance: {fileID: 129911213}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &183125710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9066380079368192538, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+--- !u!224 &194094498 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7411203278443180055, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
   m_PrefabInstance: {fileID: 8854830438201462765}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &330740901
@@ -318,6 +318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 372741606706334627, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 194094498}
     - target: {fileID: 1106352687358400602, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: m_Name
       value: Player
@@ -378,6 +382,10 @@ PrefabInstance:
       propertyPath: crossbow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5993542025763632485, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 194094498}
     - target: {fileID: 6389216421484916085, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: healthBar
       value: 
@@ -2213,11 +2221,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &978857331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2643975140818412354, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
-  m_PrefabInstance: {fileID: 8854830438201462765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &978857332 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8168004176076057784, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
@@ -2719,9 +2722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae64addb330155c4a8d554f6eee047d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startUI: {fileID: 8854830438201462766}
-  gamePausedUI: {fileID: 978857331}
-  gameOverUI: {fileID: 183125710}
 --- !u!4 &1588766365
 Transform:
   m_ObjectHideFlags: 0
