@@ -465,7 +465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 645466034}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnContinueButton
+        m_MethodName: OnShopButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
