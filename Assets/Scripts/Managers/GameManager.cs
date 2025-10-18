@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateGameState(GameState.STARTING);
+        LoadGameData();
+        Level = StatsManager.Instance.currentLevel;
+        OnLevelChanged?.Invoke(Level);
     }
 
     private void Update()
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
 
         // 👉 Non gestisce più la UI, solo lo stato
         UpdateGameState(GameState.SHOPPING);
+        SaveGameData();
     }
 
     private void LoadGameData()
