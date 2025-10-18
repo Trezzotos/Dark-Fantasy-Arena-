@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Examples.Observer;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,10 +9,10 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Commands")]
     public KeyCode shoot = KeyCode.E;
-    public KeyCode reload = KeyCode.R;  // remove?
+   // public KeyCode reload = KeyCode.R;  
 
     [Space]
-    public Crossbow crossbow;
+    [SerializeField] private RaycastShoot weapon;
 
     private PlayerMove pm;
 
@@ -19,15 +20,18 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         pm = GetComponent<PlayerMove>();
-        if (TryGetComponent(out Crossbow c)) crossbow = c;
+        weapon = GetComponentInChildren<RaycastShoot>();
+
+        if (pm == null) Debug.LogError("PlayerMove non trovato!");
+        if (weapon == null) Debug.LogError("RaycastShoot non trovato nei figli!");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
         
         // handle shooting
-        if (Input.GetKey(shoot)) crossbow.TryShoot(pm.lastDirection);
+        if (Input.GetKey(shoot)) weapon.TryShoot(pm.lastDirection);
     }
 }

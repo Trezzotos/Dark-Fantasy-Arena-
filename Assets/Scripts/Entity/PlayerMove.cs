@@ -1,89 +1,91 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("InputActionAsset")]
-    public InputActionAsset InputActions;
-
-    [Header("InputAction")]
-    private InputAction m_moveAction;
-    private InputAction m_pauseActionPlayer;
-    private InputAction m_pauseActionUI;
-
-    [Header("Vectors")]
-    private Vector2 m_moveAmt;
-
     [Header("Stats")]
-    public float walkSpeed = 3f;
+    public float movementSpeed = 3;
     public float sprintSpeedMultiplier = 1.5f;
 
-    private Vector2 moveInput = Vector2.zero;
+    [Header("Commands")]
+    public KeyCode up = KeyCode.W;
+    public KeyCode down = KeyCode.S;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public KeyCode sprint = KeyCode.LeftShift;
+
+    [Space]
+    public KeyCode pause = KeyCode.Escape;
+
     internal Vector2 lastDirection = Vector2.left;
-    Rigidbody2D m_rigidbody;
+    Vector2 mov = Vector2.zero;
     SpriteRenderer sp;
+    Rigidbody2D rb;
 
-    private void OnEnable()
+    void Start()
     {
-        InputActions.FindActionMap("Player").Enable(); //for the Input system
+        sp = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();   // granted by Entity
+
+        sp.flipX = true;   // sx
     }
 
-    private void OnDisable()
+
+    void Update()
     {
-        InputActions.FindActionMap("Player").Disable(); //for the Input system
-    }
 
-    private void Awake()
-    {
-        m_moveAction = InputSystem.actions.FindAction("Move");
-        //Because we have two actions with the same name we need to specify whitch Action Map it belongs to
-        m_pauseActionPlayer = InputSystem.actions.FindAction("Player/Pause");
-        m_pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
-
-        m_rigidbody = GetComponent<Rigidbody2D>();
-      //  sp.flipX = true;   // sx
-    }
-
-    private void Update()
-    {
-        m_moveAmt = m_moveAction.ReadValue<Vector2>();
-
-        DisplayPause();
-    }
-
-    private void DisplayPause()
-    {
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING)
-            return;
-            
-        if (m_pauseActionPlayer.WasPressedThisFrame())
-            GameManager.Instance.PauseGame();
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
         
-        else if (m_pauseActionUI.WasPressedThisFrame())
-            GameManager.Instance.ResumeGame();
-        
-    }
+        mov = Vector2.zero;
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
+        // y-axis input
+        if (Input.GetKey(up)) mov.y = 1;
+        else if (Input.GetKey(down)) mov.y = -1;
+
+        // x-axis input
+        if (Input.GetKey(right))
+        {
+            mov.x = 1;
+            if (sp.flipX) sp.flipX = false;    // dx
+        }
+        else if (Input.GetKey(left))
+        {
+            mov.x = -1;
+            if (!sp.flipX) sp.flipX = true;   // sx
+        }
+        mov.Normalize();
+
+        if (mov != Vector2.zero) lastDirection = mov;
     }
 
     void FixedUpdate()
     {
-        Walking();
-    }
-    
-    void Walking()
-    {
-        //Set speed Here
-        m_rigidbody.MovePosition(m_rigidbody.position + moveInput * m_moveAmt.y * walkSpeed * Time.deltaTime);
+        float vel = movementSpeed;
+        if (Input.GetKey(sprint)) vel *= sprintSpeedMultiplier;
+        rb.velocity = vel * mov;
     }
 
+    // Options -> Controls: 2pt
+    public void ChangeCommands(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                up = KeyCode.W;
+                down = KeyCode.S;
+                left = KeyCode.A;
+                right = KeyCode.D;
+                sprint = KeyCode.LeftShift;
+                break;
+            case 1:
+                up = KeyCode.UpArrow;
+                down = KeyCode.DownArrow;
+                left = KeyCode.LeftArrow;
+                right = KeyCode.RightArrow;
+                sprint = KeyCode.RightShift;
+                break;
+        }
+    }
 }

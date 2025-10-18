@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Examples.Observer;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
-public class Tesla : Entity
+public class Tesla : MonoBehaviour
 {
     [Header("Stats")]
     [Tooltip("How much time it has to wait to be able to shoot again")]
     public float shootFreq = 1.5f;
+    public int damage;
 
     Transform target;
     float timeToShoot;
@@ -17,16 +19,13 @@ public class Tesla : Entity
     void Start()
     {
         lineController = transform.GetComponentInChildren<LineController>();
-        if (!healthBar) Debug.LogWarning("Healthbar unreferenced!");
-        hbInitialScale = healthBar.localScale;
-        FullyHeal();
         timeToShoot = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameState != GameManager.GameState.PLAYING) return;
+        if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
         timeToShoot -= Time.deltaTime;
 
@@ -35,7 +34,8 @@ public class Tesla : Entity
 
         timeToShoot = shootFreq;
         lineController.DrawLine(target.position);
-        target.GetComponent<PlayerHealth>().Hit(damage);
+        Health health = target.GetComponent<Health>();
+        if (health) health.TakeDamage(damage);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

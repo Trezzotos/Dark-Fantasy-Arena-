@@ -14,7 +14,11 @@ GameObject:
   - component: {fileID: 4731685023732007296}
   - component: {fileID: 5796316183370546753}
   - component: {fileID: 5702371791018275961}
-  - component: {fileID: 2398450782059328537}
+  - component: {fileID: 1454664401343665048}
+  - component: {fileID: 6389216421484916085}
+  - component: {fileID: 3084304852573225397}
+  - component: {fileID: 372741606706334627}
+  - component: {fileID: 3677190110165729723}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -171,6 +175,7 @@ MonoBehaviour:
   left: 97
   right: 100
   sprint: 304
+  pause: 27
 --- !u!114 &5702371791018275961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,9 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot: 101
-  reload: 114
-  crossbow: {fileID: 0}
---- !u!114 &2398450782059328537
+  weapon: {fileID: 0}
+--- !u!114 &1454664401343665048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,14 +199,73 @@ MonoBehaviour:
   m_GameObject: {fileID: 1106352687358400602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c859148a4ca9ff5449ebbe7d0dcbdaf6, type: 3}
+  m_Script: {fileID: 11500000, guid: 93db9de4304eee74391a20bedf71ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  damage: 10
+  isPlayer: 1
+  _startingHealth: 50
+  _maxHealth: 50
+  _canHeal: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
+--- !u!114 &6389216421484916085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3247ec588750b8b46a461b86b9c4de88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  hitParticleSystem: {fileID: 7866820996295105821}
-  regenFactor: 0
+--- !u!114 &3084304852573225397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b6d263c276e3646a41598639e4c06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingMana: 100
+  _maxMana: 100
+  _canBeRestored: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
+--- !u!114 &372741606706334627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0682810738ab6d46b1d684fd866abc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaBar: {fileID: 0}
+--- !u!114 &3677190110165729723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10116c685b31a0546898a7557215b551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells: []
+  perks: []
+  money: 0
 --- !u!1001 &5832107048770643142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,10 +326,5 @@ PrefabInstance:
 --- !u!4 &4275879319003134811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7762296867988725661, guid: 9a688dcf222326348b11a591c6fa7095, type: 3}
-  m_PrefabInstance: {fileID: 5832107048770643142}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7866820996295105821 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4450504700856875483, guid: 9a688dcf222326348b11a591c6fa7095, type: 3}
   m_PrefabInstance: {fileID: 5832107048770643142}
   m_PrefabAsset: {fileID: 0}

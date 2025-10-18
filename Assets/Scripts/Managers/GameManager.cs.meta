@@ -3,7 +3,10 @@ guid: ae64addb330155c4a8d554f6eee047d7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - startUI: {fileID: 67186659971121256, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+  - gamePausedUI: {fileID: 67186659971121256, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+  - gameOverUI: {fileID: 67186659971121256, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
