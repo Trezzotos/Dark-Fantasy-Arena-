@@ -8,8 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject levelDialog;
-    [SerializeField] private TMPro.TextMeshProUGUI levelText;   
-
+    [SerializeField] private TMPro.TextMeshProUGUI levelText;
 
     private void OnEnable()
     {
@@ -37,7 +36,6 @@ public class UIManager : MonoBehaviour
         levelDialog.SetActive(state == GameState.SHOPPING);
     }
 
-
     //---- Bottoni via Inspector ----
 
     public void OnStartButton()
@@ -64,8 +62,8 @@ public class UIManager : MonoBehaviour
 
     public void OnContinueButton()
     {
+        // 👉 Chiude il dialogo e rimette il gioco in PLAYING
         levelDialog.SetActive(false);
         GameManager.Instance.UpdateGameState(GameState.PLAYING);
     }
-
 }

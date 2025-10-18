@@ -19,11 +19,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<Wave> waves = new List<Wave>();
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float timeBetweenWaves = 4f;
     private List<EnemySpawner> activeSpawners = new List<EnemySpawner>();
-
-
-    //public static event Action OnAllWavesCompleted;
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;

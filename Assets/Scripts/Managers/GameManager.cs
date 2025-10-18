@@ -14,14 +14,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public static event Action<GameState> OnGameStateChanged;
-    public static event Action<int> OnLevelChanged;   // 👉 nuovo evento
+    public static event Action<int> OnLevelChanged;
 
     public GameState gameState { get; private set; }
-    public int Level { get; private set; } = 1;       // 👉 parte da livello 1
-
-    [Header("UI")]
-    [SerializeField] private GameObject levelDialog;  // 👉 assegna un pannello UI in Inspector
-    [SerializeField] private TMPro.TextMeshProUGUI levelText; // 👉 testo per mostrare il livello
+    public int Level { get; private set; } = 1;
 
     private void Awake()
     {
@@ -61,25 +57,31 @@ public class GameManager : MonoBehaviour
         Level++;
         OnLevelChanged?.Invoke(Level);
 
-        // Mostra la finestra di dialogo
-        if (levelDialog != null)
-        {
-            levelDialog.SetActive(true);
-            if (levelText != null)
-                levelText.text = $"Livello {Level}";
-        }
-
-        // Metti il gioco in pausa mentre mostri la finestra
+        // 👉 Non gestisce più la UI, solo lo stato
         UpdateGameState(GameState.SHOPPING);
     }
 
-    // 👉 Metodo chiamato da un bottone UI "Continua"
-    public void ContinueGame()
+    private void LoadGameData()
     {
-        if (levelDialog != null)
-            levelDialog.SetActive(false);
+        GameSaveData loadedData = SaveSystem.LoadGame();
 
-        UpdateGameState(GameState.PLAYING);
+        if (loadedData != null)
+        {
+            // La Find è un po' una pezza, non va assolutamente bene
+            FindObjectOfType<Examples.Observer.Inventory>().ApplyLoadedInventoryData(loadedData.inventory);
+
+            // statsManager.ApplyLoadedStats(loadedData.gameStats);
+        }
     }
-    
+
+    private void SaveGameData()
+    {
+        InventoryData inventoryData = FindObjectOfType<Examples.Observer.Inventory>().GetCurrentInventoryData();
+        GameStatsData statsData = null;     // da implementare
+
+        GameSaveData saveData = new GameSaveData(inventoryData, statsData);
+
+        SaveSystem.SaveGame(saveData);
+    }
+
 }
