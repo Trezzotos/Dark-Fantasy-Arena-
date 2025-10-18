@@ -262,6 +262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45e8bf3665c7924fbe23449819c38ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves: []
+  spawnPoints: []
+  timeBetweenWaves: 4
 --- !u!1001 &624534385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -437,7 +440,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4020455819966116712, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       insertIndex: -1
       addedObject: {fileID: 129911215}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1106352687358400602, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1686310628}
   m_SourcePrefab: {fileID: 100100000, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
 --- !u!4 &795698816 stripped
 Transform:
@@ -2737,9 +2743,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1588766363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e920854973614544a3964b556888751, type: 3}
+  m_Script: {fileID: 11500000, guid: fb40d7955c8a94b4cabddf16049d5a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefabs: []
 --- !u!1001 &1664708967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2797,6 +2804,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c78d46ea504c7646967f385814c6f1c, type: 3}
+--- !u!1 &1686310618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1106352687358400602, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+  m_PrefabInstance: {fileID: 795698815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1686310628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686310618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10116c685b31a0546898a7557215b551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells: []
+  perks: []
+  money: 0
 --- !u!1 &1959624586
 GameObject:
   m_ObjectHideFlags: 0
