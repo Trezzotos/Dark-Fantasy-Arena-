@@ -28,13 +28,15 @@ public class GameStatsData
 {
     public int currentLevel;
     public int enemiesKilled;
-    public string currentDifficulty;
+    public int structuresDestroyed;
+    public int currentDifficulty;
     public float playTimeSeconds;
 
-    public GameStatsData(int level, int killed, string difficulty, float playTime)
+    public GameStatsData(int level, int killed, int destroyed, int difficulty, float playTime)
     {
         currentLevel = level;
         enemiesKilled = killed;
+        structuresDestroyed = destroyed;
         currentDifficulty = difficulty;
         playTimeSeconds = playTime;
     }

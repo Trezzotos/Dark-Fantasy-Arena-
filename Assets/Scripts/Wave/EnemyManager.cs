@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
+
+    public event Action OnEnemyDefeated = delegate { };
 
     [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] private int poolSizePerPrefab = 10; // quanti oggetti per tipo creare in pool
@@ -83,6 +86,7 @@ public class EnemyManager : MonoBehaviour
 
         enemy.SetActive(false);
         activeEnemies.Remove(enemy);
+        OnEnemyDefeated.Invoke();
 
         if (pools.ContainsKey(prefabIndex))
             pools[prefabIndex].Enqueue(enemy);
@@ -92,7 +96,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnRandomEnemy(Vector3 position)
     {
-        int idx = Random.Range(0, enemyPrefabs.Count);
+        int idx = UnityEngine.Random.Range(0, enemyPrefabs.Count);
         SpawnEnemy(idx, position);
     }
 

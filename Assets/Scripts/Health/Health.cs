@@ -119,9 +119,9 @@ namespace Examples.Observer
         {
             Killed?.Invoke();
             StopAllCoroutines();
-            if (isPlayer)     
+            if (isPlayer)
                 GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
-            Destroy(gameObject);   
+            Destroy(gameObject); 
         }
 
         private IEnumerator Regen()

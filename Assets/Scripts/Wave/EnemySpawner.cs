@@ -67,6 +67,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
+    // Solo per lo spawner
     private void HandleKilled()
     {
         Deactivate();
