@@ -36,5 +36,23 @@ namespace Examples.Observer
             }
 
         }
+
+        // per il salvataggio
+        public InventoryData GetCurrentInventoryData()
+        {
+            // Restituisce una nuova istanza della classe dati con i valori correnti
+            return new InventoryData(this.spells, this.perks, this.money);
+        }
+
+        public void ApplyLoadedInventoryData(InventoryData loadedData)
+        {
+            if (loadedData != null)
+            {
+                // Usa l'operatore '??' per assicurare che non siano assegnate liste nulle
+                spells = loadedData.spells ?? new List<SpellData>();
+                perks = loadedData.perks ?? new List<Perk>();
+                money = loadedData.money;
+            }
+        }
     }
 }
