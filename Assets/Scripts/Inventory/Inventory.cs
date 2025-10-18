@@ -29,6 +29,12 @@ namespace Examples.Observer
             }
 
             // codice modulare: i nemici potrebbero droppare qualsiasi cosa :D
+
+            else
+            {
+                Debug.LogWarning("Item non riconosciuto!");
+            }
+
         }
     }
 }
