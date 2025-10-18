@@ -66,4 +66,12 @@ public class UIManager : MonoBehaviour
         levelDialog.SetActive(false);
         GameManager.Instance.UpdateGameState(GameState.PLAYING);
     }
+
+    public void OnShopButton()
+    {
+        // 👉 DA RIVEDERE
+    //    levelDialog.SetActive(false);
+     //   GameManager.Instance.UpdateGameState(GameState.PLAYING);
+        SceneManager.LoadScene("Shop");
+    }
 }
