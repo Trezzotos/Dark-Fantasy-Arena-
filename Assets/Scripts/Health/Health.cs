@@ -13,6 +13,8 @@ namespace Examples.Observer
         public event Action<float> Damaged = delegate { };
         public event Action<float> Healed = delegate { };
         public event Action Killed = delegate { };
+        [SerializeField] private bool isPlayer = false;
+
 
         [SerializeField] float _startingHealth = 100;
         public float StartingHealth => _startingHealth;
@@ -116,7 +118,8 @@ namespace Examples.Observer
         {
             Killed.Invoke();
             StopAllCoroutines();
-            GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
+            if (isPlayer)     
+                GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
             Destroy(gameObject);   
         }
 

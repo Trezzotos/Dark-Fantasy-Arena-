@@ -24,6 +24,8 @@ public class CameraFollowPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (target == null) return;
+        
         desiredPosition = target.position + offset;
 
         // Smooth things up

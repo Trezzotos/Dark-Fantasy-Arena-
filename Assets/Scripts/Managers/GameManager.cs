@@ -5,7 +5,7 @@ public enum GameState
 {
     STARTING,
     PLAYING,
-    SHOPPING,    // gestito altrove
+    SHOPPING,    // da gestire
     PAUSED,
     GAMEOVER
 }

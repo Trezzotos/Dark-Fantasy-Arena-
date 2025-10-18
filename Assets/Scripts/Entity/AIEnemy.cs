@@ -5,18 +5,6 @@ using Examples.Observer;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
-public enum EnemyType
-{
-    Melee,      // Nemico corpo a corpo
-    Ranged,     // Nemico a distanza
-    Boss,       // Nemico boss
-    Flyer,      // Nemico volante
-    Tank        // Nemico corazzato
-}
-
-
-
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
@@ -34,7 +22,7 @@ public class AIEnemy: MonoBehaviour
 
     [Header("For the Sprite/EnemyTipe")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    public EnemyData Data { get; private set; }
+    //public EnemyData Data { get; private set; }
 
     void Start()
     {
