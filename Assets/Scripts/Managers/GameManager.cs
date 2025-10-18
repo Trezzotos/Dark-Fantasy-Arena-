@@ -1,4 +1,5 @@
 using System;
+using Examples.Observer;
 using UnityEngine;
 
 public enum GameState
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // LoadGameData()
         UpdateGameState(GameState.STARTING);
     }
 
@@ -51,6 +53,33 @@ public class GameManager : MonoBehaviour
         Time.timeScale = (newState == GameState.PLAYING) ? 1f : 0f;
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    // ----------------------------------------
+    // -------------- Salvataggi --------------
+    // ----------------------------------------
+
+    private void LoadGameData()
+    {
+        GameSaveData loadedData = SaveSystem.LoadGame();
+
+        if (loadedData != null)
+        {
+            // La Find è un po' una pezza, non va assolutamente bene
+            FindObjectOfType<Inventory>().ApplyLoadedInventoryData(loadedData.inventory);
+
+            // statsManager.ApplyLoadedStats(loadedData.gameStats);
+        }
+    }
+
+    private void SaveGameData()
+    {
+        InventoryData inventoryData = FindObjectOfType<Inventory>().GetCurrentInventoryData();
+        GameStatsData statsData = null;     // da implementare
+
+        GameSaveData saveData = new GameSaveData(inventoryData, statsData);
+
+        SaveSystem.SaveGame(saveData);
     }
 }
 
