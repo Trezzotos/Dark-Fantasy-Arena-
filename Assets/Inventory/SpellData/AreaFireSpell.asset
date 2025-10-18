@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6c1776baf25bca409ea0954be593c88, type: 3}
-  m_Name: FireSpell
+  m_Name: AreaFireSpell
   m_EditorClassIdentifier: 
-  spellName: Fire Shot
+  spellName: Fireball
   sprite: {fileID: -274620066, guid: 021ad2f5a5d7ed84cb7a10e3e33da804, type: 3}
   spriteTint: {r: 1, g: 1, b: 1, a: 1}
-  areaDamage: 0
+  areaDamage: 1
   effect: 1
-  baseDamage: 5
-  totalHits: 5
+  baseDamage: 3
+  totalHits: 7
   timeBetweenHits: 0.2
   damageIncrement: 0
-  radius: 0
+  radius: 1

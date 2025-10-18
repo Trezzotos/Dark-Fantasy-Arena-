@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
     public static event Action<int> OnLevelChanged;
 
-    public GameState gameState { get; private set; }
+    public GameState gameState { get; set; }
     public int Level { get; private set; } = 1;
 
     private void Awake()
@@ -31,7 +31,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    void Start()
+    {
+        PrepareGame();
+    }
+
+    public void PrepareGame()
     {
         UpdateGameState(GameState.STARTING);
         LoadGameData();
@@ -59,10 +64,10 @@ public class GameManager : MonoBehaviour
     {
         Level++;
         OnLevelChanged?.Invoke(Level);
+        SaveGameData();
 
         // 👉 Non gestisce più la UI, solo lo stato
         UpdateGameState(GameState.SHOPPING);
-        SaveGameData();
     }
 
     private void LoadGameData()

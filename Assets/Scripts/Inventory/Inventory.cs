@@ -7,7 +7,7 @@ namespace Examples.Observer
     public class Inventory : MonoBehaviour
     {
         public List<SpellData> spells;
-        public List<Perk> perks;
+        public List<PerkData> perks;
         public int money;
 
         private void OnEnable()
@@ -50,7 +50,7 @@ namespace Examples.Observer
             {
                 // Usa l'operatore '??' per assicurare che non siano assegnate liste nulle
                 spells = loadedData.spells ?? new List<SpellData>();
-                perks = loadedData.perks ?? new List<Perk>();
+                perks = loadedData.perks ?? new List<PerkData>();
                 money = loadedData.money;
             }
         }

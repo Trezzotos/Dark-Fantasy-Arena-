@@ -1,49 +1,112 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public int[,] shopItems = new int[5,5];
-    public float coins;
-    public Text CoinsTXT;
-    private const int numberxRow = 5;
+    [Tooltip("Exit button has to be clicked twice within this time to exit shop")]
+    public float timeToDoubleClick = 5f;
+    
+    [Header("References")]
+    public TMP_Text coinsLabel;
+    public TMP_Text dialogLabel;
+    public ShopButton[] buttons;
+
+    [Header("Items")]
+    public ItemData[] items;
+
+    GameSaveData saveData;
+    InventoryData inventory;
+    float lastClickTime = 0;
+    ItemData fakeBtn, lastClicked;
+
     void Start()
     {
-        CoinsTXT.text = "Coins: " + coins.ToString();
+        saveData = SaveSystem.LoadGame();
+        inventory = saveData.inventory;
 
-        // 1) ID's  [1,2,3,...]
-        for (int i = 1; i < numberxRow; i++)
-            shopItems[1, i] = i;
+        coinsLabel.text = "Coins: " + inventory.money;
 
-        // 2) Price  [10,20,30,...]
-        for (int i = 1; i < numberxRow; i++)
-            shopItems[2, i] = i * 10;
-        
-        // 3) Quantity [0,0,0,...]
-        for (int i = 1; i < numberxRow; i++)
-            shopItems[3, i] = 0;
+        int selected;
+        List<int> l = new List<int>();
+        foreach (ShopButton button in buttons)
+        {
+            do
+            {
+                selected = Random.Range(0, buttons.Length);
+            } while (l.Contains(selected));
+            l.Add(selected);
+
+            button.Set(items[selected]);
+        }
+
+        dialogLabel.text = "";
     }
 
-    public void Buy()
+    public void ShopExit()
     {
-        // Reference to the bottom of the Event System
-        GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
-
-        // check if we have enought coin for buing the item
-        if (coins >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID])
+        // check for the double click
+        if (lastClicked == fakeBtn && Time.time - lastClickTime < timeToDoubleClick)
         {
-            //remove the coins
-            coins -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
+            saveData.inventory = inventory;
+            SaveSystem.SaveGame(saveData);
 
-            //add the quantity 
-            shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID]++;
+            SceneManager.LoadScene("Game");
+            GameManager.Instance.PrepareGame();
+        }
+        else
+        {
+            lastClickTime = Time.time;
+            lastClicked = fakeBtn;
+            dialogLabel.text = "Is that all, stranger?";
+        }
+    }
 
-            //update the text on the scene
-            CoinsTXT.text = "Coins: " + coins.ToString();
-            ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
+    void OnEnable()
+    {
+        foreach (ShopButton button in buttons)
+            button.ButtonPressed += BuyItem;
+    }
+
+    void OnDisable()
+    {
+        foreach (ShopButton button in buttons)
+            button.ButtonPressed -= BuyItem;
+    }
+
+    public void BuyItem(ItemData data)
+    {
+        // check for the double click
+        if (data == lastClicked && Time.time - lastClickTime < timeToDoubleClick)
+        {
+            if (inventory.money < data.price)
+            {
+                dialogLabel.text = "Not enough cash, stranger";
+                return;
+            }
+
+            PickableData pickableData = data.item;
+            if (pickableData is SpellData spell)
+            {
+                inventory.spells.Add(spell);
+            }
+            else if (pickableData is PerkData perk)
+            {
+                inventory.perks.Add(perk);
+            }
+            inventory.money -= data.price;
+            coinsLabel.text = "Coins: " + inventory.money;
+
+            dialogLabel.text = "Eh eh eh, thank you";
+        }
+        else
+        {
+            dialogLabel.text = data.description + "\nPrice: " + data.price;
+            lastClickTime = Time.time;
+            lastClicked = data;
         }
     }
 }

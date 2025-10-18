@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSpellData", menuName = "Inventory/Spells/Spell Data")]
 
-public class SpellData : ScriptableObject
+public class SpellData : PickableData
 {
     public string spellName;
     public Sprite sprite;

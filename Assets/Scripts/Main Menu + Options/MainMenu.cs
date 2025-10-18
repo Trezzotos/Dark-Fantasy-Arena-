@@ -24,8 +24,10 @@ public class MainMenu : MonoBehaviour
 
         // quando scegli la difficoltà, crea salvataggio vuoto
 
-        // sei sicuro di voler eliminare il vecchio salvataggio (se non morto)
-
+        if (SaveSystem.SaveFileExists()) Debug.LogWarning("Elimino il vecchio salvataggio");
+        
+        int difficulty = 1;
+        SaveSystem.GenerateEmptySaveFile(difficulty);
         SceneManager.LoadScene("Game");
     }
 

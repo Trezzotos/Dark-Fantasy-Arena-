@@ -12,10 +12,10 @@ using System.Collections.Generic;
 public class InventoryData
 {
     public List<SpellData> spells;
-    public List<Perk> perks;
+    public List<PerkData> perks;
     public int money;
 
-    public InventoryData(List<SpellData> currentSpells, List<Perk> currentPerks, int currentMoney)
+    public InventoryData(List<SpellData> currentSpells, List<PerkData> currentPerks, int currentMoney)
     {
         spells = currentSpells;
         perks = currentPerks;
@@ -101,6 +101,15 @@ public static class SaveSystem
             Debug.LogWarning("Nessun file di salvataggio trovato. Ritorno dati vuoti.");
             return null;
         }
+    }
+
+    public static void GenerateEmptySaveFile(int difficulty)
+    {
+        GameSaveData newGameData = new GameSaveData(
+            new InventoryData(new List<SpellData>(), new List<PerkData>(), 30),     // 30 monete DA RIMUOVERE
+            new GameStatsData(1, 0, 0, difficulty, 0.0f)
+        );
+        SaveGame(newGameData);
     }
 
     public static bool SaveFileExists()
