@@ -121,7 +121,12 @@ namespace Examples.Observer
             StopAllCoroutines();
             if (isPlayer)
                 GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
-            Destroy(gameObject); 
+            if (TryGetComponent(out AIEnemy ai))
+            {
+                EnemyManager.Instance.DespawnEnemy(gameObject, ai.PrefabIndex);
+            }
+            // da utilizzare la pool
+            else Destroy(gameObject);   // fallback
         }
 
         private IEnumerator Regen()

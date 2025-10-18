@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class StatsManager : MonoBehaviour
 {
+    public static StatsManager Instance;
     public int currentLevel;
     public int enemiesKilled;
     public int structuresDestroyed;
@@ -14,6 +15,12 @@ public class StatsManager : MonoBehaviour
 
     bool isTimePassing = false;
     float beginCount;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     // Signal subscription
     void OnEnable()

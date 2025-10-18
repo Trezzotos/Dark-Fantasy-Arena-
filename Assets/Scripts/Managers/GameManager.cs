@@ -70,16 +70,15 @@ public class GameManager : MonoBehaviour
             // La Find è un po' una pezza, non va assolutamente bene
             FindObjectOfType<Examples.Observer.Inventory>().ApplyLoadedInventoryData(loadedData.inventory);
 
-            // statsManager.ApplyLoadedStats(loadedData.gameStats);
+            StatsManager.Instance.ApplyGameStats(loadedData.gameStats);
         }
     }
 
     private void SaveGameData()
     {
         InventoryData inventoryData = FindObjectOfType<Examples.Observer.Inventory>().GetCurrentInventoryData();
-        GameStatsData statsData = null;     // da implementare
 
-        GameSaveData saveData = new GameSaveData(inventoryData, statsData);
+        GameSaveData saveData = new GameSaveData(inventoryData, StatsManager.Instance.GetCurrentGameStats());
 
         SaveSystem.SaveGame(saveData);
     }
