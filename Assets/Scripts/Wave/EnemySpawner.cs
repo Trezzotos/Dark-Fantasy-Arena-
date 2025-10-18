@@ -52,11 +52,20 @@ public class EnemySpawner : MonoBehaviour
     {
         while (active && spawned < maxSpawnCount)
         {
-            EnemyManager.Instance.SpawnEnemy(prefabIndexToSpawn, transform.position);
-            spawned++;
+            // 🔎 Controllo globale
+            int maxInstances = 3 * GameManager.Instance.Level; // esempio: 3 * livello
+            int currentInstances = EnemyManager.Instance.ActiveEnemyCount;
+
+            if (currentInstances < maxInstances)
+            {
+                EnemyManager.Instance.SpawnEnemy(prefabIndexToSpawn, transform.position);
+                spawned++;
+            }
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+
 
     private void HandleKilled()
     {

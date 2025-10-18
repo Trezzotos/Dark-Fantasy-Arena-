@@ -110,13 +110,14 @@ namespace Examples.Observer
 
             if (CurrentHealth <= 0)
             {
+                CurrentHealth = 0;
                 Kill();
             }
         }
 
         public void Kill()
         {
-            Killed.Invoke();
+            Killed?.Invoke();
             StopAllCoroutines();
             if (isPlayer)     
                 GameManager.Instance.UpdateGameState(GameState.GAMEOVER);

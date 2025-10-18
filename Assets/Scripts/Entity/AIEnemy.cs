@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
-public class AIEnemy: MonoBehaviour
+public class AIEnemy : MonoBehaviour
 {
     public float movementSpeed = 1;
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
@@ -22,27 +22,31 @@ public class AIEnemy: MonoBehaviour
 
     [Header("For the Sprite/EnemyTipe")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    //public EnemyData Data { get; private set; }
+
+    // 👉 Aggiunta per la pool
+    public int PrefabIndex { get; private set; }
+
+    public void Initialize(int index)
+    {
+        PrefabIndex = index;
+    }
 
     void Start()
     {
         AILogic();
-        rb = GetComponent<Rigidbody2D>();   // granted by Entity
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
-        // go towards the selected player
         direction = player.transform.position - transform.position;
-
         timeToHit -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        // apply movement
         rb.velocity = direction.normalized * movementSpeed;
     }
 
@@ -55,11 +59,10 @@ public class AIEnemy: MonoBehaviour
         if (health)
         {
             health.TakeDamage(damage);
-
-            // animazione?
             timeToHit = hitRate;
         }
     }
+
     GameObject FindClosest(GameObject[] players)
     {
         float minDistance = Mathf.Infinity;
@@ -74,7 +77,6 @@ public class AIEnemy: MonoBehaviour
                 closest = p;
             }
         }
-
         return closest;
     }
 

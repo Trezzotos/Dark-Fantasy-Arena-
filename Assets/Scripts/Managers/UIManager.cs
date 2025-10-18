@@ -7,15 +7,26 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject levelDialog;
+    [SerializeField] private TMPro.TextMeshProUGUI levelText;   
+
 
     private void OnEnable()
     {
         GameManager.OnGameStateChanged += HandleGameStateChanged;
+        GameManager.OnLevelChanged += HandleLevelChanged;
     }
 
     private void OnDisable()
     {
         GameManager.OnGameStateChanged -= HandleGameStateChanged;
+        GameManager.OnLevelChanged -= HandleLevelChanged;
+    }
+
+    private void HandleLevelChanged(int newLevel)
+    {
+        if (levelText != null)
+            levelText.text = $"Livello {newLevel}";
     }
 
     private void HandleGameStateChanged(GameState state)
@@ -23,7 +34,9 @@ public class UIManager : MonoBehaviour
         startPanel.SetActive(state == GameState.STARTING);
         pausePanel.SetActive(state == GameState.PAUSED);
         gameOverPanel.SetActive(state == GameState.GAMEOVER);
+        levelDialog.SetActive(state == GameState.SHOPPING);
     }
+
 
     //---- Bottoni via Inspector ----
 
@@ -48,4 +61,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
     }
+
+    public void OnContinueButton()
+    {
+        levelDialog.SetActive(false);
+        GameManager.Instance.UpdateGameState(GameState.PLAYING);
+    }
+
 }

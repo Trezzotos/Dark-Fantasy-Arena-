@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     private List<EnemySpawner> activeSpawners = new List<EnemySpawner>();
 
 
-    public static event Action OnAllWavesCompleted;
+    //public static event Action OnAllWavesCompleted;
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;
@@ -74,13 +74,18 @@ public class WaveManager : MonoBehaviour
             // 3) Attendi fine wave: nessun nemico e nessuno spawner vivo
             yield return new WaitUntil(() =>
                 EnemyManager.Instance.ActiveEnemyCount == 0 && activeSpawners.Count == 0);
-            // yield return StartCoroutine(RunSingleWave(wave));
-            yield return new WaitForSeconds(timeBetweenWaves);
+
+            // 👉 qui invece di aspettare solo un tempo fisso,
+            // segnali al GameManager che il livello è finito
+            GameManager.Instance.NextLevel();
+
+            // 👉 aspetti che il giocatore prema "Continua"
+            yield return new WaitUntil(() => GameManager.Instance.gameState == GameState.PLAYING);
         }
 
-        //    OnAllWavesCompleted?.Invoke();
         waveRoutine = null;
     }
+
 
 
     private void SpawnWaveSpawners(Wave wave)
@@ -134,25 +139,5 @@ public class WaveManager : MonoBehaviour
         spawner.maxSpawnCount = wave.enemyCount;
         spawner.spawnInterval = wave.spawnInterval;
     }
-
-
-    /*   // SENZA SPAWNER PREFAB (New Modality)
-    private IEnumerator RunSingleWave(Wave wave)
-    {
-        for (int i = 0; i < wave.enemyCount; i++)
-        {
-            // Attende che il gioco sia in PLAYING (utile se si pausa in mezzo)
-            yield return new WaitUntil(() => GameManager.Instance.gameState == GameState.PLAYING);
-
-            // Seleziona spawn point casuale e genera il nemico
-            Transform spawn = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-            EnemyManager.Instance.SpawnEnemy(wave.prefabIndex, spawn.position);
-
-            yield return new WaitForSeconds(wave.spawnInterval);
-        }
-
-        // Attende che non ci siano più nemici attivi prima di proseguire
-        yield return new WaitUntil(() => EnemyManager.Instance.ActiveEnemyCount == 0);
-    }*/
 }
 
