@@ -5775,50 +5775,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1588766363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1588766365}
-  - component: {fileID: 1588766364}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1588766364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588766363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae64addb330155c4a8d554f6eee047d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1588766365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588766363}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1664708967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6396,7 +6352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 67186659971121256, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 935761024013643282, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
@@ -6457,7 +6413,7 @@ PrefabInstance:
     - target: {fileID: 4316749349990991084, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1588766364}
+      objectReference: {fileID: 0}
     - target: {fileID: 4316749349990991084, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -6488,7 +6444,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1978174040}
-  - {fileID: 1588766365}
   - {fileID: 795698815}
   - {fileID: 8854830438201462765}
   - {fileID: 330740903}

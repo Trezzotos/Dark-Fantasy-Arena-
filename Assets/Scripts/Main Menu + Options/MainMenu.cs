@@ -55,7 +55,7 @@ public class MainMenu : MonoBehaviour
         // Notifica il GameManager (se già presente in scena)
         if (GameManager.Instance != null)
         {
-            StatsManager.Instance.currentDifficulty = difficulty;
+            GameManager.Instance.difficolta = difficulty;
             Debug.Log($"Difficoltà selezionata: {difficulty}");
         }
 

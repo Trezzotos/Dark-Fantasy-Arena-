@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
     public static event Action<int> OnLevelChanged;
 
-    public GameState gameState { get; set; }
+    public GameState gameState { get; private set; }
     public int Level { get; private set; } = 1;
+
+    public int difficolta;
 
     private void Awake()
     {
@@ -37,12 +39,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void PrepareGame()
+{
+    UpdateGameState(GameState.STARTING);
+    LoadGameData();
+
+    if (StatsManager.Instance != null)
     {
-        UpdateGameState(GameState.STARTING);
-        LoadGameData();
         Level = StatsManager.Instance.currentLevel;
         OnLevelChanged?.Invoke(Level);
     }
+    else
+    {
+        Debug.LogWarning("StatsManager non trovato, imposto livello di default = 1");
+        Level = 1;
+        OnLevelChanged?.Invoke(Level);
+    }
+}
+
 
     private void Update()
     {
@@ -57,39 +70,85 @@ public class GameManager : MonoBehaviour
         gameState = newState;
         Time.timeScale = (newState == GameState.PLAYING) ? 1f : 0f;
         OnGameStateChanged?.Invoke(newState);
+
+        HandleMusic(newState);
     }
 
-    // 👉 Metodo per passare al livello successivo
+    private void HandleMusic(GameState state)
+{
+    switch (state)
+    {
+        case GameState.STARTING:
+            AudioManager.Instance.PlayMusic(0); // musica menu
+            break;
+
+        case GameState.PLAYING:
+        case GameState.SHOPPING:
+            if (AudioManager.Instance != null &&
+                (AudioManager.Instance.CurrentTrackIndex != 1 || !AudioManager.Instance.IsPlaying))
+            {
+                AudioManager.Instance.PlayMusic(1); // musica fight
+            }
+            // torna al volume pieno
+            AudioManager.Instance.FadeTo(1f, 1.5f);
+            break;
+
+        case GameState.PAUSED:
+            // abbassa il volume ma non ferma la musica
+            AudioManager.Instance.FadeTo(0.3f, 1.5f);
+            break;
+
+        case GameState.GAMEOVER:
+            AudioManager.Instance.StopMusic();
+            break;
+    }
+}
+
+
     public void NextLevel()
     {
         Level++;
         OnLevelChanged?.Invoke(Level);
         SaveGameData();
-
-        // 👉 Non gestisce più la UI, solo lo stato
         UpdateGameState(GameState.SHOPPING);
     }
 
     private void LoadGameData()
+{
+    GameSaveData loadedData = SaveSystem.LoadGame();
+
+    if (loadedData != null)
     {
-        GameSaveData loadedData = SaveSystem.LoadGame();
-
-        if (loadedData != null)
+        var inventory = FindObjectOfType<Examples.Observer.Inventory>();
+        if (inventory != null)
         {
-            // La Find è un po' una pezza, non va assolutamente bene
-            FindObjectOfType<Examples.Observer.Inventory>().ApplyLoadedInventoryData(loadedData.inventory);
+            inventory.ApplyLoadedInventoryData(loadedData.inventory);
+        }
+        else
+        {
+            Debug.LogWarning("Inventory non trovato in scena!");
+        }
 
+        if (StatsManager.Instance != null)
+        {
             StatsManager.Instance.ApplyGameStats(loadedData.gameStats);
         }
+        else
+        {
+            Debug.LogWarning("StatsManager non trovato in scena!");
+        }
     }
+    else
+    {
+        Debug.Log("Nessun salvataggio trovato, si parte da zero.");
+    }
+}
+
 
     private void SaveGameData()
     {
         InventoryData inventoryData = FindObjectOfType<Examples.Observer.Inventory>().GetCurrentInventoryData();
-
         GameSaveData saveData = new GameSaveData(inventoryData, StatsManager.Instance.GetCurrentGameStats());
-
         SaveSystem.SaveGame(saveData);
     }
-
 }
