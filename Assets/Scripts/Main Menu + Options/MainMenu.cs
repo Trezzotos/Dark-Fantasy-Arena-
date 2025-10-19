@@ -1,33 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("UI Panels")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject difficultyPanel;
 
-    public Button continueButton;
+    [Header("Buttons")]
+    [SerializeField] private Button continueButton;
 
-    void Start()
+    private void Start()
     {
+        // Se non c’è un salvataggio, disabilita il pulsante Continue
         if (!SaveSystem.SaveFileExists())
         {
             continueButton.GetComponent<Image>().color = Color.gray;
-            continueButton.enabled = false;
+            continueButton.interactable = false;
         }
+
+        // All’avvio mostra solo il main menu
+        mainMenuPanel.SetActive(true);
+        difficultyPanel.SetActive(false);
     }
 
-    public void PlayGame()
+    // 👉 Chiamato dal pulsante "New Game"
+    public void NewGame()
     {
-        // da settare la difficoltà
+        if (SaveSystem.SaveFileExists())
+        {
+            Debug.LogWarning("Esiste già un salvataggio, verrà sovrascritto se scegli una difficoltà.");
+        }
 
-        // quando scegli la difficoltà, crea salvataggio vuoto
+        // Nascondo il menu principale e mostro la scelta difficoltà
+        mainMenuPanel.SetActive(false);
+        difficultyPanel.SetActive(true);
+    }
 
-        if (SaveSystem.SaveFileExists()) Debug.LogWarning("Elimino il vecchio salvataggio");
-        
-        int difficulty = 1;
+    // 👉 Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
+    public void SelectDifficulty(int difficulty)
+    {
+        // Genera un nuovo salvataggio vuoto con la difficoltà scelta
         SaveSystem.GenerateEmptySaveFile(difficulty);
+
+        // Notifica il GameManager (se già presente in scena)
+        if (GameManager.Instance != null)
+        {
+            StatsManager.Instance.currentDifficulty = difficulty;
+            Debug.Log($"Difficoltà selezionata: {difficulty}");
+        }
+
+        // Carica la scena di gioco
+        SceneManager.LoadScene("Game");
+    }
+
+    public void Continue()
+    {
         SceneManager.LoadScene("Game");
     }
 
@@ -35,14 +64,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
     public void QuitGame()
     {
         Application.Quit();
     }
-    
-    public void Continue()
-    {
-        SceneManager.LoadScene("Game");
-    }
 
+    public void Back()
+    {
+        mainMenuPanel.SetActive(true);
+        difficultyPanel.SetActive(false);
+    }
 }

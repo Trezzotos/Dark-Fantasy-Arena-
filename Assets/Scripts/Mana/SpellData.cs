@@ -2,6 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSpellData", menuName = "Inventory/Spells/Spell Data")]
 
+[System.Serializable]
 public class SpellData : PickableData
 {
     public string spellName;

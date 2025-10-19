@@ -90,6 +90,6 @@ public class GameManager : MonoBehaviour
         GameSaveData saveData = new GameSaveData(inventoryData, StatsManager.Instance.GetCurrentGameStats());
 
         SaveSystem.SaveGame(saveData);
-    }
+    }
 
 }

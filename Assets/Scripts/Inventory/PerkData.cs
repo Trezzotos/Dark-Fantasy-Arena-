@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewPerkData", menuName = "Inventory/Perks/Perk Data")]
-
+[System.Serializable]
 public class PerkData : PickableData
 {
     public string perkName;
