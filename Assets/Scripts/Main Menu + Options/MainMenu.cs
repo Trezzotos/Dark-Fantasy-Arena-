@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject difficultyPanel;
+    [SerializeField] private GameObject TutorialPanel;
 
     [Header("Buttons")]
     [SerializeField] private Button continueButton;
@@ -23,9 +24,10 @@ public class MainMenu : MonoBehaviour
         // All’avvio mostra solo il main menu
         mainMenuPanel.SetActive(true);
         difficultyPanel.SetActive(false);
+        TutorialPanel.SetActive(false);
     }
 
-    // 👉 Chiamato dal pulsante "New Game"
+    //  Chiamato dal pulsante "New Game"
     public void NewGame()
     {
         if (SaveSystem.SaveFileExists())
@@ -33,12 +35,13 @@ public class MainMenu : MonoBehaviour
             Debug.LogWarning("Esiste già un salvataggio, verrà sovrascritto se scegli una difficoltà.");
         }
 
-        // Nascondo il menu principale e mostro la scelta difficoltà
+        // Nascondo il menu principale e il tutorial e mostro il tutorial
         mainMenuPanel.SetActive(false);
-        difficultyPanel.SetActive(true);
+        difficultyPanel.SetActive(false);
+        TutorialPanel.SetActive(true);
     }
 
-    // 👉 Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
+    //  Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
     public void SelectDifficulty(int difficulty)
     {
         // Genera un nuovo salvataggio vuoto con la difficoltà scelta
@@ -62,7 +65,7 @@ public class MainMenu : MonoBehaviour
 
     public void OptionMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Settings");
     }
 
     public void QuitGame()
@@ -74,5 +77,22 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         difficultyPanel.SetActive(false);
+    }
+
+    public void showTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void hideTutorial()
+    {
+        mainMenuPanel.SetActive(false);
+        difficultyPanel.SetActive(true);
+        TutorialPanel.SetActive(false);
+    }
+    
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 }

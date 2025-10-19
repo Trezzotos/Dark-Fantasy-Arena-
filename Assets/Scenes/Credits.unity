@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuPanel: {fileID: 0}
   difficultyPanel: {fileID: 0}
+  TutorialPanel: {fileID: 0}
   continueButton: {fileID: 0}
 --- !u!1 &573345555
 GameObject:
@@ -1103,7 +1104,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 25
   m_Viewport: {fileID: 836643237}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1090942904}
