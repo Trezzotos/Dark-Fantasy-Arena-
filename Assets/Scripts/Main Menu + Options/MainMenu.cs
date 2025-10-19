@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button continueButton;
+    [SerializeField] private Button rankingButton;
 
     private void Start()
     {
@@ -19,6 +20,10 @@ public class MainMenu : MonoBehaviour
         {
             continueButton.GetComponent<Image>().color = Color.gray;
             continueButton.interactable = false;
+
+            rankingButton.GetComponent<Image>().color = Color.gray;
+            rankingButton.interactable = false;
+            return;
         }
 
         // All’avvio mostra solo il main menu

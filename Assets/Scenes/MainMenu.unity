@@ -3207,7 +3207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CLASSIFICA
+  m_text: RANKING
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
   m_sharedMaterial: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
@@ -3821,7 +3821,7 @@ GameObject:
   - component: {fileID: 1896955839}
   - component: {fileID: 1896955838}
   m_Layer: 5
-  m_Name: Classifica
+  m_Name: Ranking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4228,6 +4228,7 @@ MonoBehaviour:
   difficultyPanel: {fileID: 1527790230}
   TutorialPanel: {fileID: 875379737}
   continueButton: {fileID: 1754912693}
+  rankingButton: {fileID: 1896955838}
 --- !u!4 &1964369669
 Transform:
   m_ObjectHideFlags: 0
