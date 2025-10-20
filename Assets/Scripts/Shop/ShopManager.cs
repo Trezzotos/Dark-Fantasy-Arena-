@@ -30,6 +30,7 @@ public class ShopManager : MonoBehaviour
 
         coinsLabel.text = "Coins: " + inventory.money;
 
+        Random.InitState((int) Time.time);
         int selected;
         List<int> l = new List<int>();
         foreach (ShopButton button in buttons)
@@ -55,7 +56,6 @@ public class ShopManager : MonoBehaviour
             SaveSystem.SaveGame(saveData);
 
             SceneManager.LoadScene("Game");
-            GameManager.Instance.PrepareGame();
         }
         else
         {
@@ -101,6 +101,8 @@ public class ShopManager : MonoBehaviour
             coinsLabel.text = "Coins: " + inventory.money;
 
             dialogLabel.text = "Eh eh eh, thank you";
+
+            lastClicked = null;
         }
         else
         {

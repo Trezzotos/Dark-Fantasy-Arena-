@@ -49,17 +49,7 @@ public class MainMenu : MonoBehaviour
     //  Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
     public void SelectDifficulty(int difficulty)
     {
-        // Genera un nuovo salvataggio vuoto con la difficoltà scelta
         SaveSystem.GenerateEmptySaveFile(difficulty);
-
-        // Notifica il GameManager (se già presente in scena)
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.difficolta = difficulty;
-            Debug.Log($"Difficoltà selezionata: {difficulty}");
-        }
-
-        // Carica la scena di gioco
         SceneManager.LoadScene("Game");
     }
 
@@ -84,12 +74,12 @@ public class MainMenu : MonoBehaviour
         difficultyPanel.SetActive(false);
     }
 
-    public void showTutorial()
+    public void ShowTutorial()
     {
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void hideTutorial()
+    public void HideTutorial()
     {
         mainMenuPanel.SetActive(false);
         difficultyPanel.SetActive(true);

@@ -12,9 +12,7 @@ namespace Examples.Observer
     public class Target : MonoBehaviour
     {
         public Transform healthBar;
-
         public Health Health { get; private set; }
-
         Vector3 hbInitialScale;
 
         private void Awake()
@@ -41,6 +39,7 @@ namespace Examples.Observer
         void OnHealthChanged(float amount)
         {
             float ratio = (float)Health.CurrentHealth / Health.MaxHealth;
+            ratio = math.clamp(ratio, 0, 1);
             
             healthBar.localScale = new Vector3(hbInitialScale.x * ratio, hbInitialScale.y, hbInitialScale.z);
         }

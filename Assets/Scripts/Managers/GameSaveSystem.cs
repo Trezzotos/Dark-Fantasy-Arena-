@@ -112,6 +112,25 @@ public static class SaveSystem
         SaveGame(newGameData);
     }
 
+    public static void DeleteGame()
+    {
+        if (!SaveFileExists())
+        {
+            Debug.LogWarning("Save file does not exists");
+            return;
+        }
+
+        try
+        {
+            File.Delete(SavePath);
+            Debug.Log($"File di salvataggio eliminato con successo: {SavePath}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Errore durante l'eliminazione del file: {e.Message}");
+        }
+    }
+
     public static bool SaveFileExists()
     {
         return File.Exists(SavePath);

@@ -14,11 +14,11 @@ namespace Examples.Observer
         public float range = 5;
         public float beamDuration = .25f;
 
-        float timeToShoot = 0;
         RaycastHit2D hit;
-        int layerMask;
         LineController lineController = null;
         Vector3[] positions;
+        float timeToShoot = 0;
+        int layerMask;
 
         void Start()
         {
@@ -35,7 +35,6 @@ namespace Examples.Observer
         public void TryShoot(Vector2 direction)
         {
             if (timeToShoot > 0) return;    // not ready to shoot again
-
             Shoot(direction);
         }
 
@@ -52,7 +51,7 @@ namespace Examples.Observer
                 positions[1] = hit.transform.position;
                 Health health = hit.transform.GetComponent<Health>();
                 if (health) health.TakeDamage(damage);
-                else print("No health!");
+                else Debug.LogError("Target has no Health component!");
             }
             else positions[1] = transform.position + direction * range;
             lineController.DrawLine(positions[0], positions[1]);

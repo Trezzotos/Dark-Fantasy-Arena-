@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;
+
     private void OnEnable()
     {
         GameManager.OnGameStateChanged += HandleGameStateChanged;
@@ -100,7 +101,7 @@ public class WaveManager : MonoBehaviour
             }
 
             // Configurazioni per questa wave
-            spawnerPrefabSetup(spawner, wave);
+            SpawnerPrefabSetup(spawner, wave);
 
             // Subscribe alla distruzione
             spawner.OnSpawnerKilled += HandleSpawnerKilled;
@@ -129,7 +130,7 @@ public class WaveManager : MonoBehaviour
             activeSpawners.Remove(spawner);
     }
     
-    private void spawnerPrefabSetup(EnemySpawner spawner, Wave wave)
+    private void SpawnerPrefabSetup(EnemySpawner spawner, Wave wave)
     {
         spawner.prefabIndexToSpawn = wave.prefabIndex;
         spawner.maxSpawnCount = wave.enemyCount;

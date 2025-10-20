@@ -10,16 +10,20 @@ public class StatsManager : MonoBehaviour
     public int currentLevel;
     public int enemiesKilled;
     public int structuresDestroyed;
-    public int currentDifficulty;    // will be initialized when starting the new game
+    public int currentDifficulty;
     public float playTimeSeconds;
 
     bool isTimePassing = false;
-    float beginCount;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        if (isTimePassing) playTimeSeconds += Time.deltaTime;
     }
 
     // Signal subscription
@@ -28,6 +32,7 @@ public class StatsManager : MonoBehaviour
         GameManager.OnGameStateChanged += CountTime;
         GameManager.OnLevelChanged += UpdateLevel;
         EnemyManager.Instance.OnEnemyDefeated += OnEnemyKilled;
+        // on structure destroyed
     }
 
     void OnDisable()
@@ -35,13 +40,18 @@ public class StatsManager : MonoBehaviour
         GameManager.OnGameStateChanged -= CountTime;
         GameManager.OnLevelChanged -= UpdateLevel;
         EnemyManager.Instance.OnEnemyDefeated -= OnEnemyKilled;
+        // on structure destroyed
     }
 
     // Signal handling
     void OnEnemyKilled()
     {
         enemiesKilled++;
-        print(enemiesKilled);
+    }
+
+    void OnStructureDestoyed()
+    {
+        structuresDestroyed++;
     }
 
     void UpdateLevel(int level)
@@ -51,17 +61,11 @@ public class StatsManager : MonoBehaviour
 
     void CountTime(GameState gameState)
     {
-        if (!isTimePassing && gameState == GameState.PLAYING)
-        {
+        if (gameState == GameState.PLAYING)
             isTimePassing = true;
-            beginCount = Time.time;
-        }
 
-        else if (isTimePassing && gameState != GameState.PLAYING)
-        {
+        else if (gameState != GameState.PLAYING)
             isTimePassing = false;
-            playTimeSeconds += Time.time - beginCount;
-        }
     }
 
     // GameSave
@@ -76,6 +80,7 @@ public class StatsManager : MonoBehaviour
         {
             currentLevel = loadedData.currentLevel;
             enemiesKilled = loadedData.enemiesKilled;
+            structuresDestroyed = loadedData.structuresDestroyed;
             currentDifficulty = loadedData.currentDifficulty;
             playTimeSeconds = loadedData.playTimeSeconds;
         }

@@ -6,15 +6,14 @@ using Examples.Observer;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public event Action<EnemySpawner> OnSpawnerKilled;
+
     public float spawnInterval = 1.5f;
     public int prefabIndexToSpawn = 0;
     public int maxSpawnCount = 3;
 
-    private int spawned = 0;
-    private bool active = false;
-
-    public event Action<EnemySpawner> OnSpawnerKilled;
-
+    int spawned = 0;
+    bool active = false;
     private Health health;
 
     private void Awake()
@@ -52,7 +51,6 @@ public class EnemySpawner : MonoBehaviour
     {
         while (active && spawned < maxSpawnCount)
         {
-            // 🔎 Controllo globale
             int maxInstances = 3 * GameManager.Instance.Level; // esempio: 3 * livello
             int currentInstances = EnemyManager.Instance.ActiveEnemyCount;
 
