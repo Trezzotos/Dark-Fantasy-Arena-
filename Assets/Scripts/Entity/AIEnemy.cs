@@ -50,7 +50,7 @@ public class AIEnemy : MonoBehaviour
         rb.velocity = direction.normalized * movementSpeed;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (timeToHit > 0) return;
         if (!collision.transform.CompareTag("Player")) return;
