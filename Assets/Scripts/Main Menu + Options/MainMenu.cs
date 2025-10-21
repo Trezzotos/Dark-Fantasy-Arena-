@@ -49,7 +49,8 @@ public class MainMenu : MonoBehaviour
     //  Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
     public void SelectDifficulty(int difficulty)
     {
-        SaveSystem.GenerateEmptySaveFile(difficulty);
+        // Ivanù metti una textbox?
+        SaveSystem.GenerateEmptySaveFile(difficulty, "Bob");
         SceneManager.LoadScene("Game");
     }
 

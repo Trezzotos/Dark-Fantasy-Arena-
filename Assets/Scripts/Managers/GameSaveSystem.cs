@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System;
 
 // Si, sono più classi in un file, ma non sono MonoBehaviour quindi fa niente
 
@@ -31,14 +32,18 @@ public class GameStatsData
     public int structuresDestroyed;
     public int currentDifficulty;
     public float playTimeSeconds;
+    public int score;
+    public String name;
 
-    public GameStatsData(int level, int killed, int destroyed, int difficulty, float playTime)
+    public GameStatsData(int level, int killed, int destroyed, int difficulty, float playTime, int score, String name)
     {
         currentLevel = level;
         enemiesKilled = killed;
         structuresDestroyed = destroyed;
         currentDifficulty = difficulty;
         playTimeSeconds = playTime;
+        this.score = score;
+        this.name = name;
     }
 }
 
@@ -103,11 +108,11 @@ public static class SaveSystem
         }
     }
 
-    public static void GenerateEmptySaveFile(int difficulty)
+    public static void GenerateEmptySaveFile(int difficulty, String name)
     {
         GameSaveData newGameData = new GameSaveData(
             new InventoryData(new List<SpellData>(), new List<PerkData>(), 0),
-            new GameStatsData(1, 0, 0, difficulty, 0.0f)
+            new GameStatsData(1, 0, 0, difficulty, 0.0f, 0, name)
         );
         SaveGame(newGameData);
     }

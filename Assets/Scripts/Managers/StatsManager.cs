@@ -12,6 +12,8 @@ public class StatsManager : MonoBehaviour
     public int structuresDestroyed;
     public int currentDifficulty;
     public float playTimeSeconds;
+    public int score;
+    public string playerName;
 
     bool isTimePassing = false;
 
@@ -71,7 +73,15 @@ public class StatsManager : MonoBehaviour
     // GameSave
     public GameStatsData GetCurrentGameStats()
     {
-        return new GameStatsData(currentLevel, enemiesKilled, structuresDestroyed, currentDifficulty, math.floor(playTimeSeconds));
+        return new GameStatsData(
+            currentLevel,
+            enemiesKilled,
+            structuresDestroyed,
+            currentDifficulty,
+            math.floor(playTimeSeconds),
+            (int)(playTimeSeconds / 10),     // DA SOSTITUIRE CON I PUNTI VERI
+            playerName
+        );
     }
 
     public void ApplyGameStats(GameStatsData loadedData)
@@ -83,6 +93,8 @@ public class StatsManager : MonoBehaviour
             structuresDestroyed = loadedData.structuresDestroyed;
             currentDifficulty = loadedData.currentDifficulty;
             playTimeSeconds = loadedData.playTimeSeconds;
+            this.score = loadedData.score;
+            playerName = loadedData.name;
         }
     }
 }

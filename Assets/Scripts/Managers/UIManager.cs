@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text structures;
     [SerializeField] private TMP_Text seconds;
     [SerializeField] private TMP_Text difficoulty;
+
+    [Header("Endgame Scoreboard")]
+    [SerializeField] private TMP_Text[] scoreboardText;
 
     private void OnEnable()
     {
@@ -57,11 +61,12 @@ public class UIManager : MonoBehaviour
     
     private void ShowGameover()
     {
+        // Stats
         level.text = $"{StatsManager.Instance.currentLevel}";
         enemies.text = $"{StatsManager.Instance.enemiesKilled}";
         structures.text = $"{StatsManager.Instance.structuresDestroyed}";
         seconds.text = $"{math.ceil(StatsManager.Instance.playTimeSeconds)}";
-        
+
         difficoulty.text = StatsManager.Instance.currentDifficulty switch
         {
             1 => "Easy",
@@ -69,6 +74,17 @@ public class UIManager : MonoBehaviour
             3 => "Hard",
             _ => "I Dunno :(",
         };
+
+        // Scoreboard
+        ScoreboardManager.TryAddHighscore(StatsManager.Instance.playerName, StatsManager.Instance.score);
+        List<ScoreEntry> scoreboard = ScoreboardManager.GetScoreboard();
+
+        int i = 0;
+        foreach (var record in scoreboard)
+        {
+            scoreboardText[i].text = $"{record.name} {record.score}";
+            i++;
+        }
     }
 
     //---- Bottoni via Inspector ----
