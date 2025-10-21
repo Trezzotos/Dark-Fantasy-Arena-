@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelDialog;
     [SerializeField] private TMPro.TextMeshProUGUI levelText;
 
+    [Header("UI di Gioco")]
+    [SerializeField] private GameObject UIPlayer;   // <-- aggiunto
+
     [Header("Endgame Stats")]
     [SerializeField] private TMP_Text level;
     [SerializeField] private TMP_Text enemies;
@@ -42,6 +45,11 @@ public class UIManager : MonoBehaviour
         startPanel.SetActive(state == GameState.STARTING);
         pausePanel.SetActive(state == GameState.PAUSED);
         levelDialog.SetActive(state == GameState.SHOPPING);
+        gameOverPanel.SetActive(state == GameState.GAMEOVER);
+
+        // UIPlayer attivo solo in gameplay
+        if (UIPlayer != null)
+            UIPlayer.SetActive(state == GameState.PLAYING);
 
         if (state == GameState.GAMEOVER)
             ShowGameover();
@@ -54,7 +62,6 @@ public class UIManager : MonoBehaviour
         structures.text = $"{StatsManager.Instance.structuresDestroyed}";
         seconds.text = $"{math.ceil(StatsManager.Instance.playTimeSeconds)}";
         
-        // this is a switch, just a bit more fancy looking
         difficoulty.text = StatsManager.Instance.currentDifficulty switch
         {
             1 => "Easy",
@@ -62,8 +69,6 @@ public class UIManager : MonoBehaviour
             3 => "Hard",
             _ => "I Dunno :(",
         };
-
-        gameOverPanel.SetActive(true);
     }
 
     //---- Bottoni via Inspector ----
