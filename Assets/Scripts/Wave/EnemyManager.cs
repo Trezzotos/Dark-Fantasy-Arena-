@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
 
-    public event Action OnEnemyDefeated = delegate { };
+    public event Action<Vector2> OnEnemyDefeated = delegate { };
 
     [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] private int poolSizePerPrefab = 10; // quanti oggetti per tipo creare in pool
@@ -86,7 +86,7 @@ public class EnemyManager : MonoBehaviour
 
         enemy.SetActive(false);
         activeEnemies.Remove(enemy);
-        OnEnemyDefeated.Invoke();
+        OnEnemyDefeated.Invoke(enemy.transform.position);
 
         if (pools.ContainsKey(prefabIndex))
             pools[prefabIndex].Enqueue(enemy);

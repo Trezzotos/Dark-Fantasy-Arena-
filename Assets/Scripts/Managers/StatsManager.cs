@@ -44,7 +44,7 @@ public class StatsManager : MonoBehaviour
     }
 
     // Signal handling
-    void OnEnemyKilled()
+    void OnEnemyKilled(Vector2 position)
     {
         enemiesKilled++;
     }

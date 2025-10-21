@@ -34,10 +34,7 @@ public class PlayerMove : MonoBehaviour
 
 
     void Update()
-    {
-
-        if (GameManager.Instance.gameState != GameState.PLAYING) return;
-        
+    {        
         mov = Vector2.zero;
 
         // y-axis input

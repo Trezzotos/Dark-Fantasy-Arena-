@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6130d3c4c5288d14f84730855674b6f0, type: 3}
   m_Name: Big Coin Stack
   m_EditorClassIdentifier: 
-  itemName: Big Stack of Coins
   value: 7

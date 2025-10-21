@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7205778179675480890}
   - component: {fileID: 5954599340301504888}
   - component: {fileID: 9123821895115089910}
+  - component: {fileID: -1436680651542675795}
   m_Layer: 0
   m_Name: CoinStack
   m_TagString: Untagged
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8113208, g: 0.51038074, b: 0.2066571, a: 1}
+  m_Sprite: {fileID: 21300000, guid: cd312ef8018ca7b4bb52010a90de8ecc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,3 +135,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemToGive: {fileID: 11400000, guid: b6ab4c134732d264dbcb4bba1b7d2221, type: 2}
+--- !u!114 &-1436680651542675795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2307353103096843003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8a067ea9d2d104badddbb9242c14db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 0.5
+  speed: 0.25

@@ -6343,6 +6343,54 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1093900627460044113, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
   m_PrefabInstance: {fileID: 8854830438201462765}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105057750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105057752}
+  - component: {fileID: 2105057751}
+  m_Layer: 0
+  m_Name: DropsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2105057751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105057750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da41a04bb36e63e47a95b8876b2f1e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins:
+  - {fileID: 2307353103096843003, guid: c427287ac1b7fe34e953b4f3a50bee99, type: 3}
+  - {fileID: 2782638925044128871, guid: 3b7e8ef0a14d7384fb8b46189c29b327, type: 3}
+  - {fileID: 3294859350720338121, guid: 69fec6fe1bdd3c949b9c2ab5797884dc, type: 3}
+--- !u!4 &2105057752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105057750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 959.87384, y: 586.0434, z: -5.2026157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8854830438201462765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6468,5 +6516,6 @@ SceneRoots:
   - {fileID: 89143}
   - {fileID: 714549782}
   - {fileID: 992406051}
+  - {fileID: 2105057752}
   - {fileID: 159775029}
   - {fileID: 1902273328}

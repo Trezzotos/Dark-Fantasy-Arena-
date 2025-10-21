@@ -106,7 +106,7 @@ public static class SaveSystem
     public static void GenerateEmptySaveFile(int difficulty)
     {
         GameSaveData newGameData = new GameSaveData(
-            new InventoryData(new List<SpellData>(), new List<PerkData>(), 30),     // 30 monete DA RIMUOVERE
+            new InventoryData(new List<SpellData>(), new List<PerkData>(), 0),
             new GameStatsData(1, 0, 0, difficulty, 0.0f)
         );
         SaveGame(newGameData);
