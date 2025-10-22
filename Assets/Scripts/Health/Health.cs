@@ -125,7 +125,6 @@ namespace Examples.Observer
             {
                 EnemyManager.Instance.DespawnEnemy(gameObject, ai.PrefabIndex);
             }
-            // da utilizzare la pool
             else Destroy(gameObject);   // fallback
         }
 
@@ -135,5 +134,13 @@ namespace Examples.Observer
             yield return new WaitForSeconds(RegenWaitTime);
             if (_canHeal) StartCoroutine(Regen());
         }
+
+        public void ResetToFull()
+        {
+            CurrentHealth = StartingHealth;
+            float healedAmount = CurrentHealth;
+            Healed?.Invoke(healedAmount);
+        }
+
     }
 }

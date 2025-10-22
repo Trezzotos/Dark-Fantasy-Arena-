@@ -23,7 +23,7 @@ public class AIEnemy : MonoBehaviour
     [Header("For the Sprite/EnemyTipe")]
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    // 👉 Aggiunta per la pool
+    // Aggiunta per la pool
     public int PrefabIndex { get; private set; }
 
     public void Initialize(int index)

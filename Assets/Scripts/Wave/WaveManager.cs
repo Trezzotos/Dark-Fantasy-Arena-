@@ -59,29 +59,35 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator RunAllWaves()
     {
-        for (; currentWaveIndex < waves.Count; currentWaveIndex++)
+        // continui finché il gioco non è finito
+        while (GameManager.Instance != null && GameManager.Instance.gameState != GameState.GAMEOVER)
         {
-            Wave wave = waves[currentWaveIndex];
-            // 1) Instanzia gli spawner della wave
-            SpawnWaveSpawners(wave);
+            // usa currentWaveIndex come contatore progressivo, ma prendi la definizione tramite modulo
+            int templateIndex = waves.Count > 0 ? currentWaveIndex % waves.Count : 0;
+            Wave waveTemplate = waves[templateIndex];
 
-            // 2) Attiva gli spawner per iniziare a generare nemici
+            // spawn degli spawner per la wave corrente (con configurazione scalata)
+            SpawnWaveSpawners(waveTemplate);
+
+            // attiva gli spawner
             foreach (var spawner in activeSpawners) spawner.Activate();
 
-            // 3) Attendi fine wave: nessun nemico e nessuno spawner vivo
+            // attendi fine wave: nessun nemico e nessuno spawner vivo
             yield return new WaitUntil(() =>
                 EnemyManager.Instance.ActiveEnemyCount == 0 && activeSpawners.Count == 0);
 
-            // 👉 qui invece di aspettare solo un tempo fisso,
-            // segnali al GameManager che il livello è finito
+            // segnala fine livello e lascia che il GameManager gestisca aumento livello / shop
             GameManager.Instance.NextLevel();
 
-            // 👉 aspetti che il giocatore prema "Continua"
+            // aspetta che il giocatore riprenda (continua quando torna in PLAYING)
             yield return new WaitUntil(() => GameManager.Instance.gameState == GameState.PLAYING);
-        }
 
+            // avanti la wave-counter (diventa il "prossimo livello/wave")
+            currentWaveIndex++;
+        }
         waveRoutine = null;
     }
+
 
 
 
@@ -89,8 +95,25 @@ public class WaveManager : MonoBehaviour
     {
         CleanupSpawners(); // sicurezza: pulisci lista dei riferimenti
 
-        foreach (var point in spawnPoints)
+        // Se la wave definisce punti propri, usali; altrimenti usa i spawnPoints globali
+        Transform[] pointsToUse = (wave.spawnerPoints != null && wave.spawnerPoints.Length > 0)
+            ? wave.spawnerPoints
+            : spawnPoints;
+
+        if (pointsToUse == null || pointsToUse.Length == 0)
         {
+            Debug.LogError("No spawn points available for this wave.");
+            return;
+        }
+
+        foreach (var point in pointsToUse)
+        {
+            if (point == null)
+            {
+                Debug.LogWarning("Spawn point is null, skipping.");
+                continue;
+            }
+
             var spawnerGO = Instantiate(wave.spawnerPrefab, point.position, point.rotation);
             var spawner = spawnerGO.GetComponent<EnemySpawner>();
             if (spawner == null)
@@ -109,6 +132,7 @@ public class WaveManager : MonoBehaviour
             activeSpawners.Add(spawner);
         }
     }
+
 
     private void CleanupSpawners()
     {
@@ -133,8 +157,21 @@ public class WaveManager : MonoBehaviour
     private void SpawnerPrefabSetup(EnemySpawner spawner, Wave wave)
     {
         spawner.prefabIndexToSpawn = wave.prefabIndex;
-        spawner.maxSpawnCount = wave.enemyCount;
         spawner.spawnInterval = wave.spawnInterval;
+
+        // baseCount è il valore definito nella wave (inteso come count per spawner nella definizione)
+        int baseCount = Mathf.Max(1, wave.enemyCount);
+
+        // livello corrente (se GameManager non esiste usiamo 1)
+        int level = GameManager.Instance != null ? Mathf.Max(1, GameManager.Instance.Level) : 1;
+
+        // moltiplicatore esponenziale/lineare a scelta — qui uso +15% per livello (modificabile)
+        float perLevelIncrease = 0.15f; // 15% per livello
+        float multiplier = 1f + perLevelIncrease * (level - 1);
+
+        // assegno il numero scalato per spawner
+        spawner.maxSpawnCount = Mathf.Max(1, Mathf.RoundToInt(baseCount * multiplier));
     }
+
 }
 

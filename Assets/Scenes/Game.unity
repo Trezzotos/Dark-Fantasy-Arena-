@@ -2684,7 +2684,7 @@ Transform:
   m_GameObject: {fileID: 658620332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.127277, y: 3.4068015, z: 3.457444}
+  m_LocalPosition: {x: -8.66, y: 2.03, z: 3.457444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2729,7 +2729,6 @@ MonoBehaviour:
   - spawnerPrefab: {fileID: 5358958065350155417, guid: bf850384b46040542ba34bee8d857dfb, type: 3}
     spawnerPoints:
     - {fileID: 993794569}
-    - {fileID: 658620333}
     prefabIndex: 1
     enemyCount: 4
     spawnInterval: 5
@@ -4301,6 +4300,8 @@ MonoBehaviour:
   structuresDestroyed: 0
   currentDifficulty: 0
   playTimeSeconds: 0
+  score: 0
+  playerName: 
 --- !u!4 &992406051
 Transform:
   m_ObjectHideFlags: 0
@@ -4341,7 +4342,7 @@ Transform:
   m_GameObject: {fileID: 993794568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.7827225, y: 3.4068015, z: 3.457444}
+  m_LocalPosition: {x: 4.7827225, y: 1.76, z: 3.457444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

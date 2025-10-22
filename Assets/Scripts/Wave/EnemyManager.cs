@@ -66,10 +66,19 @@ public class EnemyManager : MonoBehaviour
         {
             obj = Instantiate(enemyPrefabs[prefabIndex]);
         }
-
         obj.transform.position = position;
         obj.transform.rotation = Quaternion.identity;
         obj.SetActive(true);
+
+        // reset health so UI updates when reused from pool
+        var health = obj.GetComponent<Examples.Observer.Health>();
+        if (health != null)
+        {
+            health.ResetToFull();
+
+            // applica 0 danno per forzare l'evento Damaged e aggiornare eventuali UI
+            health.TakeDamage(0f);
+        }
 
         // 👉 inizializza AIEnemy con il suo indice
         AIEnemy ai = obj.GetComponent<AIEnemy>();
