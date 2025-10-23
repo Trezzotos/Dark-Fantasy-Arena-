@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public int Level { get; private set; } = 1;
     public int Difficolta { get; private set; }
 
-    // Unity functions
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -49,32 +48,37 @@ public class GameManager : MonoBehaviour
             UpdateGameState(GameState.PLAYING);
     }
 
-    // Our functions
     public void PrepareGame()
     {
         UpdateGameState(GameState.STARTING);
         LoadGameData();
 
-        // StatsManager exists because the scene was already loaded
-        Level = StatsManager.Instance.currentLevel;
-        Difficolta = StatsManager.Instance.currentDifficulty;
-        OnLevelChanged?.Invoke(Level);
+        if (StatsManager.Instance != null)
+        {
+            Level = StatsManager.Instance.currentLevel;
+            Difficolta = StatsManager.Instance.currentDifficulty;
+            OnLevelChanged?.Invoke(Level);
+        }
     }
 
     public void UpdateGameState(GameState newState)
     {
         gameState = newState;
-        // Time.timeScale = (newState == GameState.PLAYING) ? 1f : 0f;
 
         if (gameState == GameState.GAMEOVER)
             SaveSystem.DeleteGame();
+
+        // Gestione timeScale per PAUSED/PLAYING (se desiderato)
+        if (gameState == GameState.PAUSED)
+            Time.timeScale = 0f;
+        else if (gameState == GameState.PLAYING)
+            Time.timeScale = 1f;
 
         HandleMusic(newState);
 
         OnGameStateChanged?.Invoke(newState);
     }
 
-    // Events setup
     void OnEnable()
     {
         SceneManager.sceneLoaded += HandleSceneChange;
@@ -84,12 +88,15 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= HandleSceneChange;
     }
-    
+
     private void HandleSceneChange(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Game") 
+        // Quando si entra nella scena di gioco, prepara lo stato di gioco
+        if (scene.name == "Game")
         {
             PrepareGame();
+            // Assicura timeScale corretto alla partenza della partita
+            Time.timeScale = 1f;
         }
     }
 
@@ -101,7 +108,6 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.SHOPPING);
     }
 
-    // Savefile Management
     private void LoadGameData()
     {
         GameSaveData loadedData = SaveSystem.LoadGame();
@@ -116,44 +122,52 @@ public class GameManager : MonoBehaviour
                 StatsManager.Instance.ApplyGameStats(loadedData.gameStats);
         }
         else
+        {
             Debug.LogError("Nessun salvataggio trovato (NON dovrebbe succedere!)");
+        }
     }
-
 
     private void SaveGameData()
     {
-        InventoryData inventoryData = FindObjectOfType<Examples.Observer.Inventory>().GetCurrentInventoryData();
+        var inventoryComp = FindObjectOfType<Examples.Observer.Inventory>();
+        if (inventoryComp == null)
+        {
+            Debug.LogWarning("SaveGameData: Inventory component non trovato, skip save.");
+            return;
+        }
+
+        InventoryData inventoryData = inventoryComp.GetCurrentInventoryData();
         GameSaveData saveData = new GameSaveData(inventoryData, StatsManager.Instance.GetCurrentGameStats());
         SaveSystem.SaveGame(saveData);
     }
 
-    // Audio
     private void HandleMusic(GameState state)
     {
+        // AudioManager ora gestisce playlist per scena al caricamento.
+        // Qui ci limitiamo a fade/stop/pause/resume in base allo stato di gioco.
+        var am = AudioManager.Instance;
+        if (am == null) return;
+
         switch (state)
         {
             case GameState.STARTING:
-                AudioManager.Instance.PlayMusic(0); // musica menu
+                // Assicurati volume normale all'inizio
+                am.SetVolume(1f, save: false);
                 break;
 
             case GameState.PLAYING:
             case GameState.SHOPPING:
-                if (AudioManager.Instance != null &&
-                    (AudioManager.Instance.CurrentTrackIndex != 1 || !AudioManager.Instance.IsPlaying))
-                {
-                    AudioManager.Instance.PlayMusic(1); // musica fight
-                }
-                // torna al volume pieno
-                AudioManager.Instance.FadeTo(1f, 1.5f);
+                // Ripristina volume pieno (fade o immediato)
+                am.FadeTo(1f, 1.5f);
                 break;
 
             case GameState.PAUSED:
-                // abbassa il volume ma non ferma la musica
-                AudioManager.Instance.FadeTo(0.3f, 1.5f);
+                // Abbassa il volume quando è in pausa
+                am.FadeTo(0.3f, 1.5f);
                 break;
 
             case GameState.GAMEOVER:
-                AudioManager.Instance.StopMusic();
+                am.StopMusic();
                 break;
         }
     }

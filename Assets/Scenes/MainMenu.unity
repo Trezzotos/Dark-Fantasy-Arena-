@@ -1912,22 +1912,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 698235392}
-  musicTracks:
-  - {fileID: 8300000, guid: b65c252a32ab0d44daba068e9d282cfa, type: 3}
-  - {fileID: 8300000, guid: a2b2ba3aa5be23149835f6520721491c, type: 3}
-  - {fileID: 8300000, guid: 280363574b5c3ea458c821adb510f69f, type: 3}
-  - {fileID: 8300000, guid: d714002953ad45a46bc84fc4fca8fe4a, type: 3}
-  - {fileID: 8300000, guid: 484a76da2655dec4daf763b9a34942ab, type: 3}
-  - {fileID: 8300000, guid: 72b1eeebe0ba14b468b973938bdf71f3, type: 3}
-  - {fileID: 8300000, guid: b0925a89c3bac6845bce4fb9d64201f5, type: 3}
-  - {fileID: 8300000, guid: 59697ce10433b4a40a279890cc6bbdc9, type: 3}
-  - {fileID: 8300000, guid: 781e19454e7143841a738d7fcc2c57be, type: 3}
-  - {fileID: 8300000, guid: 942e8c8d1455c094097c9b01cd47f30e, type: 3}
-  - {fileID: 8300000, guid: 93f514dc339a6b643835d0a085060ad1, type: 3}
-  - {fileID: 8300000, guid: ed064727c3fb477469544ef327ed988c, type: 3}
-  - {fileID: 8300000, guid: eda27008061d7d841b4387cdd559055e, type: 3}
-  - {fileID: 8300000, guid: 71124bccfe87f584c96932d1b0e2dfb4, type: 3}
-  - {fileID: 8300000, guid: 4cd4e5c1f38acb14593e6e866cc28def, type: 3}
+  mainMenuTrack: {fileID: 8300000, guid: b65c252a32ab0d44daba068e9d282cfa, type: 3}
+  gameTracks:
+  - {fileID: 8300000, guid: 11da185146f80cd4f8f0c16a3e7121a0, type: 3}
+  - {fileID: 8300000, guid: 833119b0955012e448d72064f2999a46, type: 3}
+  - {fileID: 8300000, guid: c87e66671ddf9e64bb383396f8bef4ce, type: 3}
+  - {fileID: 8300000, guid: 0d0a6d406c6a38346903ad892ae770c4, type: 3}
+  - {fileID: 8300000, guid: 36a3d95e063b19b41a5653d2c1f0b818, type: 3}
+  - {fileID: 8300000, guid: 1c43346978424ba49b69c27107ed64d9, type: 3}
+  - {fileID: 8300000, guid: 379776739eedf6448bfef4eb99adf2f8, type: 3}
+  shopTracks:
+  - {fileID: 8300000, guid: d6b38f2e8e5701f4ab60d776fd1c2eb1, type: 3}
 --- !u!1 &724666091
 GameObject:
   m_ObjectHideFlags: 0
