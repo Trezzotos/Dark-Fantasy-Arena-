@@ -1742,19 +1742,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1305880581}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1305880583}
-        m_TargetAssemblyTypeName: ChangeCommands, Assembly-CSharp
-        m_MethodName: ToggleCommands
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1305880581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,6 +2404,8 @@ MonoBehaviour:
   fullscreenToggle: {fileID: 1460632711}
   volumeSlider: {fileID: 1470451155}
   resolutionDropdown: {fileID: 2063741284}
+  controlSchemeButton: {fileID: 1305880580}
+  controlSchemeLabel: {fileID: 1800505263}
 --- !u!4 &1477804081
 Transform:
   m_ObjectHideFlags: 0

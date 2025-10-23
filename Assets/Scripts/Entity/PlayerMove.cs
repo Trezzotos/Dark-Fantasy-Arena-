@@ -24,33 +24,34 @@ public class PlayerMove : MonoBehaviour
     SpriteRenderer sp;
     Rigidbody2D rb;
 
+    const string PREF_CONTROL_SCHEME = "ControlScheme";
+
     void Start()
     {
         sp = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();   // granted by Entity
+        rb = GetComponent<Rigidbody2D>();
+        sp.flipX = true;
 
-        sp.flipX = true;   // sx
+        int scheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
+        ChangeCommands(scheme);
     }
 
-
     void Update()
-    {        
+    {
         mov = Vector2.zero;
 
-        // y-axis input
         if (Input.GetKey(up)) mov.y = 1;
         else if (Input.GetKey(down)) mov.y = -1;
 
-        // x-axis input
         if (Input.GetKey(right))
         {
             mov.x = 1;
-            if (sp.flipX) sp.flipX = false;    // dx
+            if (sp.flipX) sp.flipX = false;
         }
         else if (Input.GetKey(left))
         {
             mov.x = -1;
-            if (!sp.flipX) sp.flipX = true;   // sx
+            if (!sp.flipX) sp.flipX = true;
         }
         mov.Normalize();
 
@@ -64,7 +65,6 @@ public class PlayerMove : MonoBehaviour
         rb.velocity = vel * mov;
     }
 
-    // Options -> Controls: 2pt
     public void ChangeCommands(int index)
     {
         switch (index)
@@ -82,6 +82,13 @@ public class PlayerMove : MonoBehaviour
                 left = KeyCode.LeftArrow;
                 right = KeyCode.RightArrow;
                 sprint = KeyCode.RightShift;
+                break;
+            default:
+                up = KeyCode.W;
+                down = KeyCode.S;
+                left = KeyCode.A;
+                right = KeyCode.D;
+                sprint = KeyCode.LeftShift;
                 break;
         }
     }
