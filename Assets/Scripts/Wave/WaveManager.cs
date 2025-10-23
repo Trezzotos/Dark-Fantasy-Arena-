@@ -10,16 +10,14 @@ public class WaveManager : MonoBehaviour
     [Serializable]
     private class Wave
     {   
-        public GameObject spawnerPrefab;   // prefab dello spawner da instanziare
-        public Transform[] spawnerPoints;   // punti in cui instanziare gli spawner
-        public int prefabIndex;         // indice del tipo di nemico (se serve)
+        public GameObject[] structuresPrefabs;   // prefab dello spawner da instanziare
         public int enemyCount;          // quanti nemici deve generare lo spawner
         public float spawnInterval;         // intervallo tra uno spawn e l'altro
     }
 
     [SerializeField] private List<Wave> waves = new List<Wave>();
     [SerializeField] private Transform[] spawnPoints;
-    private List<EnemySpawner> activeSpawners = new List<EnemySpawner>();
+    private List<Structure> activeStructures = new List<Structure>();
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;
@@ -70,11 +68,11 @@ public class WaveManager : MonoBehaviour
             SpawnWaveSpawners(waveTemplate);
 
             // attiva gli spawner
-            foreach (var spawner in activeSpawners) spawner.Activate();
+            foreach (var spawner in activeStructures) spawner.Activate();
 
             // attendi fine wave: nessun nemico e nessuno spawner vivo
             yield return new WaitUntil(() =>
-                EnemyManager.Instance.ActiveEnemyCount == 0 && activeSpawners.Count == 0);
+                EnemyManager.Instance.ActiveEnemyCount == 0 && activeStructures.Count == 0);
 
             // segnala fine livello e lascia che il GameManager gestisca aumento livello / shop
             GameManager.Instance.NextLevel();
@@ -95,18 +93,13 @@ public class WaveManager : MonoBehaviour
     {
         CleanupSpawners(); // sicurezza: pulisci lista dei riferimenti
 
-        // Se la wave definisce punti propri, usali; altrimenti usa i spawnPoints globali
-        Transform[] pointsToUse = (wave.spawnerPoints != null && wave.spawnerPoints.Length > 0)
-            ? wave.spawnerPoints
-            : spawnPoints;
-
-        if (pointsToUse == null || pointsToUse.Length == 0)
+        if (spawnPoints == null)
         {
             Debug.LogError("No spawn points available for this wave.");
             return;
         }
 
-        foreach (var point in pointsToUse)
+        foreach (Transform point in spawnPoints)
         {
             if (point == null)
             {
@@ -114,49 +107,59 @@ public class WaveManager : MonoBehaviour
                 continue;
             }
 
-            var spawnerGO = Instantiate(wave.spawnerPrefab, point.position, point.rotation);
-            var spawner = spawnerGO.GetComponent<EnemySpawner>();
-            if (spawner == null)
+            var structureGameobject = Instantiate(
+                wave.structuresPrefabs[UnityEngine.Random.Range(0, wave.structuresPrefabs.Length)],
+                point.position,
+                point.rotation
+            );
+
+            var structure = structureGameobject.GetComponent<Structure>();
+            if (structure == null)
             {
-                Debug.LogError("Il prefab dello spawner deve avere lo script EnemySpawner.");
-                Destroy(spawnerGO);
+                Debug.LogError("Il nuovo prefab deve avere lo script Structure.");
+                Destroy(structureGameobject);
                 continue;
             }
 
-            // Configurazioni per questa wave
-            SpawnerPrefabSetup(spawner, wave);
+            if (structure is EnemySpawner spawner)
+            {
+                // Configurazioni per questa wave
+                SpawnerPrefabSetup(spawner, wave);
+            }
+            else if (structure is Tesla tesla)
+            {
+                // modifica i parametri del danno
+            }
 
-            // Subscribe alla distruzione
-            spawner.OnSpawnerKilled += HandleSpawnerKilled;
-
-            activeSpawners.Add(spawner);
+            structure.OnStructureDestroyed += HandleStructureDestoyed;
+            activeStructures.Add(structure);
         }
     }
 
 
     private void CleanupSpawners()
     {
-        foreach (var s in activeSpawners)
+        foreach (var s in activeStructures)
         {
             if (s != null)
             {
-                s.OnSpawnerKilled -= HandleSpawnerKilled;
+                s.OnStructureDestroyed -= HandleStructureDestoyed;
                 s.Deactivate();
                 Destroy(s.gameObject);
             }
         }
-        activeSpawners.Clear();
+        activeStructures.Clear();
     }
 
-    private void HandleSpawnerKilled(EnemySpawner spawner)
+    private void HandleStructureDestoyed(Structure structure)
     {
-        if (activeSpawners.Contains(spawner))
-            activeSpawners.Remove(spawner);
+        if (activeStructures.Contains(structure))
+            activeStructures.Remove(structure);
     }
     
     private void SpawnerPrefabSetup(EnemySpawner spawner, Wave wave)
     {
-        spawner.prefabIndexToSpawn = wave.prefabIndex;
+        // spawner.prefabIndexToSpawn = wave.prefabIndex;
         spawner.spawnInterval = wave.spawnInterval;
 
         // baseCount è il valore definito nella wave (inteso come count per spawner nella definizione)
@@ -171,6 +174,9 @@ public class WaveManager : MonoBehaviour
 
         // assegno il numero scalato per spawner
         spawner.maxSpawnCount = Mathf.Max(1, Mathf.RoundToInt(baseCount * multiplier));
+
+        spawner.Activate();
+        print("Lo faccio");
     }
 
 }

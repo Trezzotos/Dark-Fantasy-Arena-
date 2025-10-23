@@ -10,8 +10,8 @@ namespace Examples.Observer
 {
     public class Health : MonoBehaviour
     {
-        public event Action<float> Damaged = delegate { };
-        public event Action<float> Healed = delegate { };
+        public event Action Damaged = delegate { };
+        public event Action Healed = delegate { };
         public event Action Killed = delegate { };
         [SerializeField] private bool isPlayer = false;
 
@@ -95,13 +95,13 @@ namespace Examples.Observer
                 CurrentHealth = MaxHealth;
                 _canHeal = false;   // Coroutine will stop itself, we do not disturb it
             }
-            Healed.Invoke(amount);
+            Healed.Invoke();
         }
 
         public void TakeDamage(float amount)
         {
             CurrentHealth -= amount;
-            Damaged.Invoke(amount);
+            Damaged.Invoke();
             if (!_canHeal)
             {
                 _canHeal = true;
@@ -119,12 +119,15 @@ namespace Examples.Observer
         {
             Killed?.Invoke();
             StopAllCoroutines();
+            
             if (isPlayer)
                 GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
-            if (TryGetComponent(out AIEnemy ai))
+
+            else if (TryGetComponent(out AIEnemy ai))
             {
                 EnemyManager.Instance.DespawnEnemy(gameObject, ai.PrefabIndex);
             }
+
             else Destroy(gameObject);   // fallback
         }
 
@@ -139,7 +142,7 @@ namespace Examples.Observer
         {
             CurrentHealth = StartingHealth;
             float healedAmount = CurrentHealth;
-            Healed?.Invoke(healedAmount);
+            Healed?.Invoke();
         }
 
     }

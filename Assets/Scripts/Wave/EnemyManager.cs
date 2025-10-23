@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -49,25 +50,13 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy(int prefabIndex, Vector3 position)
+    public void SpawnEnemy(Vector3 position)
     {
-        if (!pools.ContainsKey(prefabIndex))
-        {
-            Debug.LogError($"SpawnEnemy: indice {prefabIndex} fuori range");
-            return;
-        }
+        int prefabIndex = UnityEngine.Random.Range(0, enemyPrefabs.Count);
 
-        GameObject obj;
-        if (pools[prefabIndex].Count > 0)
-        {
-            obj = pools[prefabIndex].Dequeue();
-        }
-        else
-        {
-            obj = Instantiate(enemyPrefabs[prefabIndex]);
-        }
-        obj.transform.position = position;
-        obj.transform.rotation = Quaternion.identity;
+        GameObject obj = Instantiate(enemyPrefabs[prefabIndex]);
+
+        obj.transform.SetPositionAndRotation(position, Quaternion.identity);
         obj.SetActive(true);
 
         // reset health so UI updates when reused from pool
@@ -80,7 +69,7 @@ public class EnemyManager : MonoBehaviour
             health.TakeDamage(0f);
         }
 
-        // 👉 inizializza AIEnemy con il suo indice
+        // inizializza AIEnemy con il suo indice
         AIEnemy ai = obj.GetComponent<AIEnemy>();
         if (ai != null)
             ai.Initialize(prefabIndex);
@@ -105,8 +94,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnRandomEnemy(Vector3 position)
     {
-        int idx = UnityEngine.Random.Range(0, enemyPrefabs.Count);
-        SpawnEnemy(idx, position);
+        SpawnEnemy(position);
     }
 
     public void PauseAllEnemies()

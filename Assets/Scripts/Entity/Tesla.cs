@@ -4,7 +4,7 @@ using Examples.Observer;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
-public class Tesla : MonoBehaviour
+public class Tesla : Structure
 {
     [Header("Stats")]
     [Tooltip("How much time it has to wait to be able to shoot again")]
@@ -15,14 +15,16 @@ public class Tesla : MonoBehaviour
     float timeToShoot;
     LineController lineController;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
+        // in più
         lineController = transform.GetComponentInChildren<LineController>();
         timeToShoot = 0;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;

@@ -32,7 +32,7 @@ namespace Examples.Observer
             _health.Killed -= OnKilled;
         }
 
-        void OnDamaged(float damage)
+        void OnDamaged()
         {
             if(_damagedSound != null && _locationToPlay != null)
             {

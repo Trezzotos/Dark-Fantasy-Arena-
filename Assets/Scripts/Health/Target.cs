@@ -36,7 +36,7 @@ namespace Examples.Observer
             Health.Healed -= OnHealthChanged;
         }
 
-        void OnHealthChanged(float amount)
+        void OnHealthChanged()
         {
             float ratio = (float)Health.CurrentHealth / Health.MaxHealth;
             ratio = math.clamp(ratio, 0, 1);

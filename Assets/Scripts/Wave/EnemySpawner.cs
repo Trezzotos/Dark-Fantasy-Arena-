@@ -4,47 +4,21 @@ using UnityEngine;
 using System;
 using Examples.Observer;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : Structure
 {
-    public event Action<EnemySpawner> OnSpawnerKilled;
-
     public float spawnInterval = 1.5f;
-    public int prefabIndexToSpawn = 0;
+    // public int prefabIndexToSpawn = 0;
     public int maxSpawnCount = 3;
 
     int spawned = 0;
-    bool active = false;
-    private Health health;
+    // private Health health;
 
-    private void Awake()
+    protected override void Awake()
     {
-        health = GetComponent<Examples.Observer.Health>();
-        if (health == null) Debug.LogError("EnemySpawner richiede un Health sullo stesso GameObject.");
-    }
+        base.Awake();
 
-    private void OnEnable()
-    {
-        if (health != null)
-            health.Killed += HandleKilled;
-    }
-
-    private void OnDisable()
-    {
-        if (health != null)
-            health.Killed -= HandleKilled;
-    }
-
-    public void Activate()
-    {
-        active = true;
+        // in più gli aggiungo
         spawned = 0;
-        StartCoroutine(SpawnLoop());
-    }
-
-    public void Deactivate()
-    {
-        active = false;
-        StopAllCoroutines();
     }
 
     private IEnumerator SpawnLoop()
@@ -56,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (currentInstances < maxInstances)
             {
-                EnemyManager.Instance.SpawnEnemy(prefabIndexToSpawn, transform.position);
+                EnemyManager.Instance.SpawnEnemy(transform.position);
                 spawned++;
             }
 
@@ -64,11 +38,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-
-    // Solo per lo spawner
-    private void HandleKilled()
+    public override void Activate()
     {
-        Deactivate();
-        OnSpawnerKilled?.Invoke(this);
+        base.Activate();
+
+        // solo per EnemySpawner
+        StartCoroutine(SpawnLoop());
     }
 }
