@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +11,7 @@ public class ShopButton : MonoBehaviour
     [SerializeField] TMP_Text label;
 
     ItemData data;
+    public ItemData CurrentData => data; // proprietà pubblica per leggere l'item corrente
 
     public void Set(ItemData itemData)
     {

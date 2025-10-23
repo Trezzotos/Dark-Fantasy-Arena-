@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    [Tooltip("Exit button has to be clicked twice within this time to exit shop")]
     public float timeToDoubleClick = 5f;
-    
+
     [Header("References")]
     public TMP_Text coinsLabel;
     public TMP_Text dialogLabel;
@@ -31,30 +28,33 @@ public class ShopManager : MonoBehaviour
         coinsLabel.text = "Coins: " + inventory.money;
 
         Random.InitState((int) Time.time);
-        int selected;
-        List<int> l = new List<int>();
-        foreach (ShopButton button in buttons)
+        InitializeButtons();
+        dialogLabel.text = "";
+    }
+
+    void InitializeButtons()
+    {
+        List<int> usedIndices = new List<int>();
+        for (int i = 0; i < buttons.Length; i++)
         {
+            int selected;
             do
             {
-                selected = Random.Range(0, buttons.Length);
-            } while (l.Contains(selected));
-            l.Add(selected);
+                selected = Random.Range(0, items.Length);
+            } while (usedIndices.Contains(selected) && usedIndices.Count < items.Length);
 
-            button.Set(items[selected]);
+            usedIndices.Add(selected);
+            buttons[i].Set(items[selected]);
+            buttons[i].gameObject.SetActive(true);
         }
-
-        dialogLabel.text = "";
     }
 
     public void ShopExit()
     {
-        // check for the double click
         if (lastClicked == fakeBtn && Time.time - lastClickTime < timeToDoubleClick)
         {
             saveData.inventory = inventory;
             SaveSystem.SaveGame(saveData);
-
             SceneManager.LoadScene("Game");
         }
         else
@@ -79,7 +79,6 @@ public class ShopManager : MonoBehaviour
 
     public void BuyItem(ItemData data)
     {
-        // check for the double click
         if (data == lastClicked && Time.time - lastClickTime < timeToDoubleClick)
         {
             if (inventory.money < data.price)
@@ -99,8 +98,10 @@ public class ShopManager : MonoBehaviour
             }
             inventory.money -= data.price;
             coinsLabel.text = "Coins: " + inventory.money;
-
             dialogLabel.text = "Eh eh eh, thank you";
+
+            // Rimpiazza TUTTI i bottoni con nuovi item
+            ReplaceAllButtons();
 
             lastClicked = null;
         }
@@ -109,6 +110,31 @@ public class ShopManager : MonoBehaviour
             dialogLabel.text = data.description + "\nPrice: " + data.price;
             lastClickTime = Time.time;
             lastClicked = data;
+        }
+    }
+
+    void ReplaceAllButtons()
+    {
+        // crea lista di candidate iniziale (copie degli items disponibili)
+        List<ItemData> candidates = new List<ItemData>(items);
+
+        // se gli items disponibili sono meno dei bottoni, useremo tutti i candidates e poi disabiliteremo i restanti
+        // scegli in modo random senza ripetizioni finché possibile
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (candidates.Count == 0)
+            {
+                // non ci sono più items unici da mostrare
+                buttons[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            int idx = Random.Range(0, candidates.Count);
+            ItemData chosen = candidates[idx];
+            candidates.RemoveAt(idx);
+
+            buttons[i].Set(chosen);
+            buttons[i].gameObject.SetActive(true);
         }
     }
 }
