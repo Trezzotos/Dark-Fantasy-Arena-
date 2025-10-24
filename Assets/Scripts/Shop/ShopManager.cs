@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
@@ -72,6 +73,9 @@ public class ShopManager : MonoBehaviour
         {
             var btn = buttons[i];
             if (btn == null) continue;
+
+            btn.GetComponent<Button>().enabled = true;
+            btn.GetComponent<Image>().color = Color.white;
 
             int selected;
             int attempts = 0;
@@ -149,15 +153,19 @@ public class ShopManager : MonoBehaviour
         // debug rapido
         // Debug.Log($"[ShopManager] Button pressed: {sourceButton.name} -> {data?.name}");
 
-        BuyItem(data);
+        if (BuyItem(data))
+        {
+            sourceButton.GetComponent<Button>().enabled = false;
+            sourceButton.GetComponent<Image>().color = Color.grey;
+        }
     }
 
-    public void BuyItem(ItemData data)
+    public bool BuyItem(ItemData data)
     {
         if (data == null)
         {
             Debug.LogWarning("[ShopManager] BuyItem chiamata con data null");
-            return;
+            return false;
         }
 
         // se è il secondo click sullo stesso item entro il tempo, acquista
@@ -166,7 +174,7 @@ public class ShopManager : MonoBehaviour
             if (inventory.money < data.price)
             {
                 if (dialogLabel != null) dialogLabel.text = "Not enough cash, stranger";
-                return;
+                return false;
             }
 
             PickableData pickableData = data.item;
@@ -182,44 +190,16 @@ public class ShopManager : MonoBehaviour
             if (coinsLabel != null) coinsLabel.text = "Coins: " + inventory.money;
             if (dialogLabel != null) dialogLabel.text = "Eh eh eh, thank you";
 
-            // Rimpiazza TUTTI i bottoni con nuovi item
-            ReplaceAllButtons();
-
             lastClicked = null;
+
+            return true;
         }
         else
         {
             if (dialogLabel != null) dialogLabel.text = data.description + "\nPrice: " + data.price;
             lastClickTime = Time.time;
             lastClicked = data;
-        }
-    }
-
-    void ReplaceAllButtons()
-    {
-        if (buttons == null || items == null) return;
-
-        // crea lista di candidate iniziale (copie degli items disponibili)
-        List<ItemData> candidates = new List<ItemData>(items);
-
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            var btn = buttons[i];
-            if (btn == null) continue;
-
-            if (candidates.Count == 0)
-            {
-                // non ci sono più items unici da mostrare
-                btn.gameObject.SetActive(false);
-                continue;
-            }
-
-            int idx = Random.Range(0, candidates.Count);
-            ItemData chosen = candidates[idx];
-            candidates.RemoveAt(idx);
-
-            btn.Set(chosen);
-            btn.gameObject.SetActive(true);
+            return false;
         }
     }
 }
