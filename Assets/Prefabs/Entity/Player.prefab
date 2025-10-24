@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 3084304852573225397}
   - component: {fileID: 372741606706334627}
   - component: {fileID: 3677190110165729723}
+  - component: {fileID: -24624706963479889}
+  - component: {fileID: -4193117587172664088}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -188,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc139c79e9a1dd4f9430fb597f18373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: 101
+  shootKey: 101
   weapon: {fileID: 0}
 --- !u!114 &1454664401343665048
 MonoBehaviour:
@@ -266,6 +268,37 @@ MonoBehaviour:
   spells: []
   perks: []
   money: 0
+--- !u!114 &-24624706963479889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ae385ebf5c089469d34e6bfe7ee926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
+  spellKey: 107
+  spellPlus: 108
+  spellMinus: 106
+  selected: 0
+  availableSpells: 0
+--- !u!114 &-4193117587172664088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1ae77abf93bd488f61a54a034f90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 4450504700856875483, guid: 9a688dcf222326348b11a591c6fa7095, type: 3}
 --- !u!1001 &5832107048770643142
 PrefabInstance:
   m_ObjectHideFlags: 0

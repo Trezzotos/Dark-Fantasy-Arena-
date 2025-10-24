@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4092673326104561263}
   - component: {fileID: 2933093498186031860}
   - component: {fileID: -6848840948617651846}
+  - component: {fileID: -3162368250291369988}
   m_Layer: 6
   m_Name: FastGoblin
   m_TagString: Enemy
@@ -175,8 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93db9de4304eee74391a20bedf71ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   _startingHealth: 100
   _maxHealth: 100
+  _canHeal: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
 --- !u!114 &2933093498186031860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +210,20 @@ MonoBehaviour:
   movementSpeed: 1
   hitRate: 1
   damage: 5
+  spriteRenderer: {fileID: 0}
+--- !u!114 &-3162368250291369988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458919475696192853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1ae77abf93bd488f61a54a034f90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 4450504700856875483, guid: 9a688dcf222326348b11a591c6fa7095, type: 3}
 --- !u!1001 &2143046247563737749
 PrefabInstance:
   m_ObjectHideFlags: 0

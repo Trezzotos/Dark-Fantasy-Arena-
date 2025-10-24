@@ -2651,11 +2651,6 @@ Transform:
   - {fileID: 807991239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &194094498 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7411203278443180055, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
-  m_PrefabInstance: {fileID: 8854830438201462765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330740901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,10 +2797,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -24624706963479889, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+      propertyPath: UIText
+      value: 
+      objectReference: {fileID: 8854830438201462766}
     - target: {fileID: 372741606706334627, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: manaBar
       value: 
-      objectReference: {fileID: 194094498}
+      objectReference: {fileID: 0}
     - target: {fileID: 1106352687358400602, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2877,7 +2876,7 @@ PrefabInstance:
     - target: {fileID: 5993542025763632485, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: manaBar
       value: 
-      objectReference: {fileID: 194094498}
+      objectReference: {fileID: 0}
     - target: {fileID: 6389216421484916085, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: healthBar
       value: 
@@ -6491,6 +6490,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+--- !u!114 &8854830438201462766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7294363478929674184, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+  m_PrefabInstance: {fileID: 8854830438201462765}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
