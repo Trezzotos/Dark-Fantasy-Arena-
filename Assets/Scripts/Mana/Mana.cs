@@ -10,8 +10,8 @@ namespace Examples.Observer
 {
     public class Mana : MonoBehaviour
     {
-        public event Action<float> ManaSpent = delegate { };
-        public event Action<float> ManaGained = delegate { };
+        public event Action ManaSpent = delegate { };
+        public event Action ManaGained = delegate { };
 
         [SerializeField] float _startingMana = 100;
         public float StartingMana => _startingMana;
@@ -92,13 +92,13 @@ namespace Examples.Observer
                 CurrentMana = MaxMana;
                 _canBeRestored = false;   // Coroutine will stop itself, we do not disturb it
             }
-            ManaGained.Invoke(amount);
+            ManaGained.Invoke();
         }
 
         public void SpendMana(float amount)
         {
             CurrentMana -= amount;
-            ManaSpent.Invoke(amount);
+            ManaSpent.Invoke();
             if (!_canBeRestored)
             {
                 _canBeRestored = true;

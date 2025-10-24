@@ -8,8 +8,8 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Commands")]
-    public KeyCode shoot = KeyCode.E;
-   // public KeyCode reload = KeyCode.R;  
+    public KeyCode shootKey = KeyCode.E;
+    public KeyCode spellKey = KeyCode.R;
 
     [Space]
     [SerializeField] private RaycastShoot weapon;
@@ -30,8 +30,8 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
-        
+
         // handle shooting
-        if (Input.GetKey(shoot)) weapon.TryShoot(pm.lastDirection);
+        if (Input.GetKey(shootKey)) weapon.TryShoot(pm.lastDirection);
     }
 }

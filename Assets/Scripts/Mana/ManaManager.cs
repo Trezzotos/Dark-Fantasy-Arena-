@@ -13,28 +13,30 @@ namespace Examples.Observer
         public Mana Mana { get; private set; }
         Vector3 hbInitialScale;
 
-        private void Awake()
+        private void Start()
         {
             Mana = GetComponent<Mana>();
 
             if (!manaBar) Debug.LogWarning("Mana bar unreferenced!");
             hbInitialScale = manaBar.localScale;
+
+            UpdateManaBar();
         }
 
         private void OnEnable()
         {
             // subscribe to get notified when this health takes damage!
-            Mana.ManaGained += OnManaChanged;
-            Mana.ManaSpent += OnManaChanged;
+            Mana.ManaGained += UpdateManaBar;
+            Mana.ManaSpent += UpdateManaBar;
         }
 
         private void OnDisable()
         {
-            Mana.ManaGained -= OnManaChanged;
-            Mana.ManaSpent -= OnManaChanged;
+            Mana.ManaGained -= UpdateManaBar;
+            Mana.ManaSpent -= UpdateManaBar;
         }
 
-        void OnManaChanged(float amount)
+        void UpdateManaBar()
         {
             float ratio = (float)Mana.CurrentMana / Mana.MaxMana;
 

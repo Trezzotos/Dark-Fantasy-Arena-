@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using Examples.Observer;
 using UnityEngine;
 
 // Rappresenta il proiettile fisico nel gioco.
@@ -13,6 +16,9 @@ public class Spell : MonoBehaviour
 
     private SpellData data;
     private Vector2 launchDirection;
+
+    private delegate IEnumerator DamageFunction(Health enemyHealth);
+    private DamageFunction damageFunction;
 
     private void Awake()
     {
@@ -53,9 +59,25 @@ public class Spell : MonoBehaviour
 
         // Inizializza la fisica
         rb.velocity = launchDirection * moveSpeed;
-        
+
         // Opzionale: Ruota la spell in base alla direzione di lancio
         RotateToDirection();
+
+        switch (data.effect)
+        {
+            case SpellData.EffectType.ONESHOT:
+                damageFunction = OneShot;
+                break;
+            case SpellData.EffectType.MULTIPLE:
+                damageFunction = Multiple;
+                break;
+            case SpellData.EffectType.INCREMENTAL:
+                damageFunction = Incremental;
+                break;
+            default:
+                Debug.LogError("SpellData: effect not initialized");
+                break;
+        }
 
         // Avvia la logica di timeout/distruzione (se necessario)
         // Ad esempio: Destroy(gameObject, 5f); 
@@ -85,8 +107,40 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // logica di contatto
+        if (other.TryGetComponent(out AIEnemy ai))
+        {
+            StartCoroutine(nameof(damageFunction), other.GetComponent<Health>());
+        }
 
+        // sound effect
+        // particle system
+        GetComponent<SpriteRenderer>().enabled = false;     // nascondi la spell. si distruggerà dopo
+    }
+
+    private IEnumerator OneShot(Health enemyHealth)
+    {
+        enemyHealth.TakeDamage(data.baseDamage);
+        yield return new WaitForSeconds(0);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Multiple(Health enemyHealth)
+    {
+        for (int i = 0; i < data.totalHits; i++)
+        {
+            enemyHealth.TakeDamage(data.baseDamage);
+            yield return new WaitForSeconds(data.timeBetweenHits);
+        }
+        Destroy(gameObject);
+    }
+    
+    private IEnumerator Incremental(Health enemyHealth)
+    {
+        for (int i = 0; i < data.totalHits; i++)
+        {
+            enemyHealth.TakeDamage(data.baseDamage + data.damageIncrement * i);
+            yield return new WaitForSeconds(data.timeBetweenHits);
+        }
         Destroy(gameObject);
     }
 }
