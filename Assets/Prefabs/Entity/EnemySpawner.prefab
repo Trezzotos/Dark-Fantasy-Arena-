@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1695560717
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 20cf4324489fac542bd75661458a1c83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 1.5
-  prefabIndexToSpawn: 0
   maxSpawnCount: 3
 --- !u!1001 &2866971188546781398
 PrefabInstance:
@@ -217,6 +216,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 55677328008060679}
     m_Modifications:
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4632942368886561274, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
       propertyPath: m_Name
       value: Healthbar
@@ -276,6 +287,14 @@ PrefabInstance:
     - target: {fileID: 7469927604473180747, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618321402865308133, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618321402865308133, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1695560717
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

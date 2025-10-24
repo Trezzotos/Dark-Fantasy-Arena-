@@ -131,6 +131,14 @@ public class AudioManager : MonoBehaviour
             paused = true
         };
 
+        // Alias: fare in modo che Settings, Credits e Ranking usino lo stesso stato di MainMenu
+        string[] mainMenuAliases = new string[] { "Settings", "Credits", "Ranking" };
+        foreach (var alias in mainMenuAliases)
+        {
+            // assegna la stessa istanza di PlaylistState del MainMenu
+            states[alias] = states["MainMenu"];
+        }
+
         float savedVol = PlayerPrefs.GetFloat(PREF_MUSIC_VOLUME, DEFAULT_VOLUME);
         if (musicSource != null) musicSource.volume = Mathf.Clamp01(savedVol);
     }
@@ -349,8 +357,4 @@ public class AudioManager : MonoBehaviour
             trackCoroutine = null;
         }
     }
-
-
-
-
 }

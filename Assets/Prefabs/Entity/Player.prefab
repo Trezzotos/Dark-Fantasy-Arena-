@@ -126,8 +126,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008595139, y: 0.0004787445}
-  m_Size: {x: 0.33760965, y: 0.55898595}
+  m_Offset: {x: -0.008595139, y: -0.08049844}
+  m_Size: {x: 0.33760965, y: 0.39703158}
   m_Direction: 0
 --- !u!50 &4731685023732007296
 Rigidbody2D:
@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc139c79e9a1dd4f9430fb597f18373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: 101
+  shootKey: 101
+  spellKey: 114
   weapon: {fileID: 0}
 --- !u!114 &1454664401343665048
 MonoBehaviour:

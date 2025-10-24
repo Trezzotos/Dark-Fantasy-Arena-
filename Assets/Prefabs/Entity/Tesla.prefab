@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1695560717
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 129994464fa0a9140b220b793a82f013, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -211,11 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067d5b1d238f5694e91a2f14ad894327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  damage: 10
-  healthBar: {fileID: 0}
-  hitParticleSystem: {fileID: 0}
   shootFreq: 1.5
+  damage: 10
 --- !u!114 &-3053186552240006850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,8 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93db9de4304eee74391a20bedf71ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   _startingHealth: 100
   _maxHealth: 100
+  _canHeal: 0
+  _regenWaitTime: 0.1
+  _regenAmountPerTime: 0.1
 --- !u!114 &-7884141479242758794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2791988159805588363}
     m_Modifications:
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435244090181775746, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4632942368886561274, guid: db2b2bee8bdb35e40b3ef7c5610996c0, type: 3}
       propertyPath: m_Name
       value: Healthbar
