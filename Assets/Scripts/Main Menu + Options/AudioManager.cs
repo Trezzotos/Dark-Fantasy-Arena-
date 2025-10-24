@@ -132,7 +132,7 @@ public class AudioManager : MonoBehaviour
         };
 
         // Alias: fare in modo che Settings, Credits e Ranking usino lo stesso stato di MainMenu
-        string[] mainMenuAliases = new string[] { "Settings", "Credits", "Ranking" };
+        string[] mainMenuAliases = new string[] { "Settings", "Credits", "Ranking", "Tutorial" };
         foreach (var alias in mainMenuAliases)
         {
             // assegna la stessa istanza di PlaylistState del MainMenu

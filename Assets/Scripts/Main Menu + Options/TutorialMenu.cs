@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TutorialMenu : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class TutorialMenu : MonoBehaviour
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button showOtherSetButton;
+
+    [Header("UI Text References")]
+    [SerializeField] private TMP_Text showOtherSetButtonText;   
+
 
     private int currentIndex = 0;
     private bool showingSecondarySet = false;
@@ -64,19 +69,25 @@ public class TutorialMenu : MonoBehaviour
     /// </summary>
     private void OnShowOtherSetClicked()
     {
-        // Controlla se il set alternativo ha un elemento corrispondente
         if (currentIndex < secondarySet.Length)
         {
             showingSecondarySet = !showingSecondarySet;
             UpdateBackgroundVisibility();
             UpdateButtonVisibility();
+
+            // Aggiorna il testo del bottone tramite riferimento
+            if (showOtherSetButtonText != null)
+            {
+                showOtherSetButtonText.text = showingSecondarySet ? "Show Set 1" : "Show Set 2";
+            }
         }
         else
         {
-            // Se non esiste un background corrispondente, disattiva il pulsante
             showOtherSetButton.gameObject.SetActive(false);
         }
     }
+
+
 
     /// <summary>
     /// Aggiorna la visibilità dei background in base allo stato attuale.

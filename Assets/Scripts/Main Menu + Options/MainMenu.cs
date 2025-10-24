@@ -9,9 +9,20 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject difficultyPanel;
     [SerializeField] private GameObject TutorialPanel;
 
+    [SerializeField] private GameObject PlayerNamePanel;
+
     [Header("Buttons")]
     [SerializeField] private Button continueButton;
     [SerializeField] private Button rankingButton;
+
+    [Header("Player Name Input")]
+    [SerializeField] private InputField playerNameInput;
+    [SerializeField] private Button confirmNameButton;
+
+    [Header("String NamePlayer")]
+    private string playerName = "";
+
+
 
     private void Start()
     {
@@ -25,6 +36,8 @@ public class MainMenu : MonoBehaviour
             rankingButton.interactable = false;
             return;
         }
+        confirmNameButton.onClick.AddListener(OnConfirmName);
+
 
         // All’avvio mostra solo il main menu
         mainMenuPanel.SetActive(true);
@@ -49,8 +62,7 @@ public class MainMenu : MonoBehaviour
     //  Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
     public void SelectDifficulty(int difficulty)
     {
-        // Ivanù metti una textbox?
-        SaveSystem.GenerateEmptySaveFile(difficulty, "Bob");
+        SaveSystem.GenerateEmptySaveFile(difficulty, playerName);
         SceneManager.LoadScene("Game");
     }
 
@@ -62,6 +74,11 @@ public class MainMenu : MonoBehaviour
     public void OptionMenu()
     {
         SceneManager.LoadScene("Settings");
+    }
+
+    public void RankingMenu()
+    {
+        SceneManager.LoadScene("Ranking");
     }
 
     public void QuitGame()
@@ -83,8 +100,20 @@ public class MainMenu : MonoBehaviour
     public void HideTutorial()
     {
         mainMenuPanel.SetActive(false);
-        difficultyPanel.SetActive(true);
+        PlayerNamePanel.SetActive(true);
         TutorialPanel.SetActive(false);
+    }
+    private void OnConfirmName()
+    {
+        playerName = playerNameInput.text.Trim();
+
+        if (string.IsNullOrEmpty(name))
+        {
+            Debug.LogWarning("Please enter a valid name.");
+            return;
+        }
+        PlayerNamePanel.SetActive(false);
+        difficultyPanel.SetActive(true);
     }
     
     public void Credits()

@@ -1119,6 +1119,7 @@ MonoBehaviour:
   previousButton: {fileID: 1707541155}
   nextButton: {fileID: 1325236431}
   showOtherSetButton: {fileID: 531625158}
+  showOtherSetButtonText: {fileID: 1868660187}
 --- !u!4 &1587630127
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,7 +1381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Show Other Set
+  m_text: Show Set 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
   m_sharedMaterial: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
