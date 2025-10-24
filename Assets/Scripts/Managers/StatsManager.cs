@@ -34,7 +34,7 @@ public class StatsManager : MonoBehaviour
         GameManager.OnGameStateChanged += CountTime;
         GameManager.OnLevelChanged += UpdateLevel;
         EnemyManager.Instance.OnEnemyDefeated += OnEnemyKilled;
-        // on structure destroyed
+        WaveManager.Instance.OnStructureDestroyed += OnStructureDestoyed;
     }
 
     void OnDisable()
@@ -42,7 +42,7 @@ public class StatsManager : MonoBehaviour
         GameManager.OnGameStateChanged -= CountTime;
         GameManager.OnLevelChanged -= UpdateLevel;
         EnemyManager.Instance.OnEnemyDefeated -= OnEnemyKilled;
-        // on structure destroyed
+        WaveManager.Instance.OnStructureDestroyed -= OnStructureDestoyed;
     }
 
     // Signal handling

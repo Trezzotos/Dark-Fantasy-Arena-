@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    public event Action OnStructureDestroyed = delegate { };
+
+    public static WaveManager Instance;
 
     [Serializable]
     private class Wave
@@ -21,6 +24,12 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     private void OnEnable()
     {
@@ -152,6 +161,8 @@ public class WaveManager : MonoBehaviour
     {
         if (activeStructures.Contains(structure))
             activeStructures.Remove(structure);
+
+        OnStructureDestroyed.Invoke();
     }
     
     private void SpawnerPrefabSetup(EnemySpawner spawner, Wave wave)
