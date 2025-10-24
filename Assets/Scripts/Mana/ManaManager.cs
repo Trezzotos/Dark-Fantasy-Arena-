@@ -13,7 +13,7 @@ namespace Examples.Observer
         public Mana Mana { get; private set; }
         Vector3 hbInitialScale;
 
-        private void Start()
+        private void Awake()
         {
             Mana = GetComponent<Mana>();
 
