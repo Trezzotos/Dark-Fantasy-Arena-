@@ -25,7 +25,6 @@ namespace Examples.Observer
             if (data is MoneyData moneyData)
             {
                 money += moneyData.value;
-                print(money);
             }
 
             // codice modulare: i nemici potrebbero droppare qualsiasi cosa :D

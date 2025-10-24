@@ -9,10 +9,6 @@ public class EnemyManager : MonoBehaviour
 
     public event Action<Vector2> OnEnemyDefeated = delegate { };
 
-    [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
-    [SerializeField] private int poolSizePerPrefab = 10; // quanti oggetti per tipo creare in pool
-
-    private Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
     private readonly List<GameObject> activeEnemies = new List<GameObject>();
 
     public int ActiveEnemyCount
@@ -31,30 +27,16 @@ public class EnemyManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-
-        InitializePools();
-    }
-
-    private void InitializePools()
-    {
-        for (int i = 0; i < enemyPrefabs.Count; i++)
-        {
-            pools[i] = new Queue<GameObject>();
-
-            for (int j = 0; j < poolSizePerPrefab; j++)
-            {
-                GameObject obj = Instantiate(enemyPrefabs[i]);
-                obj.SetActive(false);
-                pools[i].Enqueue(obj);
-            }
-        }
     }
 
     public void SpawnEnemy(Vector3 position)
     {
-        int prefabIndex = UnityEngine.Random.Range(0, enemyPrefabs.Count);
-
-        GameObject obj = Instantiate(enemyPrefabs[prefabIndex]);
+        GameObject obj = EnemyPool.Instance.GetPooledObject();
+        if (!obj)
+        {
+            Debug.LogWarning("Pool piena");     // rimuovere?
+            return;
+        }
 
         obj.transform.SetPositionAndRotation(position, Quaternion.identity);
         obj.SetActive(true);
@@ -66,30 +48,20 @@ public class EnemyManager : MonoBehaviour
             health.ResetToFull();
 
             // applica 0 danno per forzare l'evento Damaged e aggiornare eventuali UI
-            health.TakeDamage(0f);
+            // health.TakeDamage(0f);
         }
-
-        // inizializza AIEnemy con il suo indice
-        AIEnemy ai = obj.GetComponent<AIEnemy>();
-        if (ai != null)
-            ai.Initialize(prefabIndex);
 
         activeEnemies.Add(obj);
     }
 
 
-    public void DespawnEnemy(GameObject enemy, int prefabIndex)
+    public void DespawnEnemy(GameObject enemy)
     {
         if (enemy == null) return;
 
         enemy.SetActive(false);
         activeEnemies.Remove(enemy);
         OnEnemyDefeated.Invoke(enemy.transform.position);
-
-        if (pools.ContainsKey(prefabIndex))
-            pools[prefabIndex].Enqueue(enemy);
-        else
-            Destroy(enemy); // fallback
     }
 
     public void SpawnRandomEnemy(Vector3 position)

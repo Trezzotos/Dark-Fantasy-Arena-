@@ -67,9 +67,6 @@ public class WaveManager : MonoBehaviour
             // spawn degli spawner per la wave corrente (con configurazione scalata)
             SpawnWaveSpawners(waveTemplate);
 
-            // attiva gli spawner
-            foreach (var spawner in activeStructures) spawner.Activate();
-
             // attendi fine wave: nessun nemico e nessuno spawner vivo
             yield return new WaitUntil(() =>
                 EnemyManager.Instance.ActiveEnemyCount == 0 && activeStructures.Count == 0);
@@ -176,7 +173,6 @@ public class WaveManager : MonoBehaviour
         spawner.maxSpawnCount = Mathf.Max(1, Mathf.RoundToInt(baseCount * multiplier));
 
         spawner.Activate();
-        print("Lo faccio");
     }
 
 }

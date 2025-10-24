@@ -125,7 +125,7 @@ namespace Examples.Observer
 
             else if (TryGetComponent(out AIEnemy ai))
             {
-                EnemyManager.Instance.DespawnEnemy(gameObject, ai.PrefabIndex);
+                EnemyManager.Instance.DespawnEnemy(gameObject);
             }
 
             else Destroy(gameObject);   // fallback
