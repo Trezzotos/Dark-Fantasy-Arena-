@@ -9,7 +9,6 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Commands")]
     public KeyCode shootKey = KeyCode.E;
-    public KeyCode spellKey = KeyCode.R;
 
     [Space]
     [SerializeField] private RaycastShoot weapon;

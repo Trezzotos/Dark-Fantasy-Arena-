@@ -11,6 +11,8 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     public float moveSpeed = 10f; // Velocità di movimento predefinita
+    public float life = .5f;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -30,6 +32,8 @@ public class Spell : MonoBehaviour
             rb.gravityScale = 0f; // La spell non è influenzata dalla gravità
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Migliora la rilevazione di collisioni veloci
         }
+
+        StartCoroutine(DestroyAfterLifetime());
     }
 
     private void FixedUpdate()
@@ -109,7 +113,8 @@ public class Spell : MonoBehaviour
     {
         if (other.TryGetComponent(out AIEnemy ai))
         {
-            StartCoroutine(nameof(damageFunction), other.GetComponent<Health>());
+            StopCoroutine(DestroyAfterLifetime());  // si distruggerà quando avrà finito
+            StartCoroutine(damageFunction(other.GetComponent<Health>()));
         }
 
         // sound effect
@@ -133,7 +138,7 @@ public class Spell : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    
+
     private IEnumerator Incremental(Health enemyHealth)
     {
         for (int i = 0; i < data.totalHits; i++)
@@ -141,6 +146,12 @@ public class Spell : MonoBehaviour
             enemyHealth.TakeDamage(data.baseDamage + data.damageIncrement * i);
             yield return new WaitForSeconds(data.timeBetweenHits);
         }
+        Destroy(gameObject);
+    }
+    
+    private IEnumerator DestroyAfterLifetime()
+    {
+        yield return new WaitForSeconds(life);
         Destroy(gameObject);
     }
 }
