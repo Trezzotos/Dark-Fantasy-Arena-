@@ -2715,11 +2715,6 @@ Transform:
   - {fileID: 807991239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &194094498 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7411203278443180055, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
-  m_PrefabInstance: {fileID: 8854830438201462765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &212576625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3650,7 +3645,7 @@ PrefabInstance:
     - target: {fileID: 372741606706334627, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: manaBar
       value: 
-      objectReference: {fileID: 194094498}
+      objectReference: {fileID: 0}
     - target: {fileID: 1106352687358400602, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3722,7 +3717,7 @@ PrefabInstance:
     - target: {fileID: 5993542025763632485, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: manaBar
       value: 
-      objectReference: {fileID: 194094498}
+      objectReference: {fileID: 0}
     - target: {fileID: 6389216421484916085, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: healthBar
       value: 
@@ -9740,11 +9735,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774616765995752567, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9066380079368192538, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

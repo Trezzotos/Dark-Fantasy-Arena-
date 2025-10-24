@@ -154,10 +154,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 259389111}
-  - {fileID: 1309187474}
   - {fileID: 773219270}
   - {fileID: 823058648}
+  - {fileID: 259389111}
+  - {fileID: 1309187474}
   m_Father: {fileID: 994400909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -316,7 +316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter the Player's Name
+  m_Text: Scrivimi
 --- !u!222 &147248354
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 259389113}
   - component: {fileID: 259389112}
   m_Layer: 5
-  m_Name: InputField (Legacy)
+  m_Name: InputPlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -735,7 +735,9 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Enter the Player's Name
+  m_Text: 'Scrivi
+
+'
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1241,10 +1243,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 34
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -2632,7 +2634,7 @@ GameObject:
   - component: {fileID: 773219272}
   - component: {fileID: 773219271}
   m_Layer: 5
-  m_Name: Tutorial
+  m_Name: Username
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2899,7 +2901,7 @@ GameObject:
   - component: {fileID: 823058650}
   - component: {fileID: 823058649}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: askName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3447,7 +3449,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1964369668}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: HideTutorial
+        m_MethodName: OnConfirmName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3849,7 +3851,7 @@ GameObject:
   - component: {fileID: 1471567593}
   - component: {fileID: 1471567592}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: isTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -103,7 +103,7 @@ public class MainMenu : MonoBehaviour
         PlayerNamePanel.SetActive(true);
         TutorialPanel.SetActive(false);
     }
-    private void OnConfirmName()
+    public void OnConfirmName()
     {
         playerName = playerNameInput.text.Trim();
 

@@ -14,9 +14,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI levelText;
 
     [Header("UI di Gioco")]
-    [SerializeField] private GameObject UIPlayer;   // <-- aggiunto
+    [SerializeField] private GameObject UIPlayer;
 
     [Header("Endgame Stats")]
+    [SerializeField] private TMP_Text PlayerName;
     [SerializeField] private TMP_Text level;
     [SerializeField] private TMP_Text enemies;
     [SerializeField] private TMP_Text structures;
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
     private void ShowGameover()
     {
         // Stats
+        PlayerName.text = $"{StatsManager.Instance.playerName}";
         level.text = $"{StatsManager.Instance.currentLevel}";
         enemies.text = $"{StatsManager.Instance.enemiesKilled}";
         structures.text = $"{StatsManager.Instance.structuresDestroyed}";
