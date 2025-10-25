@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// This class triggers a Damaged event.
-
 namespace Examples.Observer
 {
     public class RaycastShoot : MonoBehaviour
@@ -12,18 +11,23 @@ namespace Examples.Observer
         public int damage = 5;
         public float reloadTime = 0.8f;
         public float range = 5;
-        public float beamDuration = .25f;
+        public float beamDuration = 0.25f;
 
-        RaycastHit2D hit;
-        LineController lineController = null;
-        Vector3[] positions;
-        float timeToShoot = 0;
-        int layerMask;
+        private RaycastHit2D hit;
+        private LineController lineController = null;
+        private Vector3[] positions;
+        private float timeToShoot = 0;
+        private int layerMask;
 
         void Start()
         {
-            if (!lineController) lineController = transform.GetComponentInChildren<LineController>();
+            // Riferimento al LineController figlio
+            if (!lineController) 
+                lineController = transform.GetComponentInChildren<LineController>();
+
+            // Layer di oggetti colpibili dal raycast
             layerMask = LayerMask.GetMask("ArrowHittable");
+
             positions = new Vector3[2];
         }
 
@@ -32,29 +36,43 @@ namespace Examples.Observer
             timeToShoot -= Time.deltaTime;
         }
 
+        /// <summary>
+        /// Tenta di sparare nella direzione specificata
+        /// </summary>
         public void TryShoot(Vector2 direction)
         {
-            if (timeToShoot > 0) return;    // not ready to shoot again
+            if (timeToShoot > 0) return; // Non pronto a sparare di nuovo
             Shoot(direction);
         }
 
-        void Shoot(Vector3 direction)
+        private void Shoot(Vector3 direction)
         {
-            timeToShoot = reloadTime;   // we only have 1 arrow at a time
+            timeToShoot = reloadTime;   // intervallo tra i colpi
             positions[0] = transform.position;
 
             Debug.DrawRay(transform.position, direction * range, Color.red, 0.5f);
-            // raycast
-            hit = Physics2D.Raycast(transform.position, direction, range, layerMask);
+
+            // Raycast 2D
+            Vector3 normalizedDirection = direction.normalized;
+            hit = Physics2D.Raycast(transform.position, normalizedDirection, range, layerMask);
+            
             if (hit)
             {
                 positions[1] = hit.transform.position;
+
                 Health health = hit.transform.GetComponent<Health>();
-                if (health) health.TakeDamage(damage);
-                else Debug.LogError("Target has no Health component!");
+                if (health) 
+                    health.TakeDamage(damage);
+                else 
+                    Debug.LogError("Target has no Health component!");
             }
-            else positions[1] = transform.position + direction * range;
-            lineController.DrawLine(positions[0], positions[1]);
+            else
+            {
+                positions[1] = transform.position + direction * range;
+            }
+
+            // Disegna il raggio
+            lineController.DrawLine(positions[0], positions[1], beamDuration);
         }
     }
 }
