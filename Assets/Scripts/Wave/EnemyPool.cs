@@ -52,15 +52,4 @@ public class EnemyPool : MonoBehaviour
 
         return null; // pool piena
     }
-
-    public T GetPooledComponent<T>() where T : Component
-    {
-        var go = GetPooledObject();
-        if (go == null) return null;
-
-        if (go.TryGetComponent<T>(out var component))
-            return component;
-
-        return go.AddComponent<T>();
-    }
 }
