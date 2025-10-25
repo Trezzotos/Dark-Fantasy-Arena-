@@ -1,70 +1,66 @@
 using System.Collections.Generic;
 using UnityEngine;
-
-// Wrapper compatibile: mantiene lo stesso nome, campi e metodi usati dal resto del progetto
 public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool Instance;
 
-    // Manteniamo i campi pubblici per compatibilità con inspector/scripting esterno
-    public List<GameObject> pooledObjects;
-    public GameObject[] objectsToPool;
-    [Tooltip("Per object amount")]
-    public int amountToPool = 10;
+    [Tooltip("Prefabs da inserire nella pool")]
+    [SerializeField] private GameObject[] prefabsToPool;
 
-    int poolSize;
+    [Tooltip("Numero di istanze per prefab")]
+    [SerializeField] private int amountToPool = 10;
 
-    // Pool generica concreta per GameObject (usiamo Component GameObject tramite prefab.transform)
-    GenericPool<Transform> internalPool = new GenericPool<Transform>();
+    private List<GameObject> pooledObjects;
+    private int poolSize;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null) Instance = this;
-        else if (Instance != this) Destroy(gameObject);
-
-        poolSize = (objectsToPool != null) ? amountToPool * objectsToPool.Length : 0;
-    }
-
-    void Start()
-    {
-        // Inizializziamo la internalPool con i prefab come Transform
-        Transform[] prefabsAsTransforms;
-        if (objectsToPool != null && objectsToPool.Length > 0)
-        {
-            prefabsAsTransforms = new Transform[objectsToPool.Length];
-            for (int i = 0; i < objectsToPool.Length; i++)
-                prefabsAsTransforms[i] = objectsToPool[i].transform;
-        }
         else
         {
-            prefabsAsTransforms = new Transform[0];
+            Destroy(gameObject);
+            return;
         }
 
-        internalPool.Initialize(prefabsAsTransforms, amountToPool);
-
-        // Manteniamo pooledObjects esattamente come prima per compatibilità
-        var all = internalPool.GetAll();
-        pooledObjects = new List<GameObject>(all.Count);
-        foreach (var t in all) pooledObjects.Add(t.gameObject);
+        pooledObjects = new List<GameObject>();
+        InitializePool();
     }
 
-    // Firma compatibile: restituisce GameObject o null
+    private void InitializePool()
+    {
+        foreach (var prefab in prefabsToPool)
+        {
+            for (int i = 0; i < amountToPool; i++)
+            {
+                GameObject instance = Instantiate(prefab, transform);
+                instance.SetActive(false);
+                pooledObjects.Add(instance);
+            }
+        }
+
+        poolSize = pooledObjects.Count;
+    }
+
     public GameObject GetPooledObject()
     {
-        var t = internalPool.GetRandomInactive();
-        return t != null ? t.gameObject : null;
+        for (int i = 0; i < poolSize; i++)
+        {
+            int index = Random.Range(0, poolSize);
+            if (!pooledObjects[index].activeInHierarchy)
+                return pooledObjects[index];
+        }
+
+        return null; // pool piena
     }
 
-    // Se in altri punti del progetto si usa questa proprietà, continuiamo a esporla
-    public List<GameObject> GetPooledObjectsList()
+    public T GetPooledComponent<T>() where T : Component
     {
-        return pooledObjects;
-    }
+        var go = GetPooledObject();
+        if (go == null) return null;
 
-    // Metodo opzionale per restituire un oggetto alla pool (comportamento esplicito)
-    public void ReturnToPool(GameObject obj)
-    {
-        if (obj == null) return;
-        internalPool.ReturnToPool(obj.transform);
+        if (go.TryGetComponent<T>(out var component))
+            return component;
+
+        return go.AddComponent<T>();
     }
 }

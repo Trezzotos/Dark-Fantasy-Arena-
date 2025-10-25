@@ -279,8 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d924c3c23d29549a8d61d4c2d55400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectsToPool:
+  prefabsToPool:
   - {fileID: 458919475696192853, guid: 7853acd8dec89ce4cae3b2733338b861, type: 3}
   - {fileID: 458919475696192853, guid: 5a2e4fa7deaa7664886510218afea091, type: 3}
   amountToPool: 10
@@ -9743,11 +9742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774616765995752567, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9066380079368192538, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
