@@ -31,10 +31,11 @@ public class MainMenu : MonoBehaviour
         {
             continueButton.GetComponent<Image>().color = Color.gray;
             continueButton.interactable = false;
-
-            rankingButton.GetComponent<Image>().color = Color.gray;
-            rankingButton.interactable = false;
             return;
+        }
+        if(!ScoreboardManager.SaveFileExists())
+        {
+            ScoreboardManager.CreateNewScoreboard();
         }
         confirmNameButton.onClick.AddListener(OnConfirmName);
 

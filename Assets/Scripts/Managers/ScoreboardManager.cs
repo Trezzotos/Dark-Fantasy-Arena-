@@ -93,7 +93,7 @@ public class ScoreboardManager : MonoBehaviour
         }
     }
 
-    private static void CreateNewScoreboard()
+    public static void CreateNewScoreboard()
     {
         List<ScoreEntry> initialScores = new List<ScoreEntry>
         {
