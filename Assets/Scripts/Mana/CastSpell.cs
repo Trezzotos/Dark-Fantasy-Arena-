@@ -13,7 +13,7 @@ public class CastSpell : MonoBehaviour
     public KeyCode spellMinus = KeyCode.J;
 
     PlayerMove playerMove;
-    Inventory inventory;
+    [SerializeField] Inventory inventory;
     [SerializeField] int selected = 0;
     [SerializeField] int availableSpells;
 

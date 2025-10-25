@@ -186,7 +186,8 @@ MonoBehaviour:
   levelDialog: {fileID: 935761024013643282}
   levelText: {fileID: 2048741947115969095}
   UIPlayer: {fileID: 0}
-  level: {fileID: 0}
+  PlayerName: {fileID: 7608413606091982187}
+  level: {fileID: 6618462242714319009}
   enemies: {fileID: 1921218755750072183}
   structures: {fileID: 9211647581941865883}
   seconds: {fileID: 5027429484581486822}
@@ -1325,7 +1326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &443172591831577735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6564,7 +6565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1575610692039677917
 RectTransform:
   m_ObjectHideFlags: 0
