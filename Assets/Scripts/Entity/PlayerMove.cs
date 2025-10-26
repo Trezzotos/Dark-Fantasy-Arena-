@@ -38,6 +38,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.gameState != GameState.PLAYING
+            && GameManager.Instance.gameState != GameState.SHOPPING) return;
+
         mov = Vector2.zero;
 
         if (Input.GetKey(up)) mov.y = 1;

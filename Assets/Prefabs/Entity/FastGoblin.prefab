@@ -206,10 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c7675c23fedf6458f02b3ff36536a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 1.4
   hitRate: 1
-  damage: 5
-  spriteRenderer: {fileID: 0}
+  damage: 3
 --- !u!1001 &2143046247563737749
 PrefabInstance:
   m_ObjectHideFlags: 0

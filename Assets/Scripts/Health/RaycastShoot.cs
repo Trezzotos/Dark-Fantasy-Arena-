@@ -71,7 +71,6 @@ namespace Examples.Observer
         public void SetLayerMask(LayerMask mask)
         {
             layerMask = mask;
-            print("New mask value: " + layerMask);
         }
     }
 }

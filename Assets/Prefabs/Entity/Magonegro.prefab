@@ -176,11 +176,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  _startingHealth: 100
-  _maxHealth: 100
+  _startingHealth: 40
+  _maxHealth: 40
   _canHeal: 0
-  _regenWaitTime: 0.1
-  _regenAmountPerTime: 0.1
+  _regenWaitTime: 0
+  _regenAmountPerTime: 0
 --- !u!114 &-1059805288666188369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97619f2dd4127148864c03b329f59ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.8
+  movementSpeed: 0.4
   hitRate: 1.2
   damage: 12
   range: 4

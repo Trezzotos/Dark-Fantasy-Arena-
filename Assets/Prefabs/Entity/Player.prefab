@@ -203,11 +203,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
-  _startingHealth: 50
-  _maxHealth: 50
+  _startingHealth: 100
+  _maxHealth: 100
   _canHeal: 0
   _regenWaitTime: 0.1
-  _regenAmountPerTime: 0.1
+  _regenAmountPerTime: 0.2
 --- !u!114 &6389216421484916085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1669093047641293832, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
       propertyPath: damage
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1242768231697060215, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
       propertyPath: m_LocalPosition.x

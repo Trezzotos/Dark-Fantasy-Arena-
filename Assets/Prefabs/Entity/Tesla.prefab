@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067d5b1d238f5694e91a2f14ad894327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootFreq: 1.5
-  damage: 10
+  shootFreq: 2
+  damage: 27
   range: 4
 --- !u!114 &-3053186552240006850
 MonoBehaviour:
