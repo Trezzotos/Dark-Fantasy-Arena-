@@ -8,38 +8,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 
-public class AIEnemy : MonoBehaviour
+public class AIEnemy : AIBase
 {
-    public float movementSpeed = 1;
-    [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
-    public float hitRate = 1;
-    public int damage = 5;
-
-    private GameObject player;
-    Vector2 direction = Vector2.zero;
-    float timeToHit = 0;
-    Rigidbody2D rb;
-
-    [Header("For the Sprite/EnemyTipe")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-
     void Start()
     {
-        AILogic();
-        rb = GetComponent<Rigidbody2D>();
+        AIStart();      // detect player and stuff
     }
 
     void Update()
     {
-        if (GameManager.Instance.gameState != GameState.PLAYING) return;
-
-        direction = player.transform.position - transform.position;
-        timeToHit -= Time.deltaTime;
-    }
-
-    void FixedUpdate()
-    {
-        rb.velocity = direction.normalized * movementSpeed;
+        AIUpdate();     // walking and stuff
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -55,26 +33,8 @@ public class AIEnemy : MonoBehaviour
         }
     }
 
-    GameObject FindClosest(GameObject[] players)
+    void FixedUpdate()
     {
-        float minDistance = Mathf.Infinity;
-        GameObject closest = null;
-
-        foreach (GameObject p in players)
-        {
-            float dist = Vector2.Distance(transform.position, p.transform.position);
-            if (dist < minDistance)
-            {
-                minDistance = dist;
-                closest = p;
-            }
-        }
-        return closest;
-    }
-
-    void AILogic()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        player = FindClosest(players);
+        rb.velocity = direction.normalized * movementSpeed;
     }
 }

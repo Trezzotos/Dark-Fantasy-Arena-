@@ -18,17 +18,15 @@ namespace Examples.Observer
         private Vector3[] positions;
         private float timeToShoot = 0;
         private int layerMask;
-
-        void Start()
+        
+        void Awake()
         {
             // Riferimento al LineController figlio
-            if (!lineController) 
+            if (!lineController)
                 lineController = transform.GetComponentInChildren<LineController>();
 
-            // Layer di oggetti colpibili dal raycast
-            layerMask = LayerMask.GetMask("ArrowHittable");
-
             positions = new Vector3[2];
+            layerMask = LayerMask.GetMask("ArrowHittable");
         }
 
         void Update()
@@ -36,9 +34,6 @@ namespace Examples.Observer
             timeToShoot -= Time.deltaTime;
         }
 
-        /// <summary>
-        /// Tenta di sparare nella direzione specificata
-        /// </summary>
         public void TryShoot(Vector2 direction)
         {
             if (timeToShoot > 0) return; // Non pronto a sparare di nuovo
@@ -49,21 +44,19 @@ namespace Examples.Observer
         {
             timeToShoot = reloadTime;   // intervallo tra i colpi
             positions[0] = transform.position;
-
-            Debug.DrawRay(transform.position, direction * range, Color.red, 0.5f);
-
+            
             // Raycast 2D
             Vector3 normalizedDirection = direction.normalized;
             hit = Physics2D.Raycast(transform.position, normalizedDirection, range, layerMask);
-            
+
             if (hit)
             {
                 positions[1] = hit.transform.position;
 
                 Health health = hit.transform.GetComponent<Health>();
-                if (health) 
+                if (health)
                     health.TakeDamage(damage);
-                else 
+                else
                     Debug.LogError("Target has no Health component!");
             }
             else
@@ -73,6 +66,12 @@ namespace Examples.Observer
 
             // Disegna il raggio
             lineController.DrawLine(positions[0], positions[1], beamDuration);
+        }
+
+        public void SetLayerMask(LayerMask mask)
+        {
+            layerMask = mask;
+            print("New mask value: " + layerMask);
         }
     }
 }

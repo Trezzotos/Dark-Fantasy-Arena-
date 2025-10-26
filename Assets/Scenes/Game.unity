@@ -282,6 +282,7 @@ MonoBehaviour:
   prefabsToPool:
   - {fileID: 458919475696192853, guid: 7853acd8dec89ce4cae3b2733338b861, type: 3}
   - {fileID: 458919475696192853, guid: 5a2e4fa7deaa7664886510218afea091, type: 3}
+  - {fileID: 458919475696192853, guid: 2ad86fd849c527a498ea70647c5fc903, type: 3}
   amountToPool: 10
 --- !u!4 &89279306
 Transform:

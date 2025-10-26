@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6389216421484916085}
   - component: {fileID: 3677190110165729723}
   - component: {fileID: -8161585390625547095}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -264,6 +264,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4020455819966116712}
     m_Modifications:
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.11372547
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.38408768
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.7294118
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.17077245
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.5610511
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.735849
+      objectReference: {fileID: 0}
+    - target: {fileID: -4815612617091873476, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1669093047641293832, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
       propertyPath: damage
       value: 100
