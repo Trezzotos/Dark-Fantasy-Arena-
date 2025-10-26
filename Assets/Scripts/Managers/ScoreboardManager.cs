@@ -97,11 +97,11 @@ public class ScoreboardManager : MonoBehaviour
     {
         List<ScoreEntry> initialScores = new List<ScoreEntry>
         {
-            new ScoreEntry { name = "AAA", score = 50 },
-            new ScoreEntry { name = "BBB", score = 40 },
-            new ScoreEntry { name = "CCC", score = 30 },
-            new ScoreEntry { name = "DDD", score = 20 },
-            new ScoreEntry { name = "EEE", score = 10 }
+            new ScoreEntry { name = "Andy", score = 500 },
+            new ScoreEntry { name = "Bob", score = 400 },
+            new ScoreEntry { name = "Carl", score = 300 },
+            new ScoreEntry { name = "David", score = 200 },
+            new ScoreEntry { name = "Edward", score = 100 }
         };
 
         ScoreboardData dataWrapper = new ScoreboardData { highscores = initialScores };

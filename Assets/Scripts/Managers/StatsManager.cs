@@ -16,6 +16,7 @@ public class StatsManager : MonoBehaviour
     public string playerName;
 
     bool isTimePassing = false;
+    int scoreIncrement = 100;
 
     private void Awake()
     {
@@ -49,11 +50,13 @@ public class StatsManager : MonoBehaviour
     void OnEnemyKilled(Vector2 position)
     {
         enemiesKilled++;
+        score += scoreIncrement;
     }
 
     void OnStructureDestoyed()
     {
         structuresDestroyed++;
+        score += scoreIncrement * 2;
     }
 
     void UpdateLevel(int level)
@@ -79,7 +82,7 @@ public class StatsManager : MonoBehaviour
             structuresDestroyed,
             currentDifficulty,
             math.floor(playTimeSeconds),
-            (int)(playTimeSeconds / 10),     // DA SOSTITUIRE CON I PUNTI VERI
+            score,
             playerName
         );
     }
