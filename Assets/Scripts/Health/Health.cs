@@ -123,7 +123,7 @@ namespace Examples.Observer
             if (isPlayer)
                 GameManager.Instance.UpdateGameState(GameState.GAMEOVER);
 
-            else if (TryGetComponent(out AIEnemy ai))
+            else if (TryGetComponent(out AIBase ai))
             {
                 EnemyManager.Instance.DespawnEnemy(gameObject);
             }
