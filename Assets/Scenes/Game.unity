@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78745026}
   - component: {fileID: 78745027}
+  - component: {fileID: 78745028}
   m_Layer: 0
   m_Name: Tappeto
   m_TagString: Untagged
@@ -192,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 78745025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 13.590648, y: -0.8769462, z: -6}
+  m_LocalPosition: {x: 13.590648, y: -0.8769462, z: 0}
   m_LocalScale: {x: 1, y: 1.3501997, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -250,6 +251,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &78745028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78745025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &89279304
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 89279304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 959.87384, y: 586.0434, z: -5.2026157}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -327,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 133461492}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.310788, y: -2.9329894, z: 10}
+  m_LocalPosition: {x: 7.310788, y: -2.9329894, z: 0}
   m_LocalScale: {x: 1.0385385, y: 1.0385385, z: 1.0385385}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2027,7 +2044,7 @@ Transform:
   m_GameObject: {fileID: 212576625}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7507882, y: 1.8429893, z: 0.00972052}
+  m_LocalPosition: {x: -0.7507882, y: 1.8429893, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2075,7 +2092,7 @@ Transform:
   m_GameObject: {fileID: 330740901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2083,7 +2100,6 @@ Transform:
   - {fileID: 141040189}
   - {fileID: 1432735024}
   - {fileID: 1996341863}
-  - {fileID: 1933913947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409883221
@@ -2096,6 +2112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409883222}
   - component: {fileID: 409883223}
+  - component: {fileID: 409883224}
   m_Layer: 0
   m_Name: Tappeto (3)
   m_TagString: Untagged
@@ -2112,7 +2129,7 @@ Transform:
   m_GameObject: {fileID: 409883221}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.48, y: -5.82, z: -6}
+  m_LocalPosition: {x: -0.48, y: -5.82, z: 0}
   m_LocalScale: {x: 1, y: 1.34, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2170,6 +2187,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &409883224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409883221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &421239798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2328,7 @@ Transform:
   m_GameObject: {fileID: 421239798}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.6199427, y: -2.61, z: 10}
+  m_LocalPosition: {x: 4.6199427, y: -2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2327,6 +2360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 473397673}
   - component: {fileID: 473397674}
+  - component: {fileID: 473397675}
   m_Layer: 0
   m_Name: Tappeto (1)
   m_TagString: Untagged
@@ -2343,7 +2377,7 @@ Transform:
   m_GameObject: {fileID: 473397672}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 5.174298, y: -0.8826965, z: -6}
+  m_LocalPosition: {x: 5.174298, y: -0.8826965, z: 0}
   m_LocalScale: {x: 1, y: 1.6480542, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2401,6 +2435,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &473397675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473397672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &581924684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,7 +2479,7 @@ Transform:
   m_GameObject: {fileID: 581924684}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: -2.0986886, z: 10}
+  m_LocalPosition: {x: -3, y: -2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2656,7 +2706,7 @@ Transform:
   m_GameObject: {fileID: 639536173}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.7, y: -2.0986886, z: 10}
+  m_LocalPosition: {x: -17.7, y: -2.0986886, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2800,7 +2850,7 @@ Transform:
   m_GameObject: {fileID: 658620332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.66, y: 5.25, z: 3.457444}
+  m_LocalPosition: {x: -8.66, y: 5.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2834,7 +2884,7 @@ Transform:
   m_GameObject: {fileID: 672282231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.7, y: 0.9013114, z: 10}
+  m_LocalPosition: {x: -17.7, y: 0.9013114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3137,7 +3187,7 @@ Transform:
   m_GameObject: {fileID: 728831184}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.6199427, y: 0.9013114, z: 10}
+  m_LocalPosition: {x: 4.6199427, y: 0.9013114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3187,7 +3237,7 @@ Transform:
   m_GameObject: {fileID: 785832198}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.769212, y: -2.9329894, z: 10}
+  m_LocalPosition: {x: -5.769212, y: -2.9329894, z: 0}
   m_LocalScale: {x: 1.0385385, y: 1.0385385, z: 1.0385385}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3431,7 +3481,7 @@ Transform:
   m_GameObject: {fileID: 795131858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.679942, y: -2.61, z: 10}
+  m_LocalPosition: {x: 7.679942, y: -2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3515,7 +3565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4020455819966116712, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4020455819966116712, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3722,7 +3772,7 @@ Transform:
   m_GameObject: {fileID: 851145333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 0.9013114, z: 10}
+  m_LocalPosition: {x: -12, y: 0.9013114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6955,7 +7005,7 @@ Transform:
   m_GameObject: {fileID: 937582616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.91, z: 10}
+  m_LocalPosition: {x: 0, y: 7.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7053,7 +7103,7 @@ Transform:
   m_GameObject: {fileID: 993794568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.85, y: 5.25, z: 3.457444}
+  m_LocalPosition: {x: 1.85, y: 5.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7084,7 +7134,7 @@ Transform:
   m_GameObject: {fileID: 1046720533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.57, y: 0.51, z: 3.457444}
+  m_LocalPosition: {x: 5.57, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7238,7 +7288,7 @@ Transform:
   m_GameObject: {fileID: 1340510680}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.639942, y: 0.9013114, z: 10}
+  m_LocalPosition: {x: 7.639942, y: 0.9013114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7285,7 +7335,7 @@ Transform:
   m_GameObject: {fileID: 1377532153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.08, y: -4.39, z: 3.457444}
+  m_LocalPosition: {x: 3.08, y: -4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7316,7 +7366,7 @@ Transform:
   m_GameObject: {fileID: 1416995190}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.03, y: 0.51, z: 3.457444}
+  m_LocalPosition: {x: -2.03, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10881,7 +10931,7 @@ Transform:
   m_GameObject: {fileID: 1528909414}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2607882, y: -2.9329894, z: 10}
+  m_LocalPosition: {x: 3.2607882, y: -2.9329894, z: 0}
   m_LocalScale: {x: 1.0385385, y: 1.0385385, z: 1.0385385}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11028,7 +11078,7 @@ Transform:
   m_GameObject: {fileID: 1530488422}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: -2.0986886, z: 10}
+  m_LocalPosition: {x: -12, y: -2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11172,7 +11222,7 @@ Transform:
   m_GameObject: {fileID: 1530941884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.6800575, y: 2.0986886, z: -0.021380575}
+  m_LocalPosition: {x: 7.6800575, y: 2.0986886, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11198,6 +11248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1537896353}
   - component: {fileID: 1537896354}
+  - component: {fileID: 1537896355}
   m_Layer: 0
   m_Name: Tappeto (2)
   m_TagString: Untagged
@@ -11214,7 +11265,7 @@ Transform:
   m_GameObject: {fileID: 1537896352}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.49, y: -0.8826965, z: -6}
+  m_LocalPosition: {x: -6.49, y: -0.8826965, z: 0}
   m_LocalScale: {x: 1, y: 1.76, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11272,6 +11323,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1537896355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537896352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1602813366
 GameObject:
   m_ObjectHideFlags: 0
@@ -11282,6 +11349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602813367}
   - component: {fileID: 1602813368}
+  - component: {fileID: 1602813369}
   m_Layer: 0
   m_Name: Tappeto (4)
   m_TagString: Untagged
@@ -11298,7 +11366,7 @@ Transform:
   m_GameObject: {fileID: 1602813366}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.48, y: 4.14, z: -6}
+  m_LocalPosition: {x: -0.48, y: 4.14, z: 0}
   m_LocalScale: {x: 1, y: 1.34, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11356,6 +11424,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1602813369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602813366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1631007340
 GameObject:
   m_ObjectHideFlags: 0
@@ -11384,7 +11468,7 @@ Transform:
   m_GameObject: {fileID: 1631007340}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.9013114, z: 10}
+  m_LocalPosition: {x: -3, y: 0.9013114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11564,7 +11648,7 @@ Transform:
   m_GameObject: {fileID: 1835893761}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.66, y: -4.39, z: 3.457444}
+  m_LocalPosition: {x: -8.66, y: -4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11595,7 +11679,7 @@ Transform:
   m_GameObject: {fileID: 1902273327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1372778, y: 0.5431985, z: -3.4963143}
+  m_LocalPosition: {x: 2.1372778, y: 0.5431985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11606,37 +11690,6 @@ Transform:
   - {fileID: 1416995191}
   - {fileID: 1046720534}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1933913946
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1933913947}
-  m_Layer: 0
-  m_Name: InvisibleWalls
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1933913947
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933913946}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 330740903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1978174037
 GameObject:
@@ -12208,7 +12261,7 @@ Transform:
   m_GameObject: {fileID: 2137462714}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7492118, y: -2.9329894, z: 10}
+  m_LocalPosition: {x: -1.7492118, y: -2.9329894, z: 0}
   m_LocalScale: {x: 1.0385385, y: 1.0385385, z: 1.0385385}
   m_ConstrainProportionsScale: 0
   m_Children: []

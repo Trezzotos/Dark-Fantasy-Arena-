@@ -10,8 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Spell : MonoBehaviour
 {
-    public float moveSpeed = 10f; // Velocità di movimento predefinita
-    public float life = .5f;
+    public float moveSpeed = 2f; // Velocità di movimento predefinita
+    public float life = 5f;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -64,9 +64,6 @@ public class Spell : MonoBehaviour
         // Inizializza la fisica
         rb.velocity = launchDirection * moveSpeed;
 
-        // Opzionale: Ruota la spell in base alla direzione di lancio
-        RotateToDirection();
-
         switch (data.effect)
         {
             case SpellData.EffectType.ONESHOT:
@@ -95,17 +92,6 @@ public class Spell : MonoBehaviour
             sr.sprite = data.sprite;
             sr.color = data.spriteTint;
             gameObject.name = "Spell: " + data.spellName;
-        }
-    }
-
-    private void RotateToDirection()
-    {
-        if (launchDirection != Vector2.zero)
-        {
-            // Calcola l'angolo in base al vettore direzione
-            float angle = Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg;
-            // Applica la rotazione Z al Transform
-            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 

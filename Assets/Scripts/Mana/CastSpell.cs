@@ -34,7 +34,7 @@ public class CastSpell : MonoBehaviour
 
         if (Input.GetKeyDown(spellKey))
         {   
-            GameObject obj = Instantiate(spellPrefab, transform.position, quaternion.identity);
+            GameObject obj = Instantiate(spellPrefab, transform.position, Quaternion.identity);
             
             Spell spell = obj.GetComponent<Spell>();
             spell.Initialize(inventory.spells.ToArray()[selected], playerMove.lastDirection);
