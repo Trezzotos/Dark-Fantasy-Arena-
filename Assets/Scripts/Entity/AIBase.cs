@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using Examples.Observer;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(NavMeshAgent))]
 
 public class AIBase : MonoBehaviour
 {
@@ -19,10 +20,15 @@ public class AIBase : MonoBehaviour
     protected Vector2 direction = Vector2.zero;
     protected float timeToHit = 0;
     protected Rigidbody2D rb;
+    protected NavMeshAgent agent;
 
     protected void AIStart()
     {
         rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = movementSpeed;
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
 
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         player = FindClosest(players);
@@ -32,7 +38,7 @@ public class AIBase : MonoBehaviour
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
-        direction = player.transform.position - transform.position;
+        agent.SetDestination(player.transform.position);
         timeToHit -= Time.deltaTime;
     }
 

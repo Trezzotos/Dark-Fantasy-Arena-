@@ -24,6 +24,7 @@ public class AIMagonegro : AIBase
     void Update()
     {
         AIUpdate();     // walking and stuff
+        print(Vector3.Distance(player.transform.position, transform.position));
 
         if (timeToHit <= 0 && Vector3.Distance(player.transform.position, transform.position) <= range)
         {
@@ -31,10 +32,5 @@ public class AIMagonegro : AIBase
             weapon.TryShoot(player.transform.position - transform.position);
             timeToHit = hitRate;
         }
-    }
-    
-    void FixedUpdate()
-    {
-        rb.velocity = direction.normalized * movementSpeed;
     }
 }

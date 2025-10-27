@@ -5,9 +5,6 @@ using Examples.Observer;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
-
 public class AIEnemy : AIBase
 {
     void Start()
@@ -31,10 +28,5 @@ public class AIEnemy : AIBase
             health.TakeDamage(damage);
             timeToHit = hitRate;
         }
-    }
-
-    void FixedUpdate()
-    {
-        rb.velocity = direction.normalized * movementSpeed;
     }
 }
