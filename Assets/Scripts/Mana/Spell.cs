@@ -111,28 +111,62 @@ public class Spell : MonoBehaviour
         }
     }
 
+    // dentro OnTriggerEnter2D, sostituisci la parte che registra l'evento e avvia la coroutine
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // ignora il mittente se impostato tramite tag o collider
         if (!string.IsNullOrEmpty(ownerTag) && other.CompareTag(ownerTag)) return;
         if (ownerCollider != null && other == ownerCollider) return;
 
-        // nascondi la spell e ferma la distruzione programmata
         if (sr != null) sr.enabled = false;
         StopCoroutine(DestroyAfterLifetime());
 
-        // applica danno solo se l'oggetto ha Health
         if (other.TryGetComponent<Health>(out Health targetHealth))
         {
-            targetHealth.Killed += DestroySpell;    // se il target morisse prima della fine della spell, distruggi la spell
-            StartCoroutine(damageFunction(targetHealth));
+            // callback locale che si auto-deregistra
+            System.Action deathHandler = null;
+            deathHandler = () =>
+            {
+                // prima di fare qualsiasi cosa, check se questa Spell esiste ancora
+                if (this)
+                {
+                    // ferma tutte le coroutine in corso per evitare accessi successivi
+                    StopAllCoroutines();
+                    DestroySpell();
+                }
+                // deregistrati dall'evento (protezione doppia)
+                targetHealth.Killed -= deathHandler;
+            };
+
+            targetHealth.Killed += deathHandler;
+
+            // avvia la coroutine passando anche la reference al target
+            StartCoroutine(RunDamageRoutineSafely(damageFunction, targetHealth, deathHandler));
         }
         else
         {
-            // nessun Health: distruggi la spell
             Destroy(gameObject);
         }
     }
+
+    private IEnumerator RunDamageRoutineSafely(DamageFunction damageFunc, Health enemyHealth, System.Action deathHandler)
+    {
+        // protezione immediata
+        if (enemyHealth == null || damageFunc == null) yield break;
+
+        // esegui la routine di danno (OneShot/Multiple/Incremental)
+        // ogni routine è già un IEnumerator che usa enemyHealth; usiamola con 'yield return StartCoroutine'
+        yield return StartCoroutine(damageFunc(enemyHealth));
+
+        // dopo che la routine finisce, se il target è ancora valido deregistrati
+        if (enemyHealth != null)
+        {
+            enemyHealth.Killed -= deathHandler;
+        }
+
+        // assicurati di non distruggere due volte: StopAllCoroutines prima di Destroy
+        if (this) Destroy(gameObject);
+    }
+
 
     private IEnumerator OneShot(Health enemyHealth)
     {
@@ -143,26 +177,26 @@ public class Spell : MonoBehaviour
 
     private IEnumerator Multiple(Health enemyHealth)
     {
-        if (enemyHealth == null) { Destroy(gameObject); yield break; }
+        if (enemyHealth == null) yield break;
 
         for (int i = 0; i < data.totalHits; i++)
         {
+            if (!this || enemyHealth == null) yield break; // check protettivo
             enemyHealth.TakeDamage(data.baseDamage);
             yield return new WaitForSeconds(data.timeBetweenHits);
         }
-        Destroy(gameObject);
     }
 
     private IEnumerator Incremental(Health enemyHealth)
     {
-        if (enemyHealth == null) { Destroy(gameObject); yield break; }
+        if (enemyHealth == null) yield break;
 
         for (int i = 0; i < data.totalHits; i++)
         {
+            if (!this || enemyHealth == null) yield break;
             enemyHealth.TakeDamage(data.baseDamage + data.damageIncrement * i);
             yield return new WaitForSeconds(data.timeBetweenHits);
         }
-        Destroy(gameObject);
     }
 
     private IEnumerator DestroyAfterLifetime()
@@ -173,6 +207,10 @@ public class Spell : MonoBehaviour
 
     private void DestroySpell()
     {
+        StopAllCoroutines();
+        // non possiamo rimuovere tutte le subscription qui perché non conosciamo i target;
+        // le subscription dovrebbero essere rimosse dai rispettivi deathHandler locali.
         Destroy(gameObject);
     }
+
 }
