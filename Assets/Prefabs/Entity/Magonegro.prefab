@@ -182,7 +182,7 @@ MonoBehaviour:
   movementSpeed: 0.4
   hitRate: 1.2
   damage: 12
-  spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
+  spellPrefab: {fileID: 2016319056414580296, guid: cba423c3ca9bbbd46996058ae3302bb7, type: 3}
   spellData: {fileID: 11400000, guid: 51b6dd1fd3aa3cd4a989fd6d7a88d72e, type: 2}
   range: 4
   projectileSpeed: 8
