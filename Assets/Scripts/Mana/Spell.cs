@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Examples.Observer;
 using Unity.Mathematics;
@@ -13,6 +12,10 @@ public class Spell : MonoBehaviour
 {
     public float moveSpeed = 2f; // Velocità di movimento predefinita
     public float life = 5f;
+
+    // ownership per evitare friendly fire
+    public string ownerTag = null;
+    public Collider2D ownerCollider = null;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -41,8 +44,9 @@ public class Spell : MonoBehaviour
     {
         if (rb != null && launchDirection != Vector2.zero)
         {
+            // usa launchDirection * moveSpeed (non .normalized dopo la moltiplicazione)
             rb.velocity = launchDirection.normalized * moveSpeed;
-            sr.enabled = true;  // qualcosa lo disattiva, ma non capisco cosa
+            if (sr != null) sr.enabled = true;  // se qualcosa lo disattiva, lo riattiviamo
         }
     }
 
@@ -63,8 +67,11 @@ public class Spell : MonoBehaviour
         // Imposta l'aspetto visivo
         SetAppearance();
 
-        // Inizializza la fisica
-        rb.velocity = (launchDirection * moveSpeed).normalized;
+        // Imposta correttamente la velocity: launchDirection * moveSpeed
+        if (rb != null)
+        {
+            rb.velocity = launchDirection * moveSpeed;
+        }
 
         switch (data.effect)
         {
@@ -96,26 +103,37 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out AIEnemy ai))
-        {
-            StopCoroutine(DestroyAfterLifetime());  // si distruggerà quando avrà finito
-            StartCoroutine(damageFunction(other.GetComponent<Health>()));
-        }
+        // ignora il mittente se impostato tramite tag o collider
+        if (!string.IsNullOrEmpty(ownerTag) && other.CompareTag(ownerTag)) return;
+        if (ownerCollider != null && other == ownerCollider) return;
 
-        // sound effect
-        // particle system
-        GetComponent<SpriteRenderer>().enabled = false;     // nascondi la spell. si distruggerà dopo
+        // nascondi la spell e ferma la distruzione programmata
+        if (sr != null) sr.enabled = false;
+        StopCoroutine(DestroyAfterLifetime());
+
+        // applica danno solo se l'oggetto ha Health
+        if (other.TryGetComponent<Health>(out Health targetHealth))
+        {
+            StartCoroutine(damageFunction(targetHealth));
+        }
+        else
+        {
+            // nessun Health: distruggi la spell
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator OneShot(Health enemyHealth)
     {
-        enemyHealth.TakeDamage(data.baseDamage);
-        yield return new WaitForSeconds(0);
+        if (enemyHealth != null) enemyHealth.TakeDamage(data.baseDamage);
+        yield return null;
         Destroy(gameObject);
     }
 
     private IEnumerator Multiple(Health enemyHealth)
     {
+        if (enemyHealth == null) { Destroy(gameObject); yield break; }
+
         for (int i = 0; i < data.totalHits; i++)
         {
             enemyHealth.TakeDamage(data.baseDamage);
@@ -126,6 +144,8 @@ public class Spell : MonoBehaviour
 
     private IEnumerator Incremental(Health enemyHealth)
     {
+        if (enemyHealth == null) { Destroy(gameObject); yield break; }
+
         for (int i = 0; i < data.totalHits; i++)
         {
             enemyHealth.TakeDamage(data.baseDamage + data.damageIncrement * i);
@@ -133,7 +153,7 @@ public class Spell : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    
+
     private IEnumerator DestroyAfterLifetime()
     {
         yield return new WaitForSeconds(life);

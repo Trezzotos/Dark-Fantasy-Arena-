@@ -182,8 +182,14 @@ MonoBehaviour:
   movementSpeed: 0.4
   hitRate: 1.2
   damage: 12
+  spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
+  spellData: {fileID: 11400000, guid: 51b6dd1fd3aa3cd4a989fd6d7a88d72e, type: 2}
   range: 4
-  weapon: {fileID: 983477984478517085}
+  projectileSpeed: 8
+  maxPredictionTime: 3
+  maxInterceptDistance: 20
+  spellLifeTime: 6
+  overrideDamage: -1
 --- !u!195 &8499749003146960283
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -390,17 +396,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
---- !u!114 &983477984478517085 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -1669093047641293832, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}
-  m_PrefabInstance: {fileID: 7309400139750599845}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b488ac4737cf0409f70fefe40ea4c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8380925867135073746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1242768231697060215, guid: e655f7eb65c109f4b8e864e1298bd15d, type: 3}

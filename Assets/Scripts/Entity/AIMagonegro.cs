@@ -5,73 +5,126 @@ using UnityEngine;
 
 public class AIMagonegro : AIBase
 {
-    [Header("These values override weapon settings")]
-    public float range = 7;
+    [Header("Weapon (physical Spell)")]
+    public GameObject spellPrefab;       // prefab che contiene lo script Spell + SpriteRenderer + Rigidbody2D + Collider2D
+    public SpellData spellData;          // ScriptableObject con i dati della spell (baseDamage, effect, ecc.)
 
-    [SerializeField] RaycastShoot weapon;
+    [Header("Weapon / prediction")]
+    public float range = 7f;                     // raggio di ingaggio
+    public float projectileSpeed = 8f;           // usato per la predizione; controlla la moveSpeed della Spell
+    public float maxPredictionTime = 3f;         // limite per la radice positiva
+    public float maxInterceptDistance = 20f;     // protezione da soluzioni troppo lontane
 
-    [Header("Prediction")]
-    [Tooltip("Stima della velocità del proiettile (units/s). Regola per far corrispondere il comportamento di RaycastShoot")]
-    public float projectileSpeedEstimate = 20f;
-    [Tooltip("Massimo tempo di predizione (s) ammesso per cercare l'intercetta")]
-    public float maxPredictionTime = 3f;
-    [Tooltip("Soglia minima per considerare valido il punto predetto (se troppo lontano si usa fallback)")]
-    public float maxInterceptDistance = 20f;
-
-    Rigidbody2D playerRb;
+    [Header("Projectile runtime")]
+    public float spellLifeTime = 6f;             // durata della spell istanziata (override)
+    public int overrideDamage = -1;              // se >=0 sovrascrive spellData.baseDamage
 
     void Start()
     {
-        AIStart();      // detect player and stuff
-
-        if (weapon == null) weapon = GetComponentInChildren<RaycastShoot>();
-        if (weapon == null) Debug.LogError("RaycastShoot non trovato nei figli di AIMagonegro!");
-
-        weapon.range = range;
-        weapon.damage = damage;
-        weapon.reloadTime = 0;  // weapon must not handle hit rate
-        weapon.SetLayerMask(LayerMask.GetMask("EnemyHittable"));
-
-        if (player != null)
-        {
-            playerRb = player.GetComponent<Rigidbody2D>();
-        }
+        AIStart();
+        if (spellPrefab == null) Debug.LogError("AIMagonegro: missing spellPrefab!");
+        if (spellData == null) Debug.LogWarning("AIMagonegro: no SpellData assigned; spawn comunque la spell ma senza dati.");
     }
 
     void Update()
     {
-        AIUpdate();     // walking and stuff
-
+        AIUpdate();
         if (player == null) return;
-        float dist = Vector3.Distance(player.transform.position, transform.position);
-        // debug optional
-        // print(dist);
 
-        if (timeToHit <= 0 && dist <= range)
+        float dist = Vector3.Distance(player.transform.position, transform.position);
+
+        if (timeToHit <= 0f && dist <= range)
         {
             Vector2 shooterPos = transform.position;
             Vector2 targetPos = player.transform.position;
+            Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
             Vector2 targetVel = playerRb != null ? playerRb.velocity : Vector2.zero;
 
             Vector2 interceptPoint;
-            bool hasSolution = PredictInterceptPoint(shooterPos, targetPos, targetVel, projectileSpeedEstimate, maxPredictionTime, out interceptPoint);
+            bool hasSolution = PredictInterceptPoint(shooterPos, targetPos, targetVel, projectileSpeed, maxPredictionTime, out interceptPoint);
 
-            // fallback: se soluzione non valida, mira alla posizione attuale
             Vector2 aimPoint = hasSolution ? interceptPoint : targetPos;
-
-            // ulteriore fallback: se il punto predetto è troppo distante, usa posizione attuale
-            if ((aimPoint - (Vector2)shooterPos).magnitude > maxInterceptDistance)
-            {
-                aimPoint = targetPos;
-            }
+            if ((aimPoint - shooterPos).magnitude > maxInterceptDistance) aimPoint = targetPos;
 
             Vector2 shootDir = (aimPoint - shooterPos).normalized;
-            weapon.TryShoot(shootDir);
+            SpawnSpell(shooterPos, shootDir);
+
             timeToHit = hitRate;
         }
     }
 
-    // Predizione dell'intercetta: restituisce true e l'interceptPoint se esiste t>0 <= maxTime
+    void SpawnSpell(Vector2 origin, Vector2 direction)
+{
+    if (spellPrefab == null) return;
+
+    GameObject go = Instantiate(spellPrefab, origin, Quaternion.identity);
+    Spell spell = go.GetComponent<Spell>();
+
+    Collider2D spellCol = go.GetComponent<Collider2D>();
+    Collider2D myCol = GetComponent<Collider2D>();
+
+    if (spell != null)
+    {
+        // inizializza come prima (passando spellData o fallback)
+        if (spellData != null) spell.Initialize(spellData, direction);
+        else
+        {
+            SpellData fallback = ScriptableObject.CreateInstance<SpellData>();
+            fallback.spellName = "fallback";
+            fallback.baseDamage = overrideDamage >= 0 ? overrideDamage : damage;
+            fallback.effect = SpellData.EffectType.ONESHOT;
+            spell.Initialize(fallback, direction);
+        }
+
+        // runtime overrides
+        spell.moveSpeed = projectileSpeed;
+        spell.life = spellLifeTime;
+
+        // evita friendly fire: imposta ownerTag e ownerCollider e ignora collisione specifica
+        spell.ownerTag = this.gameObject.tag;
+        if (myCol != null)
+        {
+            spell.ownerCollider = myCol;
+            if (spellCol != null)
+            {
+                Physics2D.IgnoreCollision(spellCol, myCol, true);
+            }
+        }
+
+        // override damage tramite runtime copy (se richiesto)
+        if (overrideDamage >= 0)
+        {
+            SpellData runtimeData = ScriptableObject.CreateInstance<SpellData>();
+            runtimeData.spellName = spellData != null ? spellData.spellName : "runtime";
+            runtimeData.sprite = spellData != null ? spellData.sprite : null;
+            runtimeData.spriteTint = spellData != null ? spellData.spriteTint : Color.white;
+            runtimeData.effect = spellData != null ? spellData.effect : SpellData.EffectType.ONESHOT;
+            runtimeData.baseDamage = overrideDamage;
+            runtimeData.totalHits = spellData != null ? spellData.totalHits : 1;
+            runtimeData.timeBetweenHits = spellData != null ? spellData.timeBetweenHits : 0.1f;
+            runtimeData.damageIncrement = spellData != null ? spellData.damageIncrement : 0f;
+            runtimeData.radius = spellData != null ? spellData.radius : 0f;
+
+            spell.Initialize(runtimeData, direction);
+
+            // ri-applica runtime overrides e ownership
+            spell.moveSpeed = projectileSpeed;
+            spell.life = spellLifeTime;
+            spell.ownerTag = this.gameObject.tag;
+            if (myCol != null && spellCol != null) Physics2D.IgnoreCollision(spellCol, myCol, true);
+        }
+    }
+    else
+    {
+        // fallback: applica velocità se non trovi Spell
+        Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.velocity = direction * projectileSpeed;
+        // non dimenticare che in questo caso non esiste la logica di danno automatica
+    }
+}
+
+
+    // Predizione dell'intercetta (identica alla versione già discussa)
     bool PredictInterceptPoint(Vector2 shooterPos, Vector2 targetPos, Vector2 targetVel, float projectileSpeed, float maxTime, out Vector2 interceptPoint)
     {
         interceptPoint = targetPos;
@@ -87,7 +140,7 @@ public class AIMagonegro : AIBase
         float c = r2;
 
         float t = -1f;
-            //serve a controllare se il coefficiente a è praticamente uguale a zero, con una piccola tolleranza numerica.
+
         if (Mathf.Abs(a) < 1e-6f)
         {
             if (Mathf.Abs(b) > 1e-6f)
