@@ -53,42 +53,52 @@ public class Spell : MonoBehaviour
     // Inizializza la spell con i dati e la direzione di lancio.
     // Questo metodo DEVE essere chiamato dopo l'instanziazione della spell.
     public void Initialize(SpellData spellData, Vector2 direction)
+{
+    if (spellData == null)
     {
-        if (spellData == null)
-        {
-            Debug.LogError("SpellData non fornito. Distruggo la spell.");
-            Destroy(gameObject);
-            return;
-        }
-
-        data = spellData;
-        launchDirection = direction.normalized; // Assicura che sia normalizzata per un movimento uniforme
-
-        // Imposta l'aspetto visivo
-        SetAppearance();
-
-        // Imposta correttamente la velocity: launchDirection * moveSpeed
-        if (rb != null)
-        {
-            rb.velocity = launchDirection * moveSpeed;
-        }
-
-        switch (data.effect)
-        {
-            case SpellData.EffectType.ONESHOT:
-                damageFunction = OneShot;
-                break;
-            case SpellData.EffectType.MULTIPLE:
-                damageFunction = Multiple;
-                break;
-            case SpellData.EffectType.INCREMENTAL:
-                damageFunction = Incremental;
-                break;
-            default:
-                Debug.LogError("SpellData: effect not initialized");
-                break;
-        }
+        Debug.LogError("SpellData non fornito. Distruggo la spell.");
+        Destroy(gameObject);
+        return;
     }
+
+    data = spellData;
+    launchDirection = direction.normalized;
+
+    SetAppearance();
+
+    if (rb != null)
+    {
+        rb.velocity = launchDirection * moveSpeed;
+    }
+
+    // ROTAZIONE ISTANTANEA ADATTATA: la sprite "avanti" punta verso +Y, quindi sottrai 90 gradi
+    float angle = Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg - 90f;
+    transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+    Animator anim = GetComponent<Animator>();
+    if (anim != null)
+    {
+        anim.SetFloat("DirX", launchDirection.x);
+        anim.SetFloat("DirY", launchDirection.y);
+    }
+
+    switch (data.effect)
+    {
+        case SpellData.EffectType.ONESHOT:
+            damageFunction = OneShot;
+            break;
+        case SpellData.EffectType.MULTIPLE:
+            damageFunction = Multiple;
+            break;
+        case SpellData.EffectType.INCREMENTAL:
+            damageFunction = Incremental;
+            break;
+        default:
+            Debug.LogError("SpellData: effect not initialized");
+            break;
+    }
+}
+
 
     // Logica Interna
     private void SetAppearance()
