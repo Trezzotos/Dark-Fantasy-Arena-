@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3023958873979344800}
   - component: {fileID: 8499749003146960283}
   m_Layer: 6
-  m_Name: Magonegro
+  m_Name: Velmord
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 1695560717
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b38597fb35c2864a914dd126e090e47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3696f610f796cc4e9e3bbe425098b47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,8 +182,8 @@ MonoBehaviour:
   movementSpeed: 0.4
   hitRate: 1.2
   damage: 12
-  spellPrefab: {fileID: 2016319056414580296, guid: 1ddc21d32b4611a4d9b16485475de2d8, type: 3}
-  spellData: {fileID: 11400000, guid: 6345e75c4ea7b624f8d28c1417d77217, type: 2}
+  spellPrefab: {fileID: 2016319056414580296, guid: cba423c3ca9bbbd46996058ae3302bb7, type: 3}
+  spellData: {fileID: 11400000, guid: 51b6dd1fd3aa3cd4a989fd6d7a88d72e, type: 2}
   range: 4
   projectileSpeed: 8
   maxPredictionTime: 3
