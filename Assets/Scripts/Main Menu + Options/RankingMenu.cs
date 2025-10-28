@@ -16,7 +16,7 @@ public class RankingMenu : MonoBehaviour
         int i = 0;
         foreach (ScoreEntry record in scores)   // QUALCUNO HA DETTO RECORD?!?!?!?
         {
-            nameLabels[i].text = record.name;
+            nameLabels[i].text = "<style=\"H2\">" + record.name + "</style>";
             scoreLabels[i].text = "" + record.score;
             i++;
         }
