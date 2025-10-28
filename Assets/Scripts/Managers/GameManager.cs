@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public int Level { get; private set; } = 1;
     public int Difficolta { get; private set; }
 
+    LabelTimer gameoverTimer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -59,6 +61,12 @@ public class GameManager : MonoBehaviour
             Difficolta = StatsManager.Instance.currentDifficulty;
             OnLevelChanged?.Invoke(Level);
         }
+
+        if (gameoverTimer)
+        {
+            gameoverTimer.SetTimer(76 + 24 / StatsManager.Instance.currentDifficulty * StatsManager.Instance.currentLevel);
+        }
+        else Debug.LogWarning("Gameover timer unreferenced, make sure to put one in scene");
     }
 
     public void UpdateGameState(GameState newState)
@@ -70,9 +78,15 @@ public class GameManager : MonoBehaviour
 
         // Gestione timeScale per PAUSED/PLAYING (se desiderato)
         if (gameState == GameState.PAUSED)
+        {
             Time.timeScale = 0f;
+            gameoverTimer.StopTimer();
+        }
         else if (gameState == GameState.PLAYING)
+        {
             Time.timeScale = 1f;
+            gameoverTimer.ResumeTimer();
+        }
 
         HandleMusic(newState);
 
@@ -94,6 +108,16 @@ public class GameManager : MonoBehaviour
         // Quando si entra nella scena di gioco, prepara lo stato di gioco
         if (scene.name == "Game")
         {
+            Timer[] timers = FindObjectsOfType<Timer>();
+            foreach (Timer timer in timers)
+            {
+                if (timer is LabelTimer labelTimer)
+                {
+                    gameoverTimer = labelTimer;
+                    gameoverTimer.TimerEnded += TimerExpired;
+                    break;
+                }
+            }
             PrepareGame();
             // Assicura timeScale corretto alla partenza della partita
             Time.timeScale = 1f;
@@ -170,5 +194,11 @@ public class GameManager : MonoBehaviour
                 am.StopMusic();
                 break;
         }
+    }
+
+    void TimerExpired()
+    {
+        UpdateGameState(GameState.GAMEOVER);
+        // non so se serva altro
     }
 }

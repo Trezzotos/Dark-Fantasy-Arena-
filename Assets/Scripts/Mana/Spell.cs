@@ -124,6 +124,7 @@ public class Spell : MonoBehaviour
         // applica danno solo se l'oggetto ha Health
         if (other.TryGetComponent<Health>(out Health targetHealth))
         {
+            targetHealth.Killed += DestroySpell;    // se il target morisse prima della fine della spell, distruggi la spell
             StartCoroutine(damageFunction(targetHealth));
         }
         else
@@ -167,6 +168,11 @@ public class Spell : MonoBehaviour
     private IEnumerator DestroyAfterLifetime()
     {
         yield return new WaitForSeconds(life);
+        Destroy(gameObject);
+    }
+
+    private void DestroySpell()
+    {
         Destroy(gameObject);
     }
 }
