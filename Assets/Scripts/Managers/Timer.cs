@@ -6,21 +6,24 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public event Action TimerEnded = delegate { };
-    
-    public string timerName;
 
+    public string timerName;
+    bool wasStarted = false;
     private static WaitForSeconds _waitForSeconds1 = new WaitForSeconds(1);
     int maxTime = 0, currentTime = 0;
     bool isRunning = false;
 
+    public bool GetwasStarted(){ return wasStarted; }
     public void SetTimer(int time)
     {
+        wasStarted = false;
         maxTime = time;
+        currentTime = maxTime;
     }
 
-    public void StartTimer()
+    public virtual void StartTimer()
     {
-        currentTime = maxTime;
+        wasStarted = true;
         ResumeTimer();
     }
 
@@ -36,6 +39,7 @@ public class Timer : MonoBehaviour
     public int StopTimer()
     {
         isRunning = false;
+        wasStarted = false;
         return currentTime;
     }
 
@@ -43,7 +47,6 @@ public class Timer : MonoBehaviour
     {
         yield return _waitForSeconds1;
         currentTime--;
-        print($"{currentTime}/{maxTime}");  // debug purpuses only
         if (currentTime <= 0)
         {
             isRunning = false;

@@ -12,4 +12,8 @@ public class LabelTimer : Timer
         label.text = "" + GetCurrentTime();
         return base.PassTime();
     }
+    public override void StartTimer()
+    {
+        base.StartTimer();
+    }
 }

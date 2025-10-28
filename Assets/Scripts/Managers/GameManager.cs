@@ -62,22 +62,20 @@ public class GameManager : MonoBehaviour
             OnLevelChanged?.Invoke(Level);
         }
 
-        if (gameoverTimer)
-        {
-            gameoverTimer.SetTimer(76 + 24 / StatsManager.Instance.currentDifficulty * StatsManager.Instance.currentLevel);
-        }
-        else Debug.LogWarning("Gameover timer unreferenced, make sure to put one in scene");
     }
 
     public void UpdateGameState(GameState newState)
     {
         gameState = newState;
 
-        if (gameState == GameState.GAMEOVER)
-            SaveSystem.DeleteGame();
+        Debug.Log("Stato Gioco: "+gameState);
 
-        // Gestione timeScale per PAUSED/PLAYING (se desiderato)
-        if (gameState == GameState.PAUSED)
+        if (gameState == GameState.GAMEOVER)
+        {
+            SaveSystem.DeleteGame();
+            gameoverTimer.StopTimer();
+        }
+        else if (gameState == GameState.PAUSED)
         {
             Time.timeScale = 0f;
             gameoverTimer.StopTimer();
@@ -85,7 +83,21 @@ public class GameManager : MonoBehaviour
         else if (gameState == GameState.PLAYING)
         {
             Time.timeScale = 1f;
-            gameoverTimer.ResumeTimer();
+            if (gameoverTimer)
+            {
+                if (gameoverTimer.GetwasStarted())
+                    gameoverTimer.ResumeTimer();
+                else
+                {
+                    gameoverTimer.SetTimer(76 + 24 / StatsManager.Instance.currentDifficulty * StatsManager.Instance.currentLevel);
+                    gameoverTimer.StartTimer();
+                } 
+            }
+            else Debug.LogWarning("Gameover timer unreferenced, make sure to put one in scene");
+        }
+        else if (gameState == GameState.SHOPPING)
+        {
+            gameoverTimer.StopTimer();
         }
 
         HandleMusic(newState);

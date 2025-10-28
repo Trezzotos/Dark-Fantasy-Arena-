@@ -6088,7 +6088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a46885767893d49a0e38ba0b3f18eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerName: 
+  timerName: TimeLevel
   label: {fileID: 5827987008547958392}
 --- !u!1 &8012383684957701844
 GameObject:
