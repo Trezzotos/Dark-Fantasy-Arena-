@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIText: {fileID: 0}
-  spellPrefab: {fileID: 0}
+  spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
   spellKey: 107
   spellPlus: 108
   spellMinus: 106

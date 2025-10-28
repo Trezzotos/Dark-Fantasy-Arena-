@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AreaPoisonSpell
   m_EditorClassIdentifier: 
   spellName: Poison Blast
-  sprite: {fileID: 21300000, guid: 8ec72afedc18e344da8d2dfae2560ee2, type: 3}
+  sprite: {fileID: 1122475952, guid: 484f3f4739b54da49bce1257aa4ba395, type: 3}
   spriteTint: {r: 1, g: 1, b: 1, a: 1}
   areaDamage: 1
   effect: 2

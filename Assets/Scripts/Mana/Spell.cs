@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Examples.Observer;
+using Unity.Mathematics;
 using UnityEngine;
 
 // Rappresenta il proiettile fisico nel gioco.
@@ -41,6 +42,7 @@ public class Spell : MonoBehaviour
         if (rb != null && launchDirection != Vector2.zero)
         {
             rb.velocity = launchDirection.normalized * moveSpeed;
+            sr.enabled = true;  // qualcosa lo disattiva, ma non capisco cosa
         }
     }
 
@@ -62,7 +64,7 @@ public class Spell : MonoBehaviour
         SetAppearance();
 
         // Inizializza la fisica
-        rb.velocity = launchDirection * moveSpeed;
+        rb.velocity = (launchDirection * moveSpeed).normalized;
 
         switch (data.effect)
         {
@@ -79,9 +81,6 @@ public class Spell : MonoBehaviour
                 Debug.LogError("SpellData: effect not initialized");
                 break;
         }
-
-        // Avvia la logica di timeout/distruzione (se necessario)
-        // Ad esempio: Destroy(gameObject, 5f); 
     }
 
     // Logica Interna
