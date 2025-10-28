@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour
             SaveSystem.DeleteGame();
             gameoverTimer.StopTimer();
         }
-        else if (gameState == GameState.PAUSED)
+        
+        if (gameState == GameState.PAUSED)
         {
             Time.timeScale = 0f;
             gameoverTimer.StopTimer();
