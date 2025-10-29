@@ -248,8 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ae385ebf5c089469d34e6bfe7ee926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIText: {fileID: 0}
+  UISpell: {fileID: 0}
   spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
+  noSpellSprite: {fileID: 21300000, guid: 924cb20e4253f98408b1975d25dc0738, type: 3}
   spellKey: 107
   spellPlus: 108
   spellMinus: 106

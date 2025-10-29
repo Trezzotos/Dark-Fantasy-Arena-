@@ -1,12 +1,13 @@
 using Examples.Observer;
-using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CastSpell : MonoBehaviour
 {
-    public TMP_Text UIText;
+    public Image UISpell;
     public GameObject spellPrefab;
+    public Sprite noSpellSprite;
     [Space]
     public KeyCode spellKey = KeyCode.K;
     public KeyCode spellPlus = KeyCode.L;
@@ -17,14 +18,15 @@ public class CastSpell : MonoBehaviour
     [SerializeField] int selected = 0;
     [SerializeField] int availableSpells;
 
+
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         inventory = GetComponent<Inventory>();
-
+        
         availableSpells = inventory.spells.Count;
-        if (availableSpells <= 0) UIText.text = "No spell";
-        else UIText.text = inventory.spells.ToArray()[selected].spellName;
+        if (availableSpells <= 0) UISpell.sprite = noSpellSprite;
+        else UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
     }
 
     void Update()
@@ -42,20 +44,20 @@ public class CastSpell : MonoBehaviour
             inventory.spells.RemoveAt(selected);
             availableSpells--;
 
-            if (availableSpells <= 0) UIText.text = "No spell";
+            if (availableSpells <= 0) UISpell.sprite = noSpellSprite;
         }
 
         else if (Input.GetKeyDown(spellMinus))
         {
             selected--;
             if (selected < 0) selected = availableSpells - 1;
-            UIText.text = inventory.spells.ToArray()[selected].spellName;
+            UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
         }
 
         else if (Input.GetKeyDown(spellPlus))
         {
             selected = (++selected) % availableSpells;
-            UIText.text = inventory.spells.ToArray()[selected].spellName;
+            UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
         }
     }
 }

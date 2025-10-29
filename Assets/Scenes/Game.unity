@@ -2974,6 +2974,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45e8bf3665c7924fbe23449819c38ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 1377532154}
+  - {fileID: 993794569}
+  - {fileID: 658620333}
+  - {fileID: 1835893762}
+  - {fileID: 1416995191}
+  - {fileID: 1046720534}
   waves:
   - structuresPrefabs:
     - {fileID: 5358958065350155417, guid: bf850384b46040542ba34bee8d857dfb, type: 3}
@@ -2985,13 +2992,6 @@ MonoBehaviour:
     - {fileID: 3302112885294128088, guid: 9c78d46ea504c7646967f385814c6f1c, type: 3}
     enemyCount: 4
     spawnInterval: 5
-  spawnPoints:
-  - {fileID: 1377532154}
-  - {fileID: 993794569}
-  - {fileID: 658620333}
-  - {fileID: 1835893762}
-  - {fileID: 1416995191}
-  - {fileID: 1046720534}
 --- !u!4 &714549782
 Transform:
   m_ObjectHideFlags: 0
@@ -3458,6 +3458,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8161585390625547095, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
       propertyPath: UIText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -8161585390625547095, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
+      propertyPath: UISpell
       value: 
       objectReference: {fileID: 8854830438201462766}
     - target: {fileID: -8161585390625547095, guid: c3e62790870f47d4893cc29191e43c29, type: 3}
@@ -12757,13 +12761,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
 --- !u!114 &8854830438201462766 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7294363478929674184, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7363393789497271534, guid: 3838fcbac9a239048ace22fba9811e9e, type: 3}
   m_PrefabInstance: {fileID: 8854830438201462765}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
