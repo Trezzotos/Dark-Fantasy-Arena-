@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    const string PREF_CONTROL_SCHEME = "ControlScheme";
+
     [Header("Commands")]
     public KeyCode shootKey = KeyCode.E;
 
@@ -15,7 +17,6 @@ public class PlayerShoot : MonoBehaviour
 
     private PlayerMove pm;
 
-    // Start is called before the first frame update
     void Start()
     {
         pm = GetComponent<PlayerMove>();
@@ -23,14 +24,33 @@ public class PlayerShoot : MonoBehaviour
 
         if (pm == null) Debug.LogError("PlayerMove non trovato!");
         if (weapon == null) Debug.LogError("RaycastShoot non trovato nei figli!");
+
+        int scheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
+        ChangeCommands(scheme);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
-        // handle shooting
         if (Input.GetKey(shootKey)) weapon.TryShoot(pm.lastDirection);
+    }
+
+    public void ChangeCommands(int index)
+    {
+        switch (index)
+        {
+            // Set 0: WASD movement (handled in PlayerMove), shoot = I
+            case 0:
+                shootKey = KeyCode.I;
+                break;
+            // Set 1: Arrow movement (handled in PlayerMove), shoot = E
+            case 1:
+                shootKey = KeyCode.E;
+                break;
+            default:
+                shootKey = KeyCode.I;
+                break;
+        }
     }
 }
