@@ -481,16 +481,15 @@ MonoBehaviour:
     Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Lead Writer</align></size>\r\n<space=20>\r\n<align=center>Davide
     Rapisarda e Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>UI
     / UX Design</align></size>\r\n<space=20>\r\n<align=center>Davide Rapisarda e
-    Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Audio Design</align></size>\r\n<space=20>\r\n<align=center>Davide
-    Rapisarda e Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Animation</align></size>\r\n<space=20>\r\n<align=center>Davide
-    Rapisarda e Ivan Di Maria</align>\r\n<space=30>\r\n\r\r\n<size=90%><align=center>Quality
+    Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Audio Design</align></size>\r\n<space=20>\r\n<align=center>Youtube:
+    (\r\nAlkaKrab | Fantasy Music)Other Music[No Copyright] &  (nobody)-MainMenuMusic</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Animation</align></size>\r\n<space=20>\r\n<align=center>Davide
+    Rapisarda e Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Quality
     Assurance</align></size>\r\n<space=20>\r\n<align=center>Davide Rapisarda e Ivan
     Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Marketing & Publishing</align></size>\r\n<space=20>\r\n<align=center>Davide
     Rapisarda e Ivan Di Maria</align>\r\n<space=30>\r\n\r\n<size=90%><align=center>Special
-    Thanks</align></size>\r\n<space=20>\r\n<align=center>Famiglie e amici</align>\r\n<space=30>\r\n\r\n<line-height=120%>\r\n<size=90%><align=center>\xA9
+    Thanks</align></size>\r\n<space=20>\r\n<align=center>Al professore C.L.Viagrande</align>\r\n<space=30>\r\n\r\n<line-height=120%>\r\n<size=90%><align=center>\xA9
     2025 Davide Rapisarda e Ivan Di Maria</align></size>\r\n<space=20>\r\n<align=center>Realizzato
-    con Unity e TextMeshPro</align>\r\n<space=20>\r\n<align=center>Grazie per aver
-    giocato!</align>\r\n"
+    con Unity</align>\r\n<space=20>\r\n<align=center>Grazie per aver giocato!</align>\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9e03385e8a843b42aaa77c50a8a0d9e, type: 2}
   m_sharedMaterial: {fileID: 5340759632373570958, guid: b9e03385e8a843b42aaa77c50a8a0d9e, type: 2}
@@ -949,7 +948,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 493239941}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.16804242
+  m_Size: 0.16362512
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
