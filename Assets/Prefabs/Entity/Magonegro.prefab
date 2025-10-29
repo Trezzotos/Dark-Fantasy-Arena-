@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 0.4
-  hitRate: 1.2
+  hitRate: 2.5
   damage: 12
   spellPrefab: {fileID: 2016319056414580296, guid: 1ddc21d32b4611a4d9b16485475de2d8, type: 3}
   spellData: {fileID: 11400000, guid: 6345e75c4ea7b624f8d28c1417d77217, type: 2}
