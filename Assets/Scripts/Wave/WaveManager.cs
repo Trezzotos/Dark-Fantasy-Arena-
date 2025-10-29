@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -18,8 +20,10 @@ public class WaveManager : MonoBehaviour
         public float spawnInterval;         // intervallo tra uno spawn e l'altro
     }
 
+    public Transform[] spawnPoints;
     [SerializeField] private List<Wave> waves = new List<Wave>();
-    [SerializeField] private Transform[] spawnPoints;
+    
+    private int[] activeSpawnPoints;    // contiene gli indici degli spawnpoint attivi
     private List<Structure> activeStructures = new List<Structure>();
 
     private int currentWaveIndex = 0;
@@ -29,6 +33,30 @@ public class WaveManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        int spawnersToActivate = StatsManager.Instance.currentDifficulty * 2;
+        activeSpawnPoints = new int[spawnersToActivate];
+
+        if (spawnersToActivate == spawnPoints.Length)
+        {
+            for (int _i = 0; _i < spawnersToActivate; _i++) activeSpawnPoints[_i] = _i;
+            return;     // altrimenti loop infinito, gente
+        }
+
+        int selected, i = 0;
+
+        while (i < spawnersToActivate)
+        {
+            selected = UnityEngine.Random.Range(0, spawnPoints.Length);
+            if (!activeSpawnPoints.Contains(selected))
+            {
+                activeSpawnPoints[i] = selected;
+                i++;    // giusto per accedere al giusto indice di activeSpwanPoints
+            }
+        }
     }
 
     private void OnEnable()
@@ -92,20 +120,40 @@ public class WaveManager : MonoBehaviour
         waveRoutine = null;
     }
 
+    private Transform[] GetActiveSpawnPoints()
+    {
+        Transform[] spawners = new Transform[activeSpawnPoints.Length];
 
+        int i = 0;
+        foreach (int index in activeSpawnPoints)
+        {
+            spawners[i] = spawnPoints[index];
+            i++;
+        }
 
+        for (int j = 0; j < spawners.Length; j++)
+        {
+            print(spawners[j].position);
+        }
+
+        print(activeSpawnPoints.Length);
+        print(spawners.Length);
+
+        return spawners;
+    }
 
     private void SpawnWaveSpawners(Wave wave)
     {
         CleanupSpawners(); // sicurezza: pulisci lista dei riferimenti
 
-        if (spawnPoints == null)
+        Transform[] activeSpawnPoints = GetActiveSpawnPoints();
+        if (activeSpawnPoints == null)
         {
             Debug.LogError("No spawn points available for this wave.");
             return;
         }
 
-        foreach (Transform point in spawnPoints)
+        foreach (Transform point in activeSpawnPoints)
         {
             if (point == null)
             {
