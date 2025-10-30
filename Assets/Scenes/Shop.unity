@@ -365,7 +365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 145.85004, y: -50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &470631436
@@ -390,15 +390,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Coins: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9e03385e8a843b42aaa77c50a8a0d9e, type: 2}
+  m_sharedMaterial: {fileID: 5340759632373570958, guid: b9e03385e8a843b42aaa77c50a8a0d9e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278252031
+  m_fontColor: {r: 1, g: 0.9456895, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -649,6 +649,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopButton (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -891,9 +903,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1129276559812075143, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129276559812075143, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129276559812075143, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129276559812075143, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -32.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5221814270213449526, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
       propertyPath: m_Name
       value: ShopButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1246,6 +1286,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1532,6 +1584,18 @@ PrefabInstance:
     - target: {fileID: 5221814270213449526, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
       propertyPath: m_Name
       value: ShopButton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1275811975192505950, guid: be1c53f7ac010ed4896682f03b434d4c, type: 2}
+    - target: {fileID: 8842525290924928528, guid: c721f8a605a7deb46a99aea7c2af2b61, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
