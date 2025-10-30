@@ -28,6 +28,55 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;
     private Coroutine waveRoutine;
+    // gestione centrale della coda di spawn
+    private Queue<Action> spawnQueue = new Queue<Action>();
+    private bool processingSpawnQueue = false;
+    [SerializeField] private float minTimeBetweenSpawns = 0.05f; // tweakable; aumenta se necessario
+
+    public void RequestSpawn(Action spawnAction)
+    {
+        if (spawnAction == null) return;
+        lock (spawnQueue)
+        {
+            spawnQueue.Enqueue(spawnAction);
+            if (!processingSpawnQueue)
+            {
+                processingSpawnQueue = true;
+                StartCoroutine(ProcessSpawnQueue());
+            }
+        }
+    }
+
+    private IEnumerator ProcessSpawnQueue()
+    {
+        while (true)
+        {
+            Action action = null;
+            lock (spawnQueue)
+            {
+                if (spawnQueue.Count > 0) action = spawnQueue.Dequeue();
+                else
+                {
+                    processingSpawnQueue = false;
+                    yield break;
+                }
+            }
+
+            // esegui lo spawn (azione che esegue Instantiate/registrazione)
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Errore durante ProcessSpawnQueue: {ex}");
+            }
+
+            // piccolo delay reale per evitare burst nello stesso frame
+            yield return new WaitForSecondsRealtime(minTimeBetweenSpawns);
+        }
+    }
+
 
     void Awake()
     {
