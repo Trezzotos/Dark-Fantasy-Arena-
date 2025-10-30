@@ -42,6 +42,7 @@ public class CastSpell : MonoBehaviour
             GameObject obj = Instantiate(spellPrefab, transform.position, Quaternion.identity);
 
             Spell spell = obj.GetComponent<Spell>();
+            spell.ownerTag = gameObject.tag;    
             spell.Initialize(inventory.spells.Keys.ToArray()[selected], playerMove.lastDirection);
 
             inventory.spells[activeSpell]--;
