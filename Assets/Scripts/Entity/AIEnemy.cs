@@ -17,7 +17,6 @@ public class AIEnemy : AIBase
         AIUpdate();     // walking and stuff
 
         if (Vector3.Distance(transform.position, player.transform.position) <= minDistance) TryHitPlayer();
-        print($"Distance: {Vector3.Distance(transform.position, player.transform.position)} / {minDistance}");
     }
 
     void TryHitPlayer()

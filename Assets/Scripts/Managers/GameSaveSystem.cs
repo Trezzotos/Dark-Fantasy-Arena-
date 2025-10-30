@@ -149,8 +149,6 @@ public static class SaveSystem
             new GameStatsData(1, 0, 0, difficulty, 0.0f, 0, name)
         );
         SaveGame(newGameData);
-
-        Debug.Log("File created with " + spells.Count);
     }
 
     public static void DeleteGame()

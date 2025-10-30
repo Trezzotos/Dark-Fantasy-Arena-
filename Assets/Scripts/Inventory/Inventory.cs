@@ -53,7 +53,6 @@ namespace Examples.Observer
                 perks = loadedData.perks ?? new List<PerkData>();
                 money = loadedData.money;
             }
-            print("Loaded " + spells.Count + " spells");
         }
     }
 }

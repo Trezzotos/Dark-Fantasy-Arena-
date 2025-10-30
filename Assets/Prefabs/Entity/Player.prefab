@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4731685023732007296}
   - component: {fileID: 5796316183370546753}
   - component: {fileID: 5702371791018275961}
+  - component: {fileID: 4063461131627688343}
   - component: {fileID: 1454664401343665048}
   - component: {fileID: 6389216421484916085}
   - component: {fileID: 3677190110165729723}
@@ -190,6 +191,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootKey: 101
   weapon: {fileID: 0}
+--- !u!114 &4063461131627688343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106352687358400602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f334ccd51e691974786e2ec6d9923281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStartPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1454664401343665048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10116c685b31a0546898a7557215b551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: []
   perks: []
   money: 0
 --- !u!114 &-8161585390625547095
@@ -249,14 +262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UISpell: {fileID: 0}
+  UISpellCount: {fileID: 0}
   spellPrefab: {fileID: 2016319056414580296, guid: 97d125795a67042429b51065f18bdb07, type: 3}
-  noSpellSprite: {fileID: 21300000, guid: 924cb20e4253f98408b1975d25dc0738, type: 3}
   spellKey: 107
   spellPlus: 108
   spellMinus: 106
   inventory: {fileID: 0}
   selected: 0
-  availableSpells: 0
 --- !u!1001 &2185106085490542267
 PrefabInstance:
   m_ObjectHideFlags: 0
