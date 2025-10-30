@@ -15,18 +15,16 @@ public class AIEnemy : AIBase
     void Update()
     {
         AIUpdate();     // walking and stuff
+
+        if (Vector3.Distance(transform.position, player.transform.position) <= minDistance) TryHitPlayer();
+        print($"Distance: {Vector3.Distance(transform.position, player.transform.position)} / {minDistance}");
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void TryHitPlayer()
     {
         if (timeToHit > 0) return;
-        if (!collision.transform.CompareTag("Player")) return;
 
-        Health health = collision.transform.GetComponent<Health>();
-        if (health)
-        {
-            health.TakeDamage(damage);
-            timeToHit = hitRate;
-        }
+        player.GetComponent<Health>().TakeDamage(damage);
+        timeToHit = hitRate;
     }
 }
