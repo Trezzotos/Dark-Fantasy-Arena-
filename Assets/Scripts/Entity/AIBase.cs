@@ -15,6 +15,7 @@ public class AIBase : MonoBehaviour
     [Tooltip("How many seconds the enemy has to wait before being able to hit again")]
     public float hitRate = 1;
     public int damage = 5;
+    public float minDistance = 1f;
 
     protected GameObject player;
     protected Vector2 direction = Vector2.zero;
@@ -38,7 +39,7 @@ public class AIBase : MonoBehaviour
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
 
-        agent.SetDestination(player.transform.position);
+        if (Vector3.Distance(transform.position, player.transform.position) > minDistance) agent.SetDestination(player.transform.position);
         timeToHit -= Time.deltaTime;
     }
 
