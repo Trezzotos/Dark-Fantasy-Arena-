@@ -20,6 +20,9 @@ public class PlayerMove : MonoBehaviour
     public KeyCode pause = KeyCode.Escape;
 
     internal Vector2 lastDirection = Vector2.left;
+    // Direzione raw con componenti -1,0,1; mantiene la direzione anche quando il giocatore smette di muoversi
+    internal Vector2 lastDirectionRaw = Vector2.left;
+
     Vector2 mov = Vector2.zero;
     SpriteRenderer sp;
     Rigidbody2D rb;
@@ -42,28 +45,36 @@ public class PlayerMove : MonoBehaviour
             && GameManager.Instance.gameState != GameState.SHOPPING)
         {
             lastDirection = Vector2.zero;
+            lastDirectionRaw = Vector2.zero;
             mov = Vector2.zero;
             return;
         }
 
-        mov = Vector2.zero;
+        Vector2 raw = Vector2.zero;
 
-        if (Input.GetKey(up)) mov.y = 1;
-        else if (Input.GetKey(down)) mov.y = -1;
+        if (Input.GetKey(up)) raw.y = 1;
+        else if (Input.GetKey(down)) raw.y = -1;
 
         if (Input.GetKey(right))
         {
-            mov.x = 1;
+            raw.x = 1;
             if (sp.flipX) sp.flipX = false;
         }
         else if (Input.GetKey(left))
         {
-            mov.x = -1;
+            raw.x = -1;
             if (!sp.flipX) sp.flipX = true;
         }
-        mov.Normalize();
 
-        if (mov != Vector2.zero) lastDirection = mov;
+        // Aggiorna ultima direzione raw solo se ricevi input (così resta memorizzata quando ti fermi)
+        if (raw != Vector2.zero)
+        {
+            lastDirectionRaw = raw;
+            lastDirection = raw.normalized;
+        }
+
+        // mov normalizzato per la fisica
+        mov = raw.normalized;
     }
 
     void FixedUpdate()

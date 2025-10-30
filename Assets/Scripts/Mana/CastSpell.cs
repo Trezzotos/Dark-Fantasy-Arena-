@@ -22,6 +22,9 @@ public class CastSpell : MonoBehaviour
     [SerializeField] int selected = 0;
     SpellData activeSpell;
 
+    // Memorizza l'ultima direzione usata per sparare (componenti possono essere -1,0,1). Viene normalizzata prima dell'uso.
+    Vector2 lastShootDirection = Vector2.right; // fallback se non c'è mai stato input
+
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
@@ -39,23 +42,31 @@ public class CastSpell : MonoBehaviour
 
         if (Input.GetKeyDown(spellKey) && inventory.spells[activeSpell] > 0)
         {
+            // Determina direzione di sparo: preferisci l'input corrente raw, altrimenti conserva ultima direzione di sparo
+            Vector2 dirRaw = playerMove != null ? playerMove.lastDirectionRaw : Vector2.zero;
+            if (dirRaw != Vector2.zero)
+            {
+                lastShootDirection = dirRaw;
+            }
+
+            Vector2 shootDir = lastShootDirection.normalized;
+            if (shootDir == Vector2.zero) shootDir = Vector2.right;
+
             GameObject obj = Instantiate(spellPrefab, transform.position, Quaternion.identity);
 
             Spell spell = obj.GetComponent<Spell>();
-            spell.ownerTag = gameObject.tag;    
-            spell.Initialize(inventory.spells.Keys.ToArray()[selected], playerMove.lastDirection);
+            spell.ownerTag = gameObject.tag;
+            spell.Initialize(inventory.spells.Keys.ToArray()[selected], shootDir);
 
             inventory.spells[activeSpell]--;
-
             UpdateUI();
         }
-
         else if (Input.GetKeyDown(spellMinus))
         {
             selected--;
+            if (selected < 0) selected = Mathf.Max(0, inventory.spells.Count - 1);
             UpdateUI();
         }
-
         else if (Input.GetKeyDown(spellPlus))
         {
             selected = (++selected) % inventory.spells.Count;
@@ -74,13 +85,11 @@ public class CastSpell : MonoBehaviour
     {
         switch (index)
         {
-            // Set 0: movement WASD, shoot I, spells J K L
             case 0:
                 spellKey = KeyCode.K;
                 spellPlus = KeyCode.L;
                 spellMinus = KeyCode.J;
                 break;
-            // Set 1: movement arrows, shoot E, spells Z X C
             case 1:
                 spellKey = KeyCode.X;
                 spellPlus = KeyCode.C;
