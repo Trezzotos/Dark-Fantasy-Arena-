@@ -1,4 +1,6 @@
+using System.Linq;
 using Examples.Observer;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +10,8 @@ public class CastSpell : MonoBehaviour
     const string PREF_CONTROL_SCHEME = "ControlScheme";
 
     public Image UISpell;
+    public TMP_Text UISpellCount;
     public GameObject spellPrefab;
-    public Sprite noSpellSprite;
     [Space]
     public KeyCode spellKey = KeyCode.K;
     public KeyCode spellPlus = KeyCode.L;
@@ -18,16 +20,14 @@ public class CastSpell : MonoBehaviour
     PlayerMove playerMove;
     [SerializeField] Inventory inventory;
     [SerializeField] int selected = 0;
-    [SerializeField] int availableSpells;
+    SpellData activeSpell;
 
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         inventory = GetComponent<Inventory>();
 
-        availableSpells = inventory != null ? inventory.spells.Count : 0;
-        if (availableSpells <= 0) UISpell.sprite = noSpellSprite;
-        else UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
+        UpdateUI();
 
         int scheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
         ChangeCommands(scheme);
@@ -36,38 +36,37 @@ public class CastSpell : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.gameState != GameState.PLAYING) return;
-        if (availableSpells <= 0) return;
 
-        if (Input.GetKeyDown(spellKey))
+        if (Input.GetKeyDown(spellKey) && inventory.spells[activeSpell] > 0)
         {
             GameObject obj = Instantiate(spellPrefab, transform.position, Quaternion.identity);
 
             Spell spell = obj.GetComponent<Spell>();
-            spell.Initialize(inventory.spells.ToArray()[selected], playerMove.lastDirection);
+            spell.Initialize(inventory.spells.Keys.ToArray()[selected], playerMove.lastDirection);
 
-            inventory.spells.RemoveAt(selected);
-            availableSpells--;
+            inventory.spells[activeSpell]--;
 
-            if (availableSpells <= 0) UISpell.sprite = noSpellSprite;
-            else
-            {
-                selected = Mathf.Clamp(selected, 0, availableSpells - 1);
-                UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
-            }
+            UpdateUI();
         }
 
         else if (Input.GetKeyDown(spellMinus))
         {
             selected--;
-            if (selected < 0) selected = availableSpells - 1;
-            UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
+            UpdateUI();
         }
 
         else if (Input.GetKeyDown(spellPlus))
         {
-            selected = (++selected) % availableSpells;
-            UISpell.sprite = inventory.spells.ToArray()[selected].sprite;
+            selected = (++selected) % inventory.spells.Count;
+            UpdateUI();
         }
+    }
+
+    private void UpdateUI()
+    {
+        activeSpell = inventory.spells.Keys.ToArray()[selected];
+        UISpell.sprite = activeSpell.sprite;
+        UISpellCount.text = "" + inventory.spells[activeSpell];
     }
 
     public void ChangeCommands(int index)

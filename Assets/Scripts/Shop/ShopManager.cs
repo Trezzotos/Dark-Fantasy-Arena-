@@ -16,6 +16,7 @@ public class ShopManager : MonoBehaviour
 
     [Header("Items")]
     public ItemData[] items;
+    public int itemsAmountPerBuy = 3;
 
     GameSaveData saveData;
     InventoryData inventory;
@@ -36,8 +37,8 @@ public class ShopManager : MonoBehaviour
     else
     {
         // Fallback: crea un InventoryData vuoto con i param richiesti:
-        var emptySpells = new System.Collections.Generic.List<SpellData>();
-        var emptyPerks = new System.Collections.Generic.List<PerkData>();
+        var emptySpells = new Dictionary<SpellData, int>();
+        var emptyPerks = new List<PerkData>();
         int startMoney = 0;
 
         inventory = new InventoryData(emptySpells, emptyPerks, startMoney);
@@ -180,11 +181,12 @@ public class ShopManager : MonoBehaviour
             PickableData pickableData = data.item;
             if (pickableData is SpellData spell)
             {
-                inventory.spells.Add(spell);
+                int qty = inventory.spells[spell];
+                inventory.spells[spell] = qty + itemsAmountPerBuy;
             }
             else if (pickableData is PerkData perk)
             {
-                inventory.perks.Add(perk);
+                for (int i = 0; i < itemsAmountPerBuy; i++) inventory.perks.Add(perk);
             }
             inventory.money -= data.price;
             if (coinsLabel != null) coinsLabel.text = "Coins: " + inventory.money;

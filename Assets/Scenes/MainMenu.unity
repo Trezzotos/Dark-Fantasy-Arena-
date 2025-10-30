@@ -5286,6 +5286,13 @@ MonoBehaviour:
   rankingButton: {fileID: 1896955838}
   playerNameInput: {fileID: 259389112}
   confirmNameButton: {fileID: 1309187475}
+  spellDatas:
+  - {fileID: 11400000, guid: d73137da80741f44d84e63e4f8bff9ea, type: 2}
+  - {fileID: 11400000, guid: 9c3c4cb9ea03245448cbbd7e47fc39bd, type: 2}
+  - {fileID: 11400000, guid: e1bf09013a045504ca8edb31371176c0, type: 2}
+  - {fileID: 11400000, guid: e87841c30e1ac9242924fbc757d33016, type: 2}
+  - {fileID: 11400000, guid: 6345e75c4ea7b624f8d28c1417d77217, type: 2}
+  - {fileID: 11400000, guid: 51b6dd1fd3aa3cd4a989fd6d7a88d72e, type: 2}
 --- !u!4 &1964369669
 Transform:
   m_ObjectHideFlags: 0

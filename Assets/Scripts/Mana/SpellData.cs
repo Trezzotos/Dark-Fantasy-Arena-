@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class SpellData : PickableData
 {
-    // aNZICHè SALVARE TUTTO, SALVA UN IDENTIFICATIVO
     public string spellName;
     public Sprite sprite;
     public Color spriteTint = Color.white;

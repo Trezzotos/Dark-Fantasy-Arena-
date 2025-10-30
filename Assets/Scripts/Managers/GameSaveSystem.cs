@@ -12,11 +12,16 @@ using System;
 [System.Serializable]
 public class InventoryData
 {
-    public List<SpellData> spells;
+    [NonSerialized] public Dictionary<SpellData, int> spells;
+
+    // Queste liste sono usate solo per il json
+    public List<SpellData> spellKeys;
+    public List<int> spellValues;
+
     public List<PerkData> perks;
     public int money;
 
-    public InventoryData(List<SpellData> currentSpells, List<PerkData> currentPerks, int currentMoney)
+    public InventoryData(Dictionary<SpellData, int> currentSpells, List<PerkData> currentPerks, int currentMoney)
     {
         spells = currentSpells;
         perks = currentPerks;
@@ -74,6 +79,7 @@ public static class SaveSystem
     {
         try
         {
+            PreSaveConversion(data.inventory);
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(SavePath, json);
             Debug.Log($"Gioco salvato su: {SavePath}");
@@ -92,6 +98,7 @@ public static class SaveSystem
             {
                 string json = File.ReadAllText(SavePath);
                 GameSaveData data = JsonUtility.FromJson<GameSaveData>(json);
+                PostLoadConversion(data.inventory);
                 Debug.Log("Gioco caricato con successo.");
                 return data;
             }
@@ -108,13 +115,42 @@ public static class SaveSystem
         }
     }
 
-    public static void GenerateEmptySaveFile(int difficulty, String name)
+    public static void PreSaveConversion(InventoryData data)
     {
+        // Converte il Dictionary di gioco in due List serializzabili.
+        data.spellKeys = new List<SpellData>(data.spells.Keys);
+        data.spellValues = new List<int>(data.spells.Values);
+    }
+
+    public static void PostLoadConversion(InventoryData data)
+    {
+        // Se le liste serializzabili sono state caricate, ricostruisce il Dictionary di gioco.
+        if (data.spellKeys != null && data.spellValues != null)
+        {
+            data.spells = new Dictionary<SpellData, int>();
+            for (int i = 0; i < data.spellKeys.Count; i++)
+            {
+                data.spells.Add(data.spellKeys[i], data.spellValues[i]);
+            }
+        }
+    }
+
+    public static void GenerateEmptySaveFile(int difficulty, String name, SpellData[] spellDatas)
+    {
+        Dictionary<SpellData, int> spells = new Dictionary<SpellData, int>();
+
+        for (int i = 0; i < spellDatas.Length; i++)
+        {
+            spells.Add(spellDatas[i], 0);
+        }
+        
         GameSaveData newGameData = new GameSaveData(
-            new InventoryData(new List<SpellData>(), new List<PerkData>(), 0),
+            new InventoryData(spells, new List<PerkData>(), 0),
             new GameStatsData(1, 0, 0, difficulty, 0.0f, 0, name)
         );
         SaveGame(newGameData);
+
+        Debug.Log("File created with " + spells.Count);
     }
 
     public static void DeleteGame()

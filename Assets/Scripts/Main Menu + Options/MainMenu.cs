@@ -22,6 +22,9 @@ public class MainMenu : MonoBehaviour
     [Header("String NamePlayer")]
     private string playerName = "";
 
+    [Header("SpellData")]
+    [SerializeField] private SpellData[] spellDatas;
+
 
 
     private void Start()
@@ -63,7 +66,7 @@ public class MainMenu : MonoBehaviour
     //  Chiamato dai pulsanti di difficoltà (es. Easy/Normal/Hard)
     public void SelectDifficulty(int difficulty)
     {
-        SaveSystem.GenerateEmptySaveFile(difficulty, playerName);
+        SaveSystem.GenerateEmptySaveFile(difficulty, playerName, spellDatas);
         SceneManager.LoadScene("Game");
     }
 

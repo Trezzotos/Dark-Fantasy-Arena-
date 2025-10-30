@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Examples.Observer
 {
     public class Inventory : MonoBehaviour
     {
-        public List<SpellData> spells;
+        public Dictionary<SpellData, int> spells;
         public List<PerkData> perks;
         public int money;
 
@@ -48,10 +49,11 @@ namespace Examples.Observer
             if (loadedData != null)
             {
                 // Usa l'operatore '??' per assicurare che non siano assegnate liste nulle
-                spells = loadedData.spells ?? new List<SpellData>();
+                spells = loadedData.spells ?? new Dictionary<SpellData, int>();
                 perks = loadedData.perks ?? new List<PerkData>();
                 money = loadedData.money;
             }
+            print("Loaded " + spells.Count + " spells");
         }
     }
 }
