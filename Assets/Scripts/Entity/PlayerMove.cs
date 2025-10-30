@@ -42,6 +42,7 @@ public class PlayerMove : MonoBehaviour
             && GameManager.Instance.gameState != GameState.SHOPPING)
         {
             lastDirection = Vector2.zero;
+            mov = Vector2.zero;
             return;
         }
 

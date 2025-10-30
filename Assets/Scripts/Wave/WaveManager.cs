@@ -130,15 +130,7 @@ public class WaveManager : MonoBehaviour
             spawners[i] = spawnPoints[index];
             i++;
         }
-
-        for (int j = 0; j < spawners.Length; j++)
-        {
-            print(spawners[j].position);
-        }
-
-        print(activeSpawnPoints.Length);
-        print(spawners.Length);
-
+        
         return spawners;
     }
 
