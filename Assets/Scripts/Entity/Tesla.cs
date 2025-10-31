@@ -1,4 +1,5 @@
 using Examples.Observer;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Tesla : Structure
@@ -14,6 +15,7 @@ public class Tesla : Structure
     LineController lineController;
     GameObject[] players;
     bool hasTarget = false;
+    ParticleSystem ps;
 
     protected override void Awake()
     {
@@ -23,6 +25,7 @@ public class Tesla : Structure
         lineController = transform.GetComponentInChildren<LineController>();
         timeToShoot = 0;
         players = GameObject.FindGameObjectsWithTag("Player");
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
@@ -49,5 +52,6 @@ public class Tesla : Structure
         lineController.DrawLine(target.position);
         Health health = target.GetComponent<Health>();
         if (health) health.TakeDamage(damage);
+        ps.Play();
     }
 }

@@ -11,11 +11,13 @@ public class EnemySpawner : Structure
 
     int spawned = 0;
     private Coroutine spawnRoutine;
+    ParticleSystem ps;
 
     protected override void Awake()
     {
         base.Awake();
         spawned = 0;
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     private IEnumerator SpawnLoop()
@@ -34,6 +36,7 @@ public class EnemySpawner : Structure
                     // questa action viene eseguita da WaveManager.ProcessSpawnQueue
                     // qui manteniamo la logica di registrazione/spawn originale
                     EnemyManager.Instance.SpawnEnemy(transform.position);
+                    ps.Play();
                 });
 
                 spawned++;
