@@ -121,7 +121,8 @@ public class Spell : MonoBehaviour
         StopCoroutine(DestroyAfterLifetime());
 
         if (other.TryGetComponent<Health>(out Health targetHealth))
-        {
+        {   
+            SFXManager.Instance.PlayEnemyHit();
             // callback locale che si auto-deregistra
             System.Action deathHandler = null;
             deathHandler = () =>

@@ -48,7 +48,6 @@ public class AIMagonegro : AIBase
 
             Vector2 shootDir = (aimPoint - shooterPos).normalized;
             SpawnSpell(shooterPos, shootDir);
-
             timeToHit = hitRate;
         }
     }

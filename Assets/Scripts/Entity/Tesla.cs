@@ -52,6 +52,7 @@ public class Tesla : Structure
         lineController.DrawLine(target.position);
         Health health = target.GetComponent<Health>();
         if (health) health.TakeDamage(damage);
+        SFXManager.Instance.PlayTeslaHit();
         ps.Play();
     }
 }

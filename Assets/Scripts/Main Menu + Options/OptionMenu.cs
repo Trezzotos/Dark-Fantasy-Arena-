@@ -9,6 +9,7 @@ public class OptionsMenu : MonoBehaviour
     [Header("UI Riferimenti")]
     public Toggle fullscreenToggle;
     public Slider volumeSlider;
+    public Slider SFXSlider;
     public TMP_Dropdown resolutionDropdown;
 
     [Header("Controls UI")]
@@ -42,6 +43,7 @@ public class OptionsMenu : MonoBehaviour
     void OnEnable()
     {
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        SFXSlider.onValueChanged.AddListener(OnSFXChanged);
         fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
         resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
 
@@ -52,6 +54,7 @@ public class OptionsMenu : MonoBehaviour
     void OnDisable()
     {
         volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
+        SFXSlider.onValueChanged.RemoveListener(OnSFXChanged); // CORRETTO
         fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenChanged);
         resolutionDropdown.onValueChanged.RemoveListener(OnResolutionChanged);
 
@@ -63,6 +66,16 @@ public class OptionsMenu : MonoBehaviour
     {
         if (initializing) return;
         if (AudioManager.Instance != null) AudioManager.Instance.SetVolume(value);
+        PlayerPrefs.SetFloat("MusicVolume", value);
+        PlayerPrefs.Save();
+    }
+
+    public void OnSFXChanged(float value)
+    {
+        if (initializing) return;
+        if (SFXManager.Instance != null) SFXManager.Instance.SetVolume(value);
+        PlayerPrefs.SetFloat("SFXVolume", value);
+        PlayerPrefs.Save();
     }
 
     public void OnFullscreenChanged(bool isFullscreen)
@@ -83,7 +96,6 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // Bottone Controls: cicla gli schemi, salva e applica ai PlayerMove presenti
     public void OnControlSchemeButton()
     {
         int scheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
@@ -91,10 +103,8 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.SetInt(PREF_CONTROL_SCHEME, scheme);
         PlayerPrefs.Save();
         UpdateControlSchemeLabel(scheme);
-        Debug.Log("[OptionsMenu] ControlScheme changed to " + scheme);
         ApplyControlSchemeToPlayers(scheme);
     }
-
 
     void UpdateControlSchemeLabel(int scheme)
     {
@@ -118,9 +128,13 @@ public class OptionsMenu : MonoBehaviour
     {
         initializing = true;
 
-        float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        if (volumeSlider != null) volumeSlider.SetValueWithoutNotify(volume);
-        if (AudioManager.Instance != null) AudioManager.Instance.SetVolume(volume, save: false);
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        if (volumeSlider != null) volumeSlider.SetValueWithoutNotify(musicVolume);
+        if (AudioManager.Instance != null) AudioManager.Instance.SetVolume(musicVolume, save: false);
+
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        if (SFXSlider != null) SFXSlider.SetValueWithoutNotify(sfxVolume);
+        if (SFXManager.Instance != null) SFXManager.Instance.SetVolume(sfxVolume, save: false);
 
         bool isFullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
         if (fullscreenToggle != null) fullscreenToggle.SetIsOnWithoutNotify(isFullscreen);
@@ -136,7 +150,6 @@ public class OptionsMenu : MonoBehaviour
         Resolution res = resolutions[currentResolutionIndex];
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
 
-        // Controls: carica schema e aggiorna UI, applica ai player
         int controlScheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
         UpdateControlSchemeLabel(controlScheme);
         ApplyControlSchemeToPlayers(controlScheme);

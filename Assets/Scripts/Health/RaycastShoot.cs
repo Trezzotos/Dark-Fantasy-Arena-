@@ -55,7 +55,11 @@ namespace Examples.Observer
 
                 Health health = hit.transform.GetComponent<Health>();
                 if (health)
+                {
                     health.TakeDamage(damage);
+                    SFXManager.Instance.PlayPlayerHit();
+                }
+                    
                 else
                     Debug.LogError("Target has no Health component!");
             }

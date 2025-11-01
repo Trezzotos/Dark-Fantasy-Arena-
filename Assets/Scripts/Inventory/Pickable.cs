@@ -21,10 +21,12 @@ namespace Examples.Observer
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
-            {
-                ItemPickedUp.Invoke(itemToGive);
+            {   
+                SFXManager.Instance.PlayCollectedMoney();
+                ItemPickedUp?.Invoke(itemToGive);
                 Destroy(gameObject);
             }
+
         }
     }
 }

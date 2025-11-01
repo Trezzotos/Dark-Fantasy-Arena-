@@ -24,6 +24,7 @@ public class AIEnemy : AIBase
         if (timeToHit > 0) return;
 
         player.GetComponent<Health>().TakeDamage(damage);
+        SFXManager.Instance.PlayEnemyHit();
         timeToHit = hitRate;
     }
 }
