@@ -180,27 +180,27 @@ public class GameManager : MonoBehaviour
 
     private void HandleMusic(GameState state)
     {
-        // AudioManager ora gestisce playlist per scena al caricamento.
-        // Qui ci limitiamo a fade/stop/pause/resume in base allo stato di gioco.
         var am = AudioManager.Instance;
         if (am == null) return;
+
+        float current = am.GetVolume(); // valore corrente (quello salvato o l'ultimo impostato)
 
         switch (state)
         {
             case GameState.STARTING:
-                // Assicurati volume normale all'inizio
-                am.SetVolume(1f, save: false);
+                // non forzare 1f; riapplica il valore attuale se necessario
+                am.SetVolume(current, save: false);
                 break;
 
             case GameState.PLAYING:
             case GameState.SHOPPING:
-                // Ripristina volume pieno (fade o immediato)
-                am.FadeTo(1f, 1.5f);
+                // ripristina il volume corrente (fade verso il valore utente)
+                am.FadeTo(current, 1.5f, saveAtEnd: false);
                 break;
 
             case GameState.PAUSED:
-                // Abbassa il volume quando è in pausa
-                am.FadeTo(0.3f, 1.5f);
+                // abbassa il volume rispetto al valore corrente (es. 30% del valore utente)
+                am.FadeTo(Mathf.Clamp01(current * 0.3f), 1.5f, saveAtEnd: false);
                 break;
 
             case GameState.GAMEOVER:
@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
 
     void TimerExpired()
     {
