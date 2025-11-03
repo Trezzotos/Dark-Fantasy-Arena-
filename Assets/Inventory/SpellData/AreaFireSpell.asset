@@ -17,7 +17,7 @@ MonoBehaviour:
   spriteTint: {r: 1, g: 1, b: 1, a: 1}
   areaDamage: 1
   effect: 1
-  baseDamage: 3
+  baseDamage: 13
   totalHits: 7
   timeBetweenHits: 0.2
   damageIncrement: 0
