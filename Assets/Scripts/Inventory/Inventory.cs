@@ -8,7 +8,6 @@ namespace Examples.Observer
     public class Inventory : MonoBehaviour
     {
         public Dictionary<SpellData, int> spells;
-        public List<PerkData> perks;
         public int money;
 
         private void OnEnable()
@@ -41,7 +40,7 @@ namespace Examples.Observer
         public InventoryData GetCurrentInventoryData()
         {
             // Restituisce una nuova istanza della classe dati con i valori correnti
-            return new InventoryData(this.spells, this.perks, this.money);
+            return new InventoryData(this.spells, this.money);
         }
 
         public void ApplyLoadedInventoryData(InventoryData loadedData)
@@ -50,7 +49,6 @@ namespace Examples.Observer
             {
                 // Usa l'operatore '??' per assicurare che non siano assegnate liste nulle
                 spells = loadedData.spells ?? new Dictionary<SpellData, int>();
-                perks = loadedData.perks ?? new List<PerkData>();
                 money = loadedData.money;
             }
         }

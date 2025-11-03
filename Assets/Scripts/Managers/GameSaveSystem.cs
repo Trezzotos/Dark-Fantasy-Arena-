@@ -18,13 +18,11 @@ public class InventoryData
     public List<SpellData> spellKeys;
     public List<int> spellValues;
 
-    public List<PerkData> perks;
     public int money;
 
-    public InventoryData(Dictionary<SpellData, int> currentSpells, List<PerkData> currentPerks, int currentMoney)
+    public InventoryData(Dictionary<SpellData, int> currentSpells, int currentMoney)
     {
         spells = currentSpells;
-        perks = currentPerks;
         money = currentMoney;
     }
 }
@@ -145,7 +143,7 @@ public static class SaveSystem
         }
         
         GameSaveData newGameData = new GameSaveData(
-            new InventoryData(spells, new List<PerkData>(), 0),
+            new InventoryData(spells, 0),
             new GameStatsData(1, 0, 0, difficulty, 0.0f, 0, name)
         );
         SaveGame(newGameData);

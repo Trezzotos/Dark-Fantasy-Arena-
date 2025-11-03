@@ -23,11 +23,6 @@ public class ShopButton : MonoBehaviour
             image.sprite = spellData.sprite;
             label.text = spellData.spellName;
         }
-        else if (pickableData is PerkData perkData)
-        {
-            image.sprite = perkData.perkImage;
-            label.text = perkData.perkName;
-        }
     }
 
     public void OnButtonClick()

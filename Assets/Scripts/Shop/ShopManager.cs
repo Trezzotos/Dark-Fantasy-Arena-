@@ -38,10 +38,9 @@ public class ShopManager : MonoBehaviour
     {
         // Fallback: crea un InventoryData vuoto con i param richiesti:
         var emptySpells = new Dictionary<SpellData, int>();
-        var emptyPerks = new List<PerkData>();
         int startMoney = 0;
 
-        inventory = new InventoryData(emptySpells, emptyPerks, startMoney);
+        inventory = new InventoryData(emptySpells, startMoney);
 
         // Prova a recuperare gli stats correnti dal StatsManager, se disponibile
         GameStatsData statsFallback = null;
@@ -184,10 +183,7 @@ public class ShopManager : MonoBehaviour
                 int qty = inventory.spells[spell];
                 inventory.spells[spell] = qty + itemsAmountPerBuy;
             }
-            else if (pickableData is PerkData perk)
-            {
-                for (int i = 0; i < itemsAmountPerBuy; i++) inventory.perks.Add(perk);
-            }
+            
             inventory.money -= data.price;
             if (coinsLabel != null) coinsLabel.text = "Coins: " + inventory.money;
             if (dialogLabel != null) dialogLabel.text = "Eh eh eh, thank you";

@@ -997,12 +997,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07d7cebebeb01f64f8e9e75b0c282412, type: 2}
   - {fileID: 11400000, guid: 1d9701a2bd4926948b76e0ece11c3f9a, type: 2}
   - {fileID: 11400000, guid: e3503412e36f2e043aa0c14dffb9cc08, type: 2}
-  - {fileID: 11400000, guid: f12b4b96f86dfce4c9062e0a355a3259, type: 2}
-  - {fileID: 11400000, guid: e445a151f3015dc468ffa30c3d97509c, type: 2}
   - {fileID: 11400000, guid: a8f31c74e3984cd4bbb4423df126d35c, type: 2}
   - {fileID: 11400000, guid: f77d95d2106031e488632af0e847301a, type: 2}
-  - {fileID: 11400000, guid: 6c8f8d98dbfc44745b37167c4e832edf, type: 2}
-  - {fileID: 11400000, guid: f61f556f20f38a947a1ad7457ae83653, type: 2}
   - {fileID: 11400000, guid: b9919653ebe019042ac90b12b31705a9, type: 2}
   itemsAmountPerBuy: 3
 --- !u!4 &851210299
