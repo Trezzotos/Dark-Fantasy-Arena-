@@ -10,7 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Spell : MonoBehaviour
 {
-    public float moveSpeed = 2f; // Velocità di movimento predefinita
+    public float moveSpeed = 8f; // Velocità di movimento predefinita
     public float life = 5f;
 
     // ownership per evitare friendly fire
@@ -65,11 +65,6 @@ public class Spell : MonoBehaviour
     launchDirection = direction.normalized;
 
     SetAppearance();
-
-    if (rb != null)
-    {
-        rb.velocity = launchDirection * moveSpeed;
-    }
 
     // ROTAZIONE ISTANTANEA ADATTATA: la sprite "avanti" punta verso +Y, quindi sottrai 90 gradi
     float angle = Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg - 90f;

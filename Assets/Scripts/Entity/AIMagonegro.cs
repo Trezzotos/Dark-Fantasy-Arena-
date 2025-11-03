@@ -53,74 +53,73 @@ public class AIMagonegro : AIBase
     }
 
     void SpawnSpell(Vector2 origin, Vector2 direction)
-{
-    if (spellPrefab == null) return;
-
-    GameObject go = Instantiate(spellPrefab, origin, Quaternion.identity);
-    Spell spell = go.GetComponent<Spell>();
-
-    Collider2D spellCol = go.GetComponent<Collider2D>();
-    Collider2D myCol = GetComponent<Collider2D>();
-
-    if (spell != null)
     {
-        // inizializza come prima (passando spellData o fallback)
-        if (spellData != null) spell.Initialize(spellData, direction);
-        else
-        {
-            SpellData fallback = ScriptableObject.CreateInstance<SpellData>();
-            fallback.spellName = "fallback";
-            fallback.baseDamage = overrideDamage >= 0 ? overrideDamage : damage;
-            fallback.effect = SpellData.EffectType.ONESHOT;
-            spell.Initialize(fallback, direction);
-        }
+        if (spellPrefab == null) return;
 
-        // runtime overrides
-        spell.moveSpeed = projectileSpeed;
-        spell.life = spellLifeTime;
+        GameObject go = Instantiate(spellPrefab, origin, Quaternion.identity);
+        Spell spell = go.GetComponent<Spell>();
 
-        // evita friendly fire: imposta ownerTag e ownerCollider e ignora collisione specifica
-        spell.ownerTag = this.gameObject.tag;
-        if (myCol != null)
+        Collider2D spellCol = go.GetComponent<Collider2D>();
+        Collider2D myCol = GetComponent<Collider2D>();
+
+        if (spell != null)
         {
-            spell.ownerCollider = myCol;
-            if (spellCol != null)
+            if (spellData != null) spell.Initialize(spellData, direction);
+            else
             {
-                Physics2D.IgnoreCollision(spellCol, myCol, true);
+                SpellData fallback = ScriptableObject.CreateInstance<SpellData>();
+                fallback.spellName = "fallback";
+                fallback.baseDamage = overrideDamage >= 0 ? overrideDamage : damage;
+                fallback.effect = SpellData.EffectType.ONESHOT;
+                spell.Initialize(fallback, direction);
             }
-        }
 
-        // override damage tramite runtime copy (se richiesto)
-        if (overrideDamage >= 0)
-        {
-            SpellData runtimeData = ScriptableObject.CreateInstance<SpellData>();
-            runtimeData.spellName = spellData != null ? spellData.spellName : "runtime";
-            runtimeData.sprite = spellData != null ? spellData.sprite : null;
-            runtimeData.spriteTint = spellData != null ? spellData.spriteTint : Color.white;
-            runtimeData.effect = spellData != null ? spellData.effect : SpellData.EffectType.ONESHOT;
-            runtimeData.baseDamage = overrideDamage;
-            runtimeData.totalHits = spellData != null ? spellData.totalHits : 1;
-            runtimeData.timeBetweenHits = spellData != null ? spellData.timeBetweenHits : 0.1f;
-            runtimeData.damageIncrement = spellData != null ? spellData.damageIncrement : 0f;
-            runtimeData.radius = spellData != null ? spellData.radius : 0f;
-
-            spell.Initialize(runtimeData, direction);
-
-            // ri-applica runtime overrides e ownership
+            // runtime overrides
             spell.moveSpeed = projectileSpeed;
             spell.life = spellLifeTime;
+
+            // evita friendly fire: imposta ownerTag e ownerCollider e ignora collisione specifica
             spell.ownerTag = this.gameObject.tag;
-            if (myCol != null && spellCol != null) Physics2D.IgnoreCollision(spellCol, myCol, true);
+            if (myCol != null)
+            {
+                spell.ownerCollider = myCol;
+                if (spellCol != null)
+                {
+                    Physics2D.IgnoreCollision(spellCol, myCol, true);
+                }
+            }
+
+            // override damage tramite runtime copy (se richiesto)
+            if (overrideDamage >= 0)
+            {
+                SpellData runtimeData = ScriptableObject.CreateInstance<SpellData>();
+                runtimeData.spellName = spellData != null ? spellData.spellName : "runtime";
+                runtimeData.sprite = spellData != null ? spellData.sprite : null;
+                runtimeData.spriteTint = spellData != null ? spellData.spriteTint : Color.white;
+                runtimeData.effect = spellData != null ? spellData.effect : SpellData.EffectType.ONESHOT;
+                runtimeData.baseDamage = overrideDamage;
+                runtimeData.totalHits = spellData != null ? spellData.totalHits : 1;
+                runtimeData.timeBetweenHits = spellData != null ? spellData.timeBetweenHits : 0.1f;
+                runtimeData.damageIncrement = spellData != null ? spellData.damageIncrement : 0f;
+                runtimeData.radius = spellData != null ? spellData.radius : 0f;
+
+                spell.Initialize(runtimeData, direction);
+
+                // ri-applica runtime overrides e ownership
+                spell.moveSpeed = projectileSpeed;
+                spell.life = spellLifeTime;
+                spell.ownerTag = this.gameObject.tag;
+                if (myCol != null && spellCol != null) Physics2D.IgnoreCollision(spellCol, myCol, true);
+            }
+        }
+        else
+        {
+            // fallback: applica velocità se non trovi Spell
+            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.velocity = direction * projectileSpeed;
+            // non dimenticare che in questo caso non esiste la logica di danno automatica
         }
     }
-    else
-    {
-        // fallback: applica velocità se non trovi Spell
-        Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
-        if (rb != null) rb.velocity = direction * projectileSpeed;
-        // non dimenticare che in questo caso non esiste la logica di danno automatica
-    }
-}
 
 
     // Predizione dell'intercetta (identica alla versione già discussa)
