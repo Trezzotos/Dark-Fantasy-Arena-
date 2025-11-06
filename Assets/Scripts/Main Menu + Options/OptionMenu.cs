@@ -15,7 +15,8 @@ public class OptionsMenu : MonoBehaviour
     [Header("Controls UI")]
     public Button controlSchemeButton;
     public TMP_Text controlSchemeLabel;
-    private Resolution[] resolutions;
+    private Resolution[] allResolutions;
+    private List<Resolution> uniqueResolutions;
     private int currentResolutionIndex = 0;
     bool initializing = false;
 
@@ -23,17 +24,35 @@ public class OptionsMenu : MonoBehaviour
 
     void Start()
     {
-        resolutions = Screen.resolutions;
+        allResolutions = Screen.resolutions;
+
+       
+        uniqueResolutions = new List<Resolution>();      // Filtra risoluzioni duplicate (stessa width x height) mantenendo l'ordine
+        var seen = new HashSet<string>();
+        for (int i = 0; i < allResolutions.Length; i++)
+        {
+            string key = allResolutions[i].width + "x" + allResolutions[i].height;
+            if (!seen.Contains(key))
+            {
+                seen.Add(key);
+                uniqueResolutions.Add(allResolutions[i]);
+            }
+        }
+
         resolutionDropdown.ClearOptions();
         var options = new List<string>();
 
-        for (int i = 0; i < resolutions.Length; i++)
+        currentResolutionIndex = 0;
+        for (int i = 0; i < uniqueResolutions.Count; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = uniqueResolutions[i].width + "x" + uniqueResolutions[i].height;
             options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+
+            if (uniqueResolutions[i].width == Screen.currentResolution.width &&
+                uniqueResolutions[i].height == Screen.currentResolution.height)
+            {
                 currentResolutionIndex = i;
+            }
         }
 
         resolutionDropdown.AddOptions(options);
@@ -42,10 +61,10 @@ public class OptionsMenu : MonoBehaviour
 
     void OnEnable()
     {
-        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-        SFXSlider.onValueChanged.AddListener(OnSFXChanged);
-        fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
-        resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
+        if (volumeSlider != null) volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        if (SFXSlider != null) SFXSlider.onValueChanged.AddListener(OnSFXChanged);
+        if (fullscreenToggle != null) fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
+        if (resolutionDropdown != null) resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
 
         if (controlSchemeButton != null)
             controlSchemeButton.onClick.AddListener(OnControlSchemeButton);
@@ -53,10 +72,10 @@ public class OptionsMenu : MonoBehaviour
 
     void OnDisable()
     {
-        volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
-        SFXSlider.onValueChanged.RemoveListener(OnSFXChanged); // CORRETTO
-        fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenChanged);
-        resolutionDropdown.onValueChanged.RemoveListener(OnResolutionChanged);
+        if (volumeSlider != null) volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
+        if (SFXSlider != null) SFXSlider.onValueChanged.RemoveListener(OnSFXChanged);
+        if (fullscreenToggle != null) fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenChanged);
+        if (resolutionDropdown != null) resolutionDropdown.onValueChanged.RemoveListener(OnResolutionChanged);
 
         if (controlSchemeButton != null)
             controlSchemeButton.onClick.RemoveListener(OnControlSchemeButton);
@@ -89,8 +108,8 @@ public class OptionsMenu : MonoBehaviour
     public void OnResolutionChanged(int index)
     {
         if (initializing) return;
-        if (index < 0 || index >= resolutions.Length) return;
-        Resolution res = resolutions[index];
+        if (index < 0 || uniqueResolutions == null || index >= uniqueResolutions.Count) return;
+        Resolution res = uniqueResolutions[index];
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         PlayerPrefs.SetInt("ResolutionIndex", index);
         PlayerPrefs.Save();
@@ -140,15 +159,20 @@ public class OptionsMenu : MonoBehaviour
         if (fullscreenToggle != null) fullscreenToggle.SetIsOnWithoutNotify(isFullscreen);
         Screen.fullScreen = isFullscreen;
 
-        currentResolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", currentResolutionIndex);
-        currentResolutionIndex = Mathf.Clamp(currentResolutionIndex, 0, resolutions.Length - 1);
+        // Carica e clampa l'indice usando la lista di risoluzioni uniche
+        int savedIndex = PlayerPrefs.GetInt("ResolutionIndex", currentResolutionIndex);
+        currentResolutionIndex = Mathf.Clamp(savedIndex, 0, Mathf.Max(0, uniqueResolutions.Count - 1));
         if (resolutionDropdown != null)
         {
             resolutionDropdown.SetValueWithoutNotify(currentResolutionIndex);
             resolutionDropdown.RefreshShownValue();
         }
-        Resolution res = resolutions[currentResolutionIndex];
-        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+
+        if (uniqueResolutions != null && uniqueResolutions.Count > 0)
+        {
+            Resolution res = uniqueResolutions[currentResolutionIndex];
+            Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+        }
 
         int controlScheme = PlayerPrefs.GetInt(PREF_CONTROL_SCHEME, 0);
         UpdateControlSchemeLabel(controlScheme);
