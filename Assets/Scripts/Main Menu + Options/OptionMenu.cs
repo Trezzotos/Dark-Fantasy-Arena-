@@ -16,26 +16,62 @@ public class OptionsMenu : MonoBehaviour
     public Button controlSchemeButton;
     public TMP_Text controlSchemeLabel;
     private Resolution[] allResolutions;
-    private List<Resolution> uniqueResolutions;
+    private List<Resolution> supportedStandardResolutions;
     private int currentResolutionIndex = 0;
     bool initializing = false;
 
     const string PREF_CONTROL_SCHEME = "ControlScheme";
 
+    readonly Vector2Int[] standardResList = new Vector2Int[]
+    {
+        new Vector2Int(1280, 720),
+        new Vector2Int(1280, 800),
+        new Vector2Int(1366, 768),
+        new Vector2Int(1440, 900),
+        new Vector2Int(1600, 900),
+        new Vector2Int(1680, 1050),
+        new Vector2Int(1920, 1080),
+        new Vector2Int(2560, 1440),
+        new Vector2Int(3840, 2160) 
+    };
+
     void Start()
     {
         allResolutions = Screen.resolutions;
 
-       
-        uniqueResolutions = new List<Resolution>();      // Filtra risoluzioni duplicate (stessa width x height) mantenendo l'ordine
+        supportedStandardResolutions = new List<Resolution>();
         var seen = new HashSet<string>();
-        for (int i = 0; i < allResolutions.Length; i++)
+
+        var available = new HashSet<string>();
+        foreach (var r in allResolutions)
         {
-            string key = allResolutions[i].width + "x" + allResolutions[i].height;
-            if (!seen.Contains(key))
+            string key = r.width + "x" + r.height;
+            if (!available.Contains(key)) available.Add(key);
+        }
+
+        foreach (var sr in standardResList)
+        {
+            string key = sr.x + "x" + sr.y;
+            if (available.Contains(key) && !seen.Contains(key))
             {
                 seen.Add(key);
-                uniqueResolutions.Add(allResolutions[i]);
+                Resolution res = new Resolution { width = sr.x, height = sr.y, refreshRate = Screen.currentResolution.refreshRate };
+                supportedStandardResolutions.Add(res);
+            }
+        }
+
+        if (supportedStandardResolutions.Count == 0)
+        {
+            var fallbackSeen = new HashSet<string>();
+            supportedStandardResolutions = new List<Resolution>();
+            for (int i = 0; i < allResolutions.Length; i++)
+            {
+                string key = allResolutions[i].width + "x" + allResolutions[i].height;
+                if (!fallbackSeen.Contains(key))
+                {
+                    fallbackSeen.Add(key);
+                    supportedStandardResolutions.Add(allResolutions[i]);
+                }
             }
         }
 
@@ -43,13 +79,13 @@ public class OptionsMenu : MonoBehaviour
         var options = new List<string>();
 
         currentResolutionIndex = 0;
-        for (int i = 0; i < uniqueResolutions.Count; i++)
+        for (int i = 0; i < supportedStandardResolutions.Count; i++)
         {
-            string option = uniqueResolutions[i].width + "x" + uniqueResolutions[i].height;
+            string option = supportedStandardResolutions[i].width + "x" + supportedStandardResolutions[i].height;
             options.Add(option);
 
-            if (uniqueResolutions[i].width == Screen.currentResolution.width &&
-                uniqueResolutions[i].height == Screen.currentResolution.height)
+            if (supportedStandardResolutions[i].width == Screen.currentResolution.width &&
+                supportedStandardResolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
@@ -108,8 +144,8 @@ public class OptionsMenu : MonoBehaviour
     public void OnResolutionChanged(int index)
     {
         if (initializing) return;
-        if (index < 0 || uniqueResolutions == null || index >= uniqueResolutions.Count) return;
-        Resolution res = uniqueResolutions[index];
+        if (index < 0 || supportedStandardResolutions == null || index >= supportedStandardResolutions.Count) return;
+        Resolution res = supportedStandardResolutions[index];
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         PlayerPrefs.SetInt("ResolutionIndex", index);
         PlayerPrefs.Save();
@@ -159,18 +195,17 @@ public class OptionsMenu : MonoBehaviour
         if (fullscreenToggle != null) fullscreenToggle.SetIsOnWithoutNotify(isFullscreen);
         Screen.fullScreen = isFullscreen;
 
-        // Carica e clampa l'indice usando la lista di risoluzioni uniche
         int savedIndex = PlayerPrefs.GetInt("ResolutionIndex", currentResolutionIndex);
-        currentResolutionIndex = Mathf.Clamp(savedIndex, 0, Mathf.Max(0, uniqueResolutions.Count - 1));
+        currentResolutionIndex = Mathf.Clamp(savedIndex, 0, Mathf.Max(0, supportedStandardResolutions.Count - 1));
         if (resolutionDropdown != null)
         {
             resolutionDropdown.SetValueWithoutNotify(currentResolutionIndex);
             resolutionDropdown.RefreshShownValue();
         }
 
-        if (uniqueResolutions != null && uniqueResolutions.Count > 0)
+        if (supportedStandardResolutions != null && supportedStandardResolutions.Count > 0)
         {
-            Resolution res = uniqueResolutions[currentResolutionIndex];
+            Resolution res = supportedStandardResolutions[currentResolutionIndex];
             Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         }
 
