@@ -3173,6 +3173,7 @@ MonoBehaviour:
     - {fileID: 3302112885294128088, guid: 9c78d46ea504c7646967f385814c6f1c, type: 3}
     enemyCount: 4
     spawnInterval: 5
+  minTimeBetweenSpawns: 0.05
 --- !u!4 &714549782
 Transform:
   m_ObjectHideFlags: 0
@@ -4117,7 +4118,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
