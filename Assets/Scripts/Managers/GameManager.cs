@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             gameoverTimer.StopTimer();
         }
-        else if (gameState == GameState.PLAYING)
+        else if (gameState == GameState.PLAYING)//
         {
             Time.timeScale = 1f;
             if (gameoverTimer)

@@ -33,13 +33,11 @@ public class Timer : MonoBehaviour
         StartCoroutine(PassTime());
     }
 
-    /// <summary>
     /// Stops timer and returns how much time is left
-    /// </summary>
     public int StopTimer()
     {
         isRunning = false;
-        wasStarted = false;
+        StopAllCoroutines();
         return currentTime;
     }
 
@@ -48,9 +46,11 @@ public class Timer : MonoBehaviour
         yield return _waitForSeconds1;
         currentTime--;
         if (currentTime <= 0)
-        {
+        {   
+            wasStarted = false;
             isRunning = false;
             TimerEnded.Invoke();
+            StopTimer();
         }
         else if (isRunning) StartCoroutine(PassTime());
     }

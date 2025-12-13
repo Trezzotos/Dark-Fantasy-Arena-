@@ -100,6 +100,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.UpdateGameState(GameState.PLAYING);
     }
 
+    public void OnRestartButton()
+    {   
+        SceneManager.LoadScene("Game");   
+    }
+
     public void OnQuitButton()
     {
         SceneManager.LoadScene("MainMenu");
