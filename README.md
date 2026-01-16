@@ -1,7 +1,7 @@
 # 🎮 Dark Fantasy Arena
 ## Informazioni generali
 
-###Titolo 
+### Titolo 
 Dark Fantasy Arena
 ### Genere
 Dark Fantasy, Arena
