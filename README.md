@@ -1,1 +1,225 @@
-🏰 Dark Fantasy ArenaDark Fantasy Arena è un'esperienza arcade frenetica ambientata in un castello decadente e opprimente. Impersona un mago intrappolato in un loop infinito di battaglie, affina le tue arti magiche e sopravvivi alle ondate di nemici per scalare la classifica.🌑 Atmosfera e LoreIl gioco immerge il giocatore in un mondo di Pixel Art cupo e misterioso. Sei un mago senza nome, prigioniero di un castello senziente. La tua unica via d'uscita? Sconfiggere il mitico Mago Supremo.Mood: Isolamento, pericolo costante e decadenza.Stile: Dark Fantasy classico con estetica retro.🎮 Caratteristiche PrincipaliCombattimento Strategico: Sistema di spell a distanza con gestione della posizione.Progressione Dinamica: Guadagna punteggio, sali di livello e potenzia il tuo arsenale nello Shop interno.IA Avanzata: I nemici non si limitano a inseguirti; i più forti calcolano la tua traiettoria per anticipare le tue mosse.Sistema di Salvataggio: Riprendi la tua scalata al castello in qualsiasi momento.Competizione: Punta al punteggio più alto e domina la scena dei Ranking.🕹️ Gameplay e ControlliIl gioco supporta due configurazioni di tasti per adattarsi al tuo stile di gioco:AzioneModalità 1 (Classica)Modalità 2 (WASD)Movimento⬆️⬇️⬅️➡️ (Frecce)W A S DAttacco BaseEISpell (Z/X/C)Z, X, CJ, K, LI NemiciNon sottovalutare i tuoi avversari. Ognuno richiede una strategia diversa:🔥 Mago Nero: Specialista in incantesimi di fuoco.🧪 Mago del Veleno: Logora la tua salute nel tempo.💥 Mago Burst: Letale, infligge ingenti danni esplosivi.🛠️ Focus TecnicoIl progetto è stato sviluppato con un occhio di riguardo per le performance e la manutenibilità del codice:Object Pooling: Gestione ottimizzata dello spawn/despawn dei nemici e dei proiettili per evitare picchi di carico sulla CPU (Garbage Collector).Predictive AI: Implementazione di algoritmi per il calcolo della traiettoria (Lead Shooting) per rendere i nemici più impegnativi.Modular Spell System: Sistema flessibile per l'aggiunta e il potenziamento di nuove abilità tramite lo Shop.🚀 Installazione e BuildClona la repository: git clone https://github.com/tuo-username/dark-fantasy-arena.gitApri con Unity: Versione consigliata 2022.3 o superiore.Target Platform: Il progetto è configurato e ottimizzato per Windows.Build: Vai su File > Build Settings e seleziona la scena Main Menu come prima scena.👥 Il TeamIl progetto è frutto della collaborazione tra due sviluppatori appassionati:Trezzoto (GitHub Profile) - Lead Programming & Game Designdavyrap - Systems Design & Development📚 Note AccademicheQuesto videogioco è stato realizzato come progetto per l'esame di "Sviluppo di Giochi Digitali" presso il DMI – Università degli Studi di Catania (UNICT).Strumenti utilizzati:Unity (Engine)Aseprite (Pixel Art)Git/GitHub (Version Control)AI Generativa (Supporto creativo e brainstorming)
+🎮 Dark Fantasy Arena
+Informazioni generali
+
+Titolo: Dark Fantasy Arena
+Genere: Dark Fantasy, Arena
+Piattaforma: PC
+Motore di gioco: Unity
+Lingua: Italiano
+Stato del progetto: Completo
+Periodo di sviluppo: Ottobre 2025
+
+Autori:
+
+Trezzoto (GitHub)
+
+davyrap
+
+🧩 Concept e Ambientazione
+
+Dark Fantasy Arena è un videogioco ambientato in un castello oscuro e opprimente, caratterizzato da un’estetica dark fantasy con stile grafico pixel art. L’ambientazione punta a trasmettere un senso di decadenza, mistero e pericolo costante, tipico del genere.
+
+Il gioco non segue un concept narrativo complesso o articolato: l’obiettivo principale è offrire un’esperienza di combattimento in arena immersa in un contesto cupo e fantasy.
+
+Mood
+
+Il mood del gioco è cupo e oscuro, ispirato al dark fantasy classico. L’atmosfera è pensata per far sentire il giocatore isolato all’interno di un ambiente ostile, dove ogni scontro rappresenta una sfida alla sopravvivenza.
+
+Lore (accennata)
+
+La lore non è sviluppata in modo approfondito, trattandosi di una demo.
+Il giocatore interpreta un mago, intrappolato in un castello apparentemente infinito, il cui scopo è sconfiggere il Mago Supremo. Al momento, il boss finale non è ancora implementato, lasciando la narrazione volutamente aperta.
+
+🗺️ Struttura del gioco (Scene)
+
+Il gioco è suddiviso in diverse scene, ognuna con uno scopo specifico all’interno dell’esperienza di gioco.
+
+Main Menu
+
+Scena iniziale del gioco. Da qui il giocatore può:
+
+Avviare una nuova partita
+
+Continuare una partita salvata
+
+Accedere alle opzioni
+
+Visualizzare la classifica
+
+Uscire dal gioco
+
+Arena 1
+
+Prima arena di combattimento.
+Qui il giocatore affronta ondate di nemici utilizzando le proprie spell magiche.
+La difficoltà e il numero di nemici aumentano progressivamente con il livello.
+
+Option
+
+Scena dedicata alle opzioni di gioco, dove il giocatore può configurare le impostazioni disponibili (es. controlli, audio, ecc.).
+
+Ranking
+
+Scena che mostra la classifica finale, basata sullo score ottenuto durante le partite.
+
+Continue
+
+Permette al giocatore di riprendere l’ultima partita dal livello salvato, grazie al sistema di salvataggio.
+
+Game Over / Victory
+
+Scena mostrata al termine della partita:
+
+Game Over in caso di sconfitta
+
+Victory in caso di completamento degli obiettivi disponibili nella demo
+
+Shop
+
+Scena dedicata all’acquisto di nuove spell e potenziamenti, utilizzando le risorse ottenute durante il gameplay.
+
+⚔️ Gameplay e Meccaniche
+Sistema di combattimento
+
+Il combattimento è a distanza, coerente con il ruolo del giocatore che interpreta un mago.
+Il gameplay è basato sull’uso strategico delle spell e sul posizionamento all’interno dell’arena.
+
+Controlli
+
+Sono disponibili due modalità di controllo:
+
+Modalità 1
+
+Movimento: Frecce direzionali
+
+Attacco: E
+
+Modalità 2
+
+Movimento: WASD
+
+Attacco: I
+
+Armi e abilità
+
+Le spell sono gestite tramite:
+
+Z X C con una modalità di controllo
+
+J K L con l’altra modalità
+
+Le spell rappresentano le principali abilità offensive del giocatore.
+
+Sistema di progressione
+
+Livelli: il giocatore avanza di livello affrontando le arene
+
+Score: utilizzato per determinare la posizione nella classifica finale
+
+Potenziamenti: applicabili esclusivamente alle spell
+
+Intelligenza artificiale dei nemici
+
+IA base: i nemici inseguono direttamente il giocatore (chase)
+
+IA avanzata: i nemici calcolano la traiettoria prevista del giocatore, anticipando la sua prossima posizione
+
+Difficoltà
+
+Sono disponibili tre livelli di difficoltà:
+
+Facile
+
+Medio
+
+Difficile
+
+La difficoltà è incrementale e aumenta con il livello di gioco.
+
+Elementi Dark Fantasy nel gameplay
+
+Utilizzo di spell magiche oscure
+
+Ambientazioni cupe e oppressive
+
+🧙 Personaggi ed Entità
+Personaggio giocabile
+
+Il giocatore interpreta un mago che può acquistare nuove spell all’interno dello shop.
+Il personaggio presenta:
+
+Grande potenziale offensivo
+
+Debolezze specifiche contro determinati tipi di nemici
+
+Nemici
+
+Mago Nero: utilizza spell di fuoco
+
+Mago del Veleno: attacca con spell velenose
+
+Mago Burst: utilizza spell ad alto danno esplosivo
+
+Ogni nemico presenta pattern di attacco differenti.
+
+🎨 Grafica e Audio
+
+Stile grafico: Pixel Art
+
+Animazioni: Basilari
+
+Musiche: Brani senza copyright reperiti su YouTube
+
+Effetti sonori: Asset no-copyright trovati online
+
+Fonti di ispirazione: Utilizzo di AI generativa come supporto creativo
+
+🛠️ Aspetti Tecnici
+
+Sistema di salvataggio: memorizza l’ultimo livello completato
+
+Ottimizzazione: utilizzo dell’Object Pooling per la gestione efficiente dello spawn dei nemici a runtime
+
+▶️ Installazione e Avvio
+
+Una volta scaricato il progetto, è possibile buildare autonomamente il gioco in base al dispositivo di destinazione.
+
+Il gioco è stato pensato e testato principalmente per sistemi operativi Windows.
+Dalla repository (tramite pull del progetto) viene fornito l’intero progetto Unity, permettendo così:
+
+Apertura diretta tramite Unity Hub
+
+Modifica o analisi del codice
+
+Build personalizzata per la piattaforma desiderata
+
+⚠️ Nota: il supporto ufficiale è orientato a Windows.
+
+🤝 Collaborazione e Suddivisione dei Ruoli
+
+Il progetto è stato sviluppato da due game developer, con una ripartizione equilibrata dei ruoli tra design, programmazione e sviluppo generale.
+
+La realizzazione è stata possibile grazie all’utilizzo di Git, con sincronizzazione costante del progetto tramite repository condivisa.
+Questo approccio ha permesso una collaborazione efficace e un flusso di lavoro ordinato durante tutto lo sviluppo.
+
+🙏 Crediti e Ringraziamenti
+
+Ispirazioni:
+
+Dark Fantasy
+
+Sistemi di combattimento magici a distanza
+
+Strumenti utilizzati:
+
+Unity – Motore di gioco
+
+Aseprite – Creazione dei modelli pixel art dei personaggi
+
+Contesto del progetto:
+Il gioco è nato come demo per la consegna di un progetto per l’esame di
+“Sviluppo di Giochi Digitali”
+presso DMI – Università degli Studi di Catania (UNICT).
+
+Ringraziamenti speciali:
+Un sentito ringraziamento a davyrap, per il fondamentale supporto e il grande contributo fornito durante tutta la realizzazione del progetto.
