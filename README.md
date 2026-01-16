@@ -1,95 +1,96 @@
 # 🎮 Dark Fantasy Arena
 ## Informazioni generali
 
-### Titolo 
+###Titolo 
 Dark Fantasy Arena
-Genere: Dark Fantasy, Arena
-Piattaforma: PC
-Motore di gioco: Unity
-Lingua: Italiano
-Stato del progetto: Completo
-Periodo di sviluppo: Ottobre 2025
+### Genere
+Dark Fantasy, Arena
+### Piattaforma 
+PC
+### Motore di gioco
+Unity
+### Lingua
+Italiano
+### Stato del progetto
+Completo
+### Periodo di sviluppo
+Ottobre 2025
 
-Autori:
+## Autori:
 
 Trezzoto (GitHub)
-
 davyrap
 
-🧩 Concept e Ambientazione
+### 🧩 Concept e Ambientazione
 
 Dark Fantasy Arena è un videogioco ambientato in un castello oscuro e opprimente, caratterizzato da un’estetica dark fantasy con stile grafico pixel art. L’ambientazione punta a trasmettere un senso di decadenza, mistero e pericolo costante, tipico del genere.
 
 Il gioco non segue un concept narrativo complesso o articolato: l’obiettivo principale è offrire un’esperienza di combattimento in arena immersa in un contesto cupo e fantasy.
 
-Mood
-
-Il mood del gioco è cupo e oscuro, ispirato al dark fantasy classico. L’atmosfera è pensata per far sentire il giocatore isolato all’interno di un ambiente ostile, dove ogni scontro rappresenta una sfida alla sopravvivenza.
-
-Lore (accennata)
+### Lore (accennata)
 
 La lore non è sviluppata in modo approfondito, trattandosi di una demo.
 Il giocatore interpreta un mago, intrappolato in un castello apparentemente infinito, il cui scopo è sconfiggere il Mago Supremo. Al momento, il boss finale non è ancora implementato, lasciando la narrazione volutamente aperta.
 
-🗺️ Struttura del gioco (Scene)
+## 🗺️ Struttura del gioco (Scene)
 
 Il gioco è suddiviso in diverse scene, ognuna con uno scopo specifico all’interno dell’esperienza di gioco.
 
-Main Menu
+### Main Menu
 
 Scena iniziale del gioco. Da qui il giocatore può:
 
-Avviare una nuova partita
+- Avviare una nuova partita
 
-Continuare una partita salvata
+- Continuare una partita salvata
 
-Accedere alle opzioni
+- Accedere alle opzioni
 
-Visualizzare la classifica
+- Visualizzare la classifica
 
-Uscire dal gioco
+- Uscire dal gioco
 
-Arena 1
+### Arena 
 
 Prima arena di combattimento.
 Qui il giocatore affronta ondate di nemici utilizzando le proprie spell magiche.
 La difficoltà e il numero di nemici aumentano progressivamente con il livello.
 
-Option
+### Option
 
 Scena dedicata alle opzioni di gioco, dove il giocatore può configurare le impostazioni disponibili (es. controlli, audio, ecc.).
 
-Ranking
+### Ranking
 
 Scena che mostra la classifica finale, basata sullo score ottenuto durante le partite.
 
-Continue
+### Continue
 
 Permette al giocatore di riprendere l’ultima partita dal livello salvato, grazie al sistema di salvataggio.
 
-Game Over / Victory
+### Game Over / Victory
 
 Scena mostrata al termine della partita:
 
-Game Over in caso di sconfitta
+- Game Over in caso di sconfitta
 
-Victory in caso di completamento degli obiettivi disponibili nella demo
+- Victory in caso di completamento degli obiettivi disponibili nella demo
 
-Shop
+### Shop
 
 Scena dedicata all’acquisto di nuove spell e potenziamenti, utilizzando le risorse ottenute durante il gameplay.
 
-⚔️ Gameplay e Meccaniche
-Sistema di combattimento
+## ⚔️ Gameplay e Meccaniche
+### Sistema di combattimento
 
 Il combattimento è a distanza, coerente con il ruolo del giocatore che interpreta un mago.
 Il gameplay è basato sull’uso strategico delle spell e sul posizionamento all’interno dell’arena.
 
-Controlli
+### Controlli
 
 Sono disponibili due modalità di controllo:
 
-Modalità 1
+### Modalità 1
 
 Movimento: Frecce direzionali
 
@@ -101,17 +102,17 @@ Movimento: WASD
 
 Attacco: I
 
-Armi e abilità
+### Armi e abilità
 
 Le spell sono gestite tramite:
 
-Z X C con una modalità di controllo
+- Z X C con una modalità di controllo
 
-J K L con l’altra modalità
+- J K L con l’altra modalità
 
 Le spell rappresentano le principali abilità offensive del giocatore.
 
-Sistema di progressione
+### Sistema di progressione
 
 Livelli: il giocatore avanza di livello affrontando le arene
 
@@ -119,51 +120,51 @@ Score: utilizzato per determinare la posizione nella classifica finale
 
 Potenziamenti: applicabili esclusivamente alle spell
 
-Intelligenza artificiale dei nemici
+### Intelligenza artificiale dei nemici
 
 IA base: i nemici inseguono direttamente il giocatore (chase)
 
 IA avanzata: i nemici calcolano la traiettoria prevista del giocatore, anticipando la sua prossima posizione
 
-Difficoltà
+### Difficoltà
 
 Sono disponibili tre livelli di difficoltà:
 
-Facile
+- Facile
 
-Medio
+- Medio
 
-Difficile
+- Difficile
 
 La difficoltà è incrementale e aumenta con il livello di gioco.
 
-Elementi Dark Fantasy nel gameplay
+### Elementi Dark Fantasy nel gameplay
 
 Utilizzo di spell magiche oscure
 
 Ambientazioni cupe e oppressive
 
-🧙 Personaggi ed Entità
-Personaggio giocabile
+## 🧙 Personaggi ed Entità
+### Personaggio giocabile
 
 Il giocatore interpreta un mago che può acquistare nuove spell all’interno dello shop.
 Il personaggio presenta:
 
-Grande potenziale offensivo
+- Grande potenziale offensivo
 
-Debolezze specifiche contro determinati tipi di nemici
+- Debolezze specifiche contro determinati tipi di nemici
 
-Nemici
+### Nemici
 
-Mago Nero: utilizza spell di fuoco
+- Mago Nero: utilizza spell di fuoco
 
-Mago del Veleno: attacca con spell velenose
+- Mago del Veleno: attacca con spell velenose
 
-Mago Burst: utilizza spell ad alto danno esplosivo
+- Mago Burst: utilizza spell ad alto danno esplosivo
 
 Ogni nemico presenta pattern di attacco differenti.
 
-🎨 Grafica e Audio
+## 🎨 Grafica e Audio
 
 Stile grafico: Pixel Art
 
@@ -175,13 +176,13 @@ Effetti sonori: Asset no-copyright trovati online
 
 Fonti di ispirazione: Utilizzo di AI generativa come supporto creativo
 
-🛠️ Aspetti Tecnici
+## 🛠️ Aspetti Tecnici
 
 Sistema di salvataggio: memorizza l’ultimo livello completato
 
 Ottimizzazione: utilizzo dell’Object Pooling per la gestione efficiente dello spawn dei nemici a runtime
 
-▶️ Installazione e Avvio
+## ▶️ Installazione e Avvio
 
 Una volta scaricato il progetto, è possibile buildare autonomamente il gioco in base al dispositivo di destinazione.
 
@@ -196,14 +197,14 @@ Build personalizzata per la piattaforma desiderata
 
 ⚠️ Nota: il supporto ufficiale è orientato a Windows.
 
-🤝 Collaborazione e Suddivisione dei Ruoli
+## 🤝 Collaborazione e Suddivisione dei Ruoli
 
 Il progetto è stato sviluppato da due game developer, con una ripartizione equilibrata dei ruoli tra design, programmazione e sviluppo generale.
 
 La realizzazione è stata possibile grazie all’utilizzo di Git, con sincronizzazione costante del progetto tramite repository condivisa.
 Questo approccio ha permesso una collaborazione efficace e un flusso di lavoro ordinato durante tutto lo sviluppo.
 
-🙏 Crediti e Ringraziamenti
+## 🙏 Crediti e Ringraziamenti
 
 Ispirazioni:
 
@@ -217,10 +218,10 @@ Unity – Motore di gioco
 
 Aseprite – Creazione dei modelli pixel art dei personaggi
 
-Contesto del progetto:
+## Contesto del progetto:
 Il gioco è nato come demo per la consegna di un progetto per l’esame di
 “Sviluppo di Giochi Digitali”
 presso DMI – Università degli Studi di Catania (UNICT).
 
-Ringraziamenti speciali:
+## Ringraziamenti speciali:
 Un sentito ringraziamento a davyrap, per il fondamentale supporto e il grande contributo fornito durante tutta la realizzazione del progetto.
