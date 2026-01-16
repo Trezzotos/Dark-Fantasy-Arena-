@@ -1,7 +1,8 @@
-🎮 Dark Fantasy Arena
-Informazioni generali
+# 🎮 Dark Fantasy Arena
+## Informazioni generali
 
-Titolo: Dark Fantasy Arena
+###Titolo 
+Dark Fantasy Arena
 Genere: Dark Fantasy, Arena
 Piattaforma: PC
 Motore di gioco: Unity
