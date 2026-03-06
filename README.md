@@ -1,5 +1,5 @@
 # 🎮 Dark Fantasy Arena
-![Screenshot del Piano Virtuale in funzione](docs/images/MainMenu.png)
+![Screenshot del Main Menu](docs/images/MainMenu.png)
 
 ## Informazioni generali
 
@@ -53,7 +53,7 @@ Scena iniziale del gioco. Da qui il giocatore può:
 - Uscire dal gioco
 
 ### Arena 
-![Screenshot del Piano Virtuale in funzione](docs/images/Game.png)
+![Screenshot della schermata arena](docs/images/Game.png)
 Prima arena di combattimento.
 Qui il giocatore affronta ondate di nemici utilizzando le proprie spell magiche.
 La difficoltà e il numero di nemici aumentano progressivamente con il livello.
@@ -79,7 +79,7 @@ Scena mostrata al termine della partita:
 - Victory in caso di completamento degli obiettivi disponibili nella demo
 
 ### Shop
-![Screenshot del Piano Virtuale in funzione](docs/images/Shop.png)
+![Screenshot delo Shop del gioco](docs/images/Shop.png)
 
 Scena dedicata all’acquisto di nuove spell e potenziamenti, utilizzando le risorse ottenute durante il gameplay.
 
