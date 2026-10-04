@@ -1,230 +1,57 @@
 # 🎮 Dark Fantasy Arena
-![Screenshot del Main Menu](docs/images/MainMenu.PNG)
 
-## Informazioni generali
+**Dark Fantasy Arena** is a 2D pixel-art dark fantasy arena game set in a gloomy, oppressive castle. Developed as an exam project for "Sviluppo di Giochi Digitali" at DMI – University of Catania (UNICT), the game focuses on intense ranged magical combat against waves of enemies.
 
-### Titolo 
-Dark Fantasy Arena
-### Genere
-Dark Fantasy, Arena
-### Piattaforma 
-PC
-### Motore di gioco
-Unity
-### Lingua
-Italiano
-### Stato del progetto
-Completo
-### Periodo di sviluppo
-Ottobre 2025
+## 📦 Technologies
 
-## Autori:
+- Unity
+- C#
+- Aseprite (Pixel Art)
+- Git & GitHub
 
-Trezzoto (GitHub)
-davyrap
+## 🦄 Features
 
-### 🧩 Concept e Ambientazione
+Here's what you can experience in Dark Fantasy Arena:
 
-Dark Fantasy Arena è un videogioco ambientato in un castello oscuro e opprimente, caratterizzato da un’estetica dark fantasy con stile grafico pixel art. L’ambientazione punta a trasmettere un senso di decadenza, mistero e pericolo costante, tipico del genere.
+- **Immersive Dark Fantasy Setting:** Battle through waves of enemies inside an endless castle with a distinct pixel-art aesthetic.
+- **Ranged Magical Combat:** Control a wizard utilizing strategic spells and positioning to survive.
+- **Multiple Control Schemes:** Fully configurable controls supporting either Arrow keys + `E` / `Z X C` or `WASD` + `I` / `J K L`.
+- **Diverse Enemy AI & Types:** Face specialized enemies like the Black Wizard (fire spells), Poison Wizard, and Burst Wizard featuring both chase and predictive trajectory AI.
+- **Progression & Shop:** Earn scores, clear levels, and purchase powerful spell upgrades at the in-game Shop.
+- **Multiple Game Modes & Options:** Includes Main Menu, three difficulty levels (Easy, Medium, Hard), a persistent Save/Continue system, and a Ranking scoreboard.
 
-Il gioco non segue un concept narrativo complesso o articolato: l’obiettivo principale è offrire un’esperienza di combattimento in arena immersa in un contesto cupo e fantasy.
+---
 
-### Lore (accennata)
+### 🗺️ Game Scenes & Overview
 
-La lore non è sviluppata in modo approfondito, trattandosi di una demo.
-Il giocatore interpreta un mago, intrappolato in un castello apparentemente infinito, il cui scopo è sconfiggere il Mago Supremo. Al momento, il boss finale non è ancora implementato, lasciando la narrazione volutamente aperta.
+- **Main Menu:**
+  ![Screenshot del Main Menu](docs/images/MainMenu.PNG)
+  Launch new games, continue saved progress, open options, view rankings, or exit.
+- **Arena:** 
+  ![Screenshot della schermata arena](docs/images/Game.PNG)
+  The primary combat zone where you face escalating waves of enemies using magical spells.
+- **Shop:** 
+  ![Screenshot delo Shop del gioco](docs/images/Shop.PNG)
+  Spend earned resources to acquire new spells and power-ups.
+- **Options, Ranking & Continue:** Dedicated scenes for game settings, high scores, and persistent session loading.
 
-## 🗺️ Struttura del gioco (Scene)
+## 🚢 The Process & Architecture
 
-Il gioco è suddiviso in diverse scene, ognuna con uno scopo specifico all’interno dell’esperienza di gioco.
+- **Object Pooling:** Implemented efficient runtime object pooling to manage enemy spawning smoothly and maintain high performance.
+- **Save System:** A persistent system that records player progress and stores the last completed level.
+- **Modular Scene Architecture:** Clean separation of concerns across Main Menu, Arena, Shop, Options, Ranking, and Game Over/Victory scenes.
 
-### Main Menu
+## 🚦 Running the Project
 
-Scena iniziale del gioco. Da qui il giocatore può:
+To run the project in your local environment:
 
-- Avviare una nuova partita
+1. Clone the repository to your local machine.
+2. Open the project folder using **Unity Hub**.
+3. Build or run the project (optimized and tested primarily for Windows).
 
-- Continuare una partita salvata
+## 👥 Authors & Context
 
-- Accedere alle opzioni
+Developed in October 2025 as a demo project for the "**Sviluppo di Giochi Digitali**" exam at DMI – Università degli Studi di Catania (UNICT).
 
-- Visualizzare la classifica
-
-- Uscire dal gioco
-
-### Arena 
-![Screenshot della schermata arena](docs/images/Game.PNG)
-Prima arena di combattimento.
-Qui il giocatore affronta ondate di nemici utilizzando le proprie spell magiche.
-La difficoltà e il numero di nemici aumentano progressivamente con il livello.
-
-### Option
-
-Scena dedicata alle opzioni di gioco, dove il giocatore può configurare le impostazioni disponibili (es. controlli, audio, ecc.).
-
-### Ranking
-
-Scena che mostra la classifica finale, basata sullo score ottenuto durante le partite.
-
-### Continue
-
-Permette al giocatore di riprendere l’ultima partita dal livello salvato, grazie al sistema di salvataggio.
-
-### Game Over / Victory
-
-Scena mostrata al termine della partita:
-
-- Game Over in caso di sconfitta
-
-- Victory in caso di completamento degli obiettivi disponibili nella demo
-
-### Shop
-![Screenshot delo Shop del gioco](docs/images/Shop.PNG)
-
-Scena dedicata all’acquisto di nuove spell e potenziamenti, utilizzando le risorse ottenute durante il gameplay.
-
-## ⚔️ Gameplay e Meccaniche
-### Sistema di combattimento
-
-Il combattimento è a distanza, coerente con il ruolo del giocatore che interpreta un mago.
-Il gameplay è basato sull’uso strategico delle spell e sul posizionamento all’interno dell’arena.
-
-### Controlli
-
-Sono disponibili due modalità di controllo:
-
-### Modalità 1
-
-Movimento: Frecce direzionali
-
-Attacco: E
-
-Modalità 2
-
-Movimento: WASD
-
-Attacco: I
-
-### Armi e abilità
-
-Le spell sono gestite tramite:
-
-- Z X C con una modalità di controllo
-
-- J K L con l’altra modalità
-
-Le spell rappresentano le principali abilità offensive del giocatore.
-
-### Sistema di progressione
-
-Livelli: il giocatore avanza di livello affrontando le arene
-
-Score: utilizzato per determinare la posizione nella classifica finale
-
-Potenziamenti: applicabili esclusivamente alle spell
-
-### Intelligenza artificiale dei nemici
-
-IA base: i nemici inseguono direttamente il giocatore (chase)
-
-IA avanzata: i nemici calcolano la traiettoria prevista del giocatore, anticipando la sua prossima posizione
-
-### Difficoltà
-
-Sono disponibili tre livelli di difficoltà:
-
-- Facile
-
-- Medio
-
-- Difficile
-
-La difficoltà è incrementale e aumenta con il livello di gioco.
-
-### Elementi Dark Fantasy nel gameplay
-
-Utilizzo di spell magiche oscure
-
-Ambientazioni cupe e oppressive
-
-## 🧙 Personaggi ed Entità
-### Personaggio giocabile
-
-Il giocatore interpreta un mago che può acquistare nuove spell all’interno dello shop.
-Il personaggio presenta:
-
-- Grande potenziale offensivo
-
-- Debolezze specifiche contro determinati tipi di nemici
-
-### Nemici
-
-- Mago Nero: utilizza spell di fuoco
-
-- Mago del Veleno: attacca con spell velenose
-
-- Mago Burst: utilizza spell ad alto danno esplosivo
-
-Ogni nemico presenta pattern di attacco differenti.
-
-## 🎨 Grafica e Audio
-
-Stile grafico: Pixel Art
-
-Animazioni: Basilari
-
-Musiche: Brani senza copyright reperiti su YouTube
-
-Effetti sonori: Asset no-copyright trovati online
-
-Fonti di ispirazione: Utilizzo di AI generativa come supporto creativo
-
-## 🛠️ Aspetti Tecnici
-
-Sistema di salvataggio: memorizza l’ultimo livello completato
-
-Ottimizzazione: utilizzo dell’Object Pooling per la gestione efficiente dello spawn dei nemici a runtime
-
-## ▶️ Installazione e Avvio
-
-Una volta scaricato il progetto, è possibile buildare autonomamente il gioco in base al dispositivo di destinazione.
-
-Il gioco è stato pensato e testato principalmente per sistemi operativi Windows.
-Dalla repository (tramite pull del progetto) viene fornito l’intero progetto Unity, permettendo così:
-
-Apertura diretta tramite Unity Hub
-
-Modifica o analisi del codice
-
-Build personalizzata per la piattaforma desiderata
-
-⚠️ Nota: il supporto ufficiale è orientato a Windows.
-
-## 🤝 Collaborazione e Suddivisione dei Ruoli
-
-Il progetto è stato sviluppato da due game developer, con una ripartizione equilibrata dei ruoli tra design, programmazione e sviluppo generale.
-
-La realizzazione è stata possibile grazie all’utilizzo di Git, con sincronizzazione costante del progetto tramite repository condivisa.
-Questo approccio ha permesso una collaborazione efficace e un flusso di lavoro ordinato durante tutto lo sviluppo.
-
-## 🙏 Crediti e Ringraziamenti
-
-Ispirazioni:
-
-Dark Fantasy
-
-Sistemi di combattimento magici a distanza
-
-Strumenti utilizzati:
-
-Unity – Motore di gioco
-
-Aseprite – Creazione dei modelli pixel art dei personaggi
-
-## Contesto del progetto:
-Il gioco è nato come demo per la consegna di un progetto per l’esame di
-“Sviluppo di Giochi Digitali”
-presso DMI – Università degli Studi di Catania (UNICT).
-
-## Ringraziamenti speciali:
-Un sentito ringraziamento a davyrap, per il fondamentale supporto e il grande contributo fornito durante tutta la realizzazione del progetto.
+- **Trezzoto** (GitHub)
+- **davyrap** (Special thanks for the fundamental support and contribution throughout development)
